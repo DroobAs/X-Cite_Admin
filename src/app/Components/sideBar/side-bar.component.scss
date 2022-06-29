@@ -10,10 +10,12 @@
 .mat-icon {
   vertical-align: center;
   margin-right: 1rem;
+  margin-left: 0.3rem;
   color: #45a0ce;
 }
 .mat-list-item{
-  margin-bottom: 24px;
+  // margin-bottom: 24px;
+  margin-bottom: 2px;
   transition: all .5s;
   &:hover{
     background-color: #6489c5 !important;
