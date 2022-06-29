@@ -26,9 +26,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
-
-
-
+import {initializeApp, provideFirebaseApp} from "@angular/fire/app"
+import {provideFirestore, getFirestore} from "@angular/fire/firestore"
+import {provideAuth , getAuth} from "@angular/fire/auth"
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +59,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSidenavModule,
     MatDividerModule,
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    provideFirebaseApp(()=> initializeApp(environment.firebaseConfig)),
+    provideAuth(()=> getAuth()),
+    provideFirestore(()=> getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]
