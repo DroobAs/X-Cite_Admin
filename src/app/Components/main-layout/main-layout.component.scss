@@ -1,0 +1,15 @@
+$main-color : #001A2C;
+$orange-color : #EF912B;
+:host {
+  display:  flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-drawer{
+  width: 260px;
+  background-color: $main-color;
+}
+mat-drawer-container{
+  height: 100%;
+}

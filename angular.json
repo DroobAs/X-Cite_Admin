@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "BookStore": {
+    "X-Cite_Admin": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/book-store",
+            "outputPath": "dist/x-cite-admin",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -32,7 +32,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "BookStore:build:production"
+              "browserTarget": "X-Cite_Admin:build:production"
             },
             "development": {
-              "browserTarget": "BookStore:build:development"
+              "browserTarget": "X-Cite_Admin:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "BookStore:build"
+            "browserTarget": "X-Cite_Admin:build"
           }
         },
         "test": {
@@ -108,6 +108,6 @@
     }
   },
   "cli": {
-    "analytics": "5dd69bde-2c83-4c1e-9936-a0732e24e0a0"
+    "analytics": "13376e75-411e-4c4f-9e72-bf29f7d02877"
   }
 }

@@ -6,9 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Dashborad';
-  sideBarOpen= true;
-  sideBarToggler(){
-    this.sideBarOpen = !this.sideBarOpen
-  }
+  title = 'X-Cite_Admin';
+  
 }

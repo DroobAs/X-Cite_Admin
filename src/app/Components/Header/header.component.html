@@ -1,0 +1,35 @@
+<mat-toolbar>
+    <mat-toolbar-row class="nav-bar">
+      <button mat-icon-button (click)="toggleSideBar()">
+        <mat-icon class="menu-icon">menu</mat-icon>
+      </button>
+      <h1 class="name-logo">X-cite</h1>
+      <div class="row d-flex align-items-center justify-content-between">
+        <ul>
+          <li>
+            <button
+              mat-button
+              [matMenuTriggerFor]="menu"
+              class="user d-flex align-items-center"
+            >
+              <div class="information-admin">
+                <img
+                  src="./../../../assets/images/1.png"
+                  alt=""
+                  class="img-fliud user-image"
+                />
+                <p class="text-black">ahmed</p>
+                <mat-icon class="icon">arrow_downward</mat-icon>
+              </div>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>exit_to_app</mat-icon>
+                Logout
+              </button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>

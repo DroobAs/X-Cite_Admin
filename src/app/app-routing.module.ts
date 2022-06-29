@@ -1,29 +1,37 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotFoundComponent } from './Component/not-found/not-found.component';
+import { AnalyticsComponent } from './Components/analytics/analytics.component';
+import { BrandsComponent } from './Components/brands/brands.component';
+import { CategoriesComponent } from './Components/Categories/categoryies.component';
+import { HomeComponent } from './Components/Home/home.component';
+import { LoginComponent } from './Components/login/login.component';
+import { MainLayoutComponent } from './Components/main-layout/main-layout.component';
+import { NotFoundComponent } from './Components/not-found/not-found.component';
+import { ProductsComponent } from './Components/products/products.component';
+import { ProfileComponent } from './Components/profile/profile.component';
+import { SellersComponent } from './Components/sellers/sellers.component';
+import { UsersComponent } from './Components/users/users.component';
+import { WebConfigComponent } from './Components/web-config/web-config.component';
 
-import { MainSectionComponent } from './Component/main-section/main-section.component';
-import { EditAndUpdateComponent } from './Component/edit-and-update/edit-and-update.component';
-import { CustomersComponent } from './Component/customers/customers.component';
-import { SellersComponent } from './Component/sellers/sellers.component';
-import { ProductsComponent } from './Component/products/products.component';
-import { CategoryiesComponent } from './Component/categoryies/categoryies.component';
-
-const newLocal = "products";
 const routes: Routes = [
-  {path:"",redirectTo:"/home",pathMatch:"full"},
-  {path:"home",component:MainSectionComponent},
-  {path:"edit", component: EditAndUpdateComponent},
-  {path:"customers", component: CustomersComponent},
-  {path:"sellers", component: SellersComponent},
-  {path:"products", component: ProductsComponent},
-  {path:"categories", component: CategoryiesComponent},
-  {path:"**",component:NotFoundComponent}
+  {path: '', component: MainLayoutComponent, children:[
+    {path: '', redirectTo:'/Home', pathMatch:'full'},
+    {path: 'Home', component:HomeComponent},
+    {path: 'Products', component:ProductsComponent },
+    {path: 'Categories', component:CategoriesComponent},
+    {path: 'Users', component: UsersComponent},
+    {path: 'Sellers', component: SellersComponent},
+    {path: 'Brands', component: BrandsComponent},
+    {path: 'Analytics', component: AnalyticsComponent},
+    {path: 'Profile', component: ProfileComponent},
+    {path: 'WebSite', component: WebConfigComponent}
+  ]},
+  {path: 'Login', component:LoginComponent},
+  {path:'**',component:NotFoundComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
-
 })
 export class AppRoutingModule { }
