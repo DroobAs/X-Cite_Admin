@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminAuthGuard } from './admin-auth.guard';
 import { AnalyticsComponent } from './Components/analytics/analytics.component';
 import { BrandsComponent } from './Components/brands/brands.component';
 import { CategoriesComponent } from './Components/Categories/categoryies.component';
@@ -14,17 +15,17 @@ import { UsersComponent } from './Components/users/users.component';
 import { WebConfigComponent } from './Components/web-config/web-config.component';
 
 const routes: Routes = [
-  {path: '', component: MainLayoutComponent, children:[
+  {path: '', component: MainLayoutComponent, canActivate:[AdminAuthGuard], children:[
     {path: '', redirectTo:'/Home', pathMatch:'full'},
-    {path: 'Home', component:HomeComponent},
-    {path: 'Products', component:ProductsComponent },
-    {path: 'Categories', component:CategoriesComponent},
-    {path: 'Users', component: UsersComponent},
-    {path: 'Sellers', component: SellersComponent},
-    {path: 'Brands', component: BrandsComponent},
-    {path: 'Analytics', component: AnalyticsComponent},
-    {path: 'Profile', component: ProfileComponent},
-    {path: 'WebSite', component: WebConfigComponent}
+    {path: 'Home', component:HomeComponent, },
+    {path: 'Products', component:ProductsComponent ,},
+    {path: 'Categories', component:CategoriesComponent , },
+    {path: 'Users', component: UsersComponent ,},
+    {path: 'Sellers', component: SellersComponent ,},
+    {path: 'Brands', component: BrandsComponent ,},
+    {path: 'Analytics', component: AnalyticsComponent ,},
+    {path: 'Profile', component: ProfileComponent ,},
+    {path: 'WebSite', component: WebConfigComponent ,}
   ]},
   {path: 'Login', component:LoginComponent},
   {path:'**',component:NotFoundComponent}

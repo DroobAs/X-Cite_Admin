@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <mat-toolbar-row class="nav-bar" style="background-color: #d3a827;">
+    <mat-toolbar-row class="nav-bar" style="background-color: #86bde4;">
       <button mat-icon-button (click)="toggleSideBar()">
         <mat-icon class="menu-icon">menu</mat-icon>
       </button>
@@ -22,8 +22,8 @@
                 <mat-icon class="icon">arrow_downward</mat-icon>
               </div>
             </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
+            <mat-menu #menu="matMenu" class="mt-3 ms-3">
+              <button (click)="logOut()" mat-menu-item  class="px-4">
                 <mat-icon>exit_to_app</mat-icon>
                 Logout
               </button>

@@ -6,7 +6,7 @@
 
 .profile-image-pic{
   height: 200px;
-  width: 200px;
+  width: 440px;
   object-fit: cover;
 }
 
@@ -18,4 +18,9 @@
 
 a{
   text-decoration: none;
+}
+.hello{
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: #0e1c36;
 }
