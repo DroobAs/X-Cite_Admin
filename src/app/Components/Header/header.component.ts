@@ -1,4 +1,6 @@
 import {  Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AdminService } from 'src/app/Services/admin.service';
 
 @Component({
   selector: 'app-header',
@@ -7,12 +9,17 @@ import {  Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authAdmin: AdminService,
+               private router:Router) { }
   @Output() openAndClose: EventEmitter<any> = new EventEmitter();
   ngOnInit(): void {
   }
   toggleSideBar(){
       this.openAndClose.emit()
+  }
+  logOut(){
+      this.authAdmin.logOut()
+      this.router.navigate(['/Login'])
   }
 
 }

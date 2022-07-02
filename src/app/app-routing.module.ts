@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminAuthGuard } from './admin-auth.guard';
 import { AnalyticsComponent } from './Components/analytics/analytics.component';
 import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/add-update-brand.component';
 import { BrandDetailesComponent } from './Components/brands/brand-detailes/brand-detailes.component';
@@ -16,10 +17,10 @@ import { UsersComponent } from './Components/users/users.component';
 import { WebConfigComponent } from './Components/web-config/web-config.component';
 
 const routes: Routes = [
-  {path: '', component: MainLayoutComponent, children:[
+  {path: '', component: MainLayoutComponent, canActivate:[AdminAuthGuard], children:[
     {path: '', redirectTo:'/Home', pathMatch:'full'},
     {path: 'Home', component:HomeComponent},
-    {path: 'Products', component:ProductsComponent },
+    {path: 'Products', component:ProductsComponent},
     {path: 'Categories', component:CategoriesComponent},
     {path: 'Users', component: UsersComponent},
     {path: 'Sellers', component: SellersComponent},

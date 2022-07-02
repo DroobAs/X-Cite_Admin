@@ -1,1 +1,51 @@
-<p>login works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="text-center">
+        <img
+          src="../../../assets/images/xcite-logo-en.png"
+          class="img-fluid profile-image-pic img-thumbnail rounded-circle py-5 my-4"
+          width="200px"
+          alt="profile"
+        />
+      </div>
+      <div class="card my-5">
+        <h2 class="text-center text-dark py-5 mt-5 fs-1">X-Cite</h2>
+        <div class="text-center text-black-50 py-3 fs-4 hello">
+          hello
+        </div>
+        <form #loginForm="ngForm" (ngSubmit)="adminLogIN(loginForm.value)" class="card-body cardbody-color p-lg-5">
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              name="email"
+              ngModel
+              aria-describedby="email"
+              placeholder="email"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="password"
+              name="password"
+              ngModel
+              class="form-control"
+              id="password"
+              placeholder="password"
+              required
+              minlength="8"
+            />
+          </div>
+          <div [hidden]="loginForm.form.errors" class="py-2">{{massage}}</div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-color px-5 mb-5 w-100">
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
