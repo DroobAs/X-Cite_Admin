@@ -28,11 +28,17 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import {provideAuth , getAuth} from "@angular/fire/auth"
-import { environment } from 'src/environments/environment';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-// import { AngularFirestore } from '@angular/fire/firestore';
+
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule, SETTINGS } from '@angular/fire/compat/firestore';
+import { BrandDetailesComponent } from './Components/brands/brand-detailes/brand-detailes.component';
+import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/add-update-brand.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +53,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
     UsersComponent,
     BrandsComponent,
     LoginComponent,
-    FooterComponent
+    FooterComponent,
+    BrandDetailesComponent,
+    AddUpdateBrandComponent
 ],
   imports: [
     BrowserModule,
@@ -63,11 +71,17 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
     MatDividerModule,
     CommonModule,
     BrowserAnimationsModule,
-    provideFirebaseApp(()=> initializeApp(environment.firebaseConfig)),
+    AngularFireModule.initializeApp(environment.firebase),
     provideAuth(()=> getAuth()),
-    provideFirestore(()=> getFirestore())
+    provideFirestore(()=> getFirestore()),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
   ],
-  providers: [AngularFirestore],
+  providers: [
+    {provide: SETTINGS, useValue:{}},
+    AngularFirestore
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
