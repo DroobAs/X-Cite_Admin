@@ -26,10 +26,13 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
-import {initializeApp, provideFirebaseApp} from "@angular/fire/app"
-import {provideFirestore, getFirestore} from "@angular/fire/firestore"
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import {provideAuth , getAuth} from "@angular/fire/auth"
 import { environment } from 'src/environments/environment';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+// import { AngularFirestore } from '@angular/fire/firestore';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +67,7 @@ import { environment } from 'src/environments/environment';
     provideAuth(()=> getAuth()),
     provideFirestore(()=> getFirestore())
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

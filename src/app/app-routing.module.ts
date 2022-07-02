@@ -17,15 +17,15 @@ import { WebConfigComponent } from './Components/web-config/web-config.component
 const routes: Routes = [
   {path: '', component: MainLayoutComponent, canActivate:[AdminAuthGuard], children:[
     {path: '', redirectTo:'/Home', pathMatch:'full'},
-    {path: 'Home', component:HomeComponent, },
-    {path: 'Products', component:ProductsComponent ,},
-    {path: 'Categories', component:CategoriesComponent , },
-    {path: 'Users', component: UsersComponent ,},
-    {path: 'Sellers', component: SellersComponent ,},
-    {path: 'Brands', component: BrandsComponent ,},
-    {path: 'Analytics', component: AnalyticsComponent ,},
-    {path: 'Profile', component: ProfileComponent ,},
-    {path: 'WebSite', component: WebConfigComponent ,}
+    {path: 'Home', component:HomeComponent},
+    {path: 'Products', component:ProductsComponent},
+    {path: 'Categories', component:CategoriesComponent},
+    {path: 'Users', component: UsersComponent},
+    {path: 'Sellers', component: SellersComponent},
+    {path: 'Brands', component: BrandsComponent},
+    {path: 'Analytics', component: AnalyticsComponent},
+    {path: 'Profile', component: ProfileComponent},
+    {path: 'WebSite', component: WebConfigComponent}
   ]},
   {path: 'Login', component:LoginComponent},
   {path:'**',component:NotFoundComponent}

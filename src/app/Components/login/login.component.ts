@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Auth , signInWithEmailAndPassword } from '@angular/fire/auth';
 import { AdminService } from 'src/app/Services/admin.service';
 import { Router } from '@angular/router';
+import {Database , ref , getDatabase , set  } from "@angular/fire/database"
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

@@ -1,7 +1,9 @@
 export interface Seller {
-  name:string,
+  fullName:string,
   email:string,
-  mobile:number,
+  mobileNo:number,
   age:number,
   productName: string,
+  address: string,
+  id?:string
 }

@@ -1,1 +1,161 @@
-<p>sellers works!</p>
+<div class="container w-50">
+  <form
+    (ngSubmit)="addSeller(formval.value)"
+    #formval="ngForm"
+    [formGroup]="usrFormGroup"
+    class="m-2"
+  >
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="mb-3 form-group">
+          <label for="usrName" class="form-label">Full Name</label>
+
+          <input
+            [(ngModel)]="user"
+            type="text"
+            class="form-control"
+            name="usrName"
+            id="usrName"
+            formControlName="fullName"
+            [class.is-valid]="fullName?.valid"
+            [class.is-invalid]="fullName?.touched && fullName?.invalid"
+          />
+
+          <div
+            class="alert alert-warning"
+            [hidden]="fullName?.valid || fullName?.untouched"
+          >
+            <small *ngIf="fullName?.errors?.['required']">
+              Full Name is required
+            </small>
+            <small *ngIf="fullName?.errors?.['minlength']">
+              Full Name must be at least 3 letters
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="usrEmail" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            name="usrEmail"
+            id="usrEmail"
+            formControlName="email"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="usrMobile">Mobile number</label>
+          <input
+            type="number"
+            class="form-control"
+            name="usrMobile"
+            id="usrMobile"
+            formControlName="mobileNo"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="mb-3 ms-2">
+          <label for="usrCity" class="form-label">city address</label>
+          <input
+            type="text"
+            class="form-control"
+            name="usrCity"
+            id="usrCity"
+            formControlName="address"
+          />
+        </div>
+        <div class="mb-2 ms-2">
+          <label for="usrProduct" class="form-label">Product Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="usrProduct"
+            id="usrProduct"
+            formControlName="productName"
+          />
+        </div>
+        <div class="mb-3 ms-2">
+          <label for="usrage" class="form-label">Age</label>
+          <input
+            type="number"
+            class="form-control"
+            name="usrage"
+            id="usrage"
+            formControlName="age"
+          />
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <button [disabled]="formval.valid" type="submit" class="btn add-btn">
+          Add Seller
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!--MDB Tables-->
+<div class="container mt-4">
+  <div class="card mb-4">
+    <div class="card-body">
+      <!-- Grid row -->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-12">
+          <div class="input-group md-form form-sm form-2 pl-0">
+            <input
+              class="form-control my-0 py-1 pl-3 purple-border"
+              type="text"
+              placeholder="Search something here..."
+              aria-label="Search"
+            />
+            <span
+              class="input-group-addon waves-effect purple lighten-2"
+              id="basic-addon1"
+              ><a><i class="fa fa-search white-text" aria-hidden="true"></i></a
+            ></span>
+          </div>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+      <!--Table-->
+      <table class="table table-striped">
+        <!--Table head-->
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>id</th>
+            <th>full Name</th>
+            <th>Email</th>
+            <th>product Name</th>
+            <th>age</th>
+            <th>address</th>
+            <th>mobile</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <!--Table head-->
+        <!--Table body-->
+        <tbody>
+          <tr *ngFor="let seller of sellersList; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ seller.id }}</td>
+            <td>{{ seller.fullName }}</td>
+            <td>{{ seller.email }}</td>
+            <td>{{ seller.productName }}</td>
+            <td>{{ seller.age }}</td>
+            <td>{{ seller.address }}</td>
+            <td>{{ seller.mobileNo }}</td>
+            <td class="del-icon"><mat-icon>delete_forever</mat-icon></td>
+          </tr>
+        </tbody>
+        <!--Table body-->
+      </table>
+      <!--Table-->
+    </div>
+  </div>
+</div>
