@@ -27,6 +27,12 @@ import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule, SETTINGS } from '@angular/fire/compat/firestore';
+import { BrandDetailesComponent } from './Components/brands/brand-detailes/brand-detailes.component';
+import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/add-update-brand.component';
 
 
 @NgModule({
@@ -43,7 +49,9 @@ import { MatDividerModule } from '@angular/material/divider';
     UsersComponent,
     BrandsComponent,
     LoginComponent,
-    FooterComponent
+    FooterComponent,
+    BrandDetailesComponent,
+    AddUpdateBrandComponent
 ],
   imports: [
     BrowserModule,
@@ -58,9 +66,14 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSidenavModule,
     MatDividerModule,
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
   ],
-  providers: [],
+  providers: [
+    {provide: SETTINGS, useValue:{}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
