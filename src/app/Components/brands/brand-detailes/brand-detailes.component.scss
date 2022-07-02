@@ -1,0 +1,16 @@
+$mainColorBlue: #001a2c;
+$mainColorYellow: #d3a827;
+
+.cPointer{
+    cursor: pointer;
+}
+
+.mColor{
+    color: $mainColorBlue !important;
+}
+.bg-main{
+    background-color: $mainColorBlue !important;
+}
+.sColor{
+    color: $mainColorYellow !important;
+}
