@@ -28,6 +28,14 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 
 
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
+import { environment } from 'src/environments/environment';
+
+import {AngularFireModule} from '@angular/fire/compat'; 
+import {AngularFireDatabaseModule} from '@angular/fire/compat/database'
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore'
+import { CategoriesComponent } from './Components/Categories/categoryies.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +51,8 @@ import { MatDividerModule } from '@angular/material/divider';
     UsersComponent,
     BrandsComponent,
     LoginComponent,
-    FooterComponent
+    FooterComponent,
+    CategoriesComponent,
 ],
   imports: [
     BrowserModule,
@@ -58,7 +67,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSidenavModule,
     MatDividerModule,
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
