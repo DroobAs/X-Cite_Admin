@@ -1,0 +1,17 @@
+$mainColorBlue: #001a2c;
+$mainColorYellow: #d3a827;
+
+.brandcard{
+    box-shadow: 3px 3px 7px 1px $mainColorBlue;
+    transition: all;
+    transition-duration: 0.6s;
+    top: 0;
+}
+.brandcard:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    border-radius: 50% !important;
+    box-shadow: 1px 1px 1px 1px $mainColorYellow;
+    top: -20px;
+
+}

@@ -1,1 +1,14 @@
-<p>brands works!</p>
+<h1 class="text-center my-3"><b>*** All Brands ***</b></h1>
+<div class="container-fluid d-flex flex-wrap">
+
+    <div class="card px-5 pt-5 text-center m-4 rounded-pill brandcard" style="width: 18rem;" *ngFor="let brand of Brands">
+      <div (click)="showDetailes(brand.id)">
+        <img src={{brand.value.Logo}} class="card-img-top" alt={{brand.value.Name}}>
+        <div class="card-body mt-2">
+          <h1 class="card-title"><b>{{brand.value.Name}}</b></h1>
+          <p>{{brand.id}}</p>
+        </div>
+      </div>
+      </div>
+      
+</div>
