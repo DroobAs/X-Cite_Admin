@@ -19,6 +19,7 @@ import { UsersComponent } from './Components/users/users.component';
 import { BrandsComponent } from './Components/brands/brands.component';
 import { LoginComponent } from './Components/login/login.component';
 import { FooterComponent } from './Components/footer/footer.component';
+import { CategoriesComponent } from './Components/Categories/categories.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,8 +27,14 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import {provideAuth , getAuth} from "@angular/fire/auth"
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-import { environment } from 'src/environments/environment';
+
+import { environment } from './../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule, SETTINGS } from '@angular/fire/compat/firestore';
@@ -50,8 +57,10 @@ import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/ad
     BrandsComponent,
     LoginComponent,
     FooterComponent,
+    CategoriesComponent,
     BrandDetailesComponent,
-    AddUpdateBrandComponent
+    AddUpdateBrandComponent,
+    // HttpClientModule
 ],
   imports: [
     BrowserModule,
@@ -67,13 +76,20 @@ import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/ad
     MatDividerModule,
     CommonModule,
     BrowserAnimationsModule,
+// ///////////////////////////////////////////////////////////////////////
     AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+// ///////////////////////////////////////////////////////////////////////
+    provideAuth(()=> getAuth()),
+    provideFirestore(()=> getFirestore()),
     AngularFireDatabaseModule,
     AngularFirestoreModule
   ],
   providers: [
-    {provide: SETTINGS, useValue:{}}
+    {provide: SETTINGS, useValue:{}},
+    AngularFirestore
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

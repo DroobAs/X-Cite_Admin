@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Brand } from 'src/app/Models/brand';
-import { BrandService } from 'src/app/Services/brand.service';
-import { CRUDService } from 'src/app/Services/crud.service';
+import { Brand } from '../../../Models/brand';
+import { BrandService } from '../../../Services/brand.service';
+import { CRUDService } from '../../../Services/crud.service';
 
 @Component({
   selector: 'app-brand-detailes',
