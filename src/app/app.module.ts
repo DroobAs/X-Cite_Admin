@@ -32,9 +32,6 @@ import {provideAuth , getAuth} from "@angular/fire/auth"
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -76,6 +73,7 @@ import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/ad
     MatDividerModule,
     CommonModule,
     BrowserAnimationsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     AngularFireModule.initializeApp(environment.firebase),
     provideAuth(()=> getAuth()),
     provideFirestore(()=> getFirestore()),
