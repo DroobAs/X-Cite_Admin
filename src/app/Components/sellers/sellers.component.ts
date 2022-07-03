@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Seller } from 'src/app/Models/seller';
-import { SellerService } from 'src/app/Services/seller.service';
+import { Seller } from '../../Models/seller';
+import { SellerService } from '../../Services/seller.service';
 import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-sellers',

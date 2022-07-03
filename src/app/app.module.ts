@@ -19,7 +19,7 @@ import { UsersComponent } from './Components/users/users.component';
 import { BrandsComponent } from './Components/brands/brands.component';
 import { LoginComponent } from './Components/login/login.component';
 import { FooterComponent } from './Components/footer/footer.component';
-import { CategoriesComponent } from './Components/Categories/categoryies.component';
+import { CategoriesComponent } from './Components/Categories/categories.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -33,9 +33,8 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-import { environment } from 'src/environments/environment';
+import { environment } from './../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule, SETTINGS } from '@angular/fire/compat/firestore';
@@ -60,7 +59,8 @@ import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/ad
     FooterComponent,
     CategoriesComponent,
     BrandDetailesComponent,
-    AddUpdateBrandComponent
+    AddUpdateBrandComponent,
+    // HttpClientModule
 ],
   imports: [
     BrowserModule,
@@ -76,7 +76,10 @@ import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/ad
     MatDividerModule,
     CommonModule,
     BrowserAnimationsModule,
+// ///////////////////////////////////////////////////////////////////////
     AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+// ///////////////////////////////////////////////////////////////////////
     provideAuth(()=> getAuth()),
     provideFirestore(()=> getFirestore()),
     AngularFireDatabaseModule,

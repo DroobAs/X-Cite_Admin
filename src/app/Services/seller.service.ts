@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { getDocs, collection, Firestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { Seller } from '../Models/seller';
 
 @Injectable({
