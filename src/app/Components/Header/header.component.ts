@@ -10,7 +10,7 @@ import { AdminService } from '../../Services/admin.service';
 export class HeaderComponent implements OnInit {
 
   constructor(private authAdmin: AdminService,
-               private router:Router) { }
+              private router:Router) { }
   @Output() openAndClose: EventEmitter<any> = new EventEmitter();
   ngOnInit(): void {
   }
