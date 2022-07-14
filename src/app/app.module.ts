@@ -38,6 +38,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule, SETTINGS } from '@angular/fire/compat/firestore';
 import { BrandDetailesComponent } from './Components/brands/brand-detailes/brand-detailes.component';
 import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/add-update-brand.component';
+import { AddUpdateProductComponent } from './Components/products/add-update-product/add-update-product.component';
+import { ProductDetailsComponent } from './Components/products/product-details/product-details.component';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/ad
     FooterComponent,
     CategoriesComponent,
     BrandDetailesComponent,
-    AddUpdateBrandComponent
+    AddUpdateBrandComponent,
+    AddUpdateProductComponent,
+    ProductDetailsComponent
 ],
   imports: [
     BrowserModule,

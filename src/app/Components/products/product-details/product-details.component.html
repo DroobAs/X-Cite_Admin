@@ -1,0 +1,27 @@
+<div class=" bg-main sColor text-center my-3">
+    <h1>** Product Details **</h1>
+</div>
+<div class="container-fluid mt-3 mb-5">
+    <div class="d-flex w-100 mb-4">
+        <span class="col-5">
+            <!-- <img src={{targetProduct.Logo}} class="w-100"> -->
+        </span>
+        <span class="col-6 text-end">
+            <i class="fa-solid fa-pen-to-square fs-3 m-3 cPointer mColor shadow" (click)="goToEditProduct(targetProductID)" title="Edit"></i>
+            <i class="fa-solid fa-trash-can fs-3 m-3 cPointer mColor shadow" (click)="goToDeleteProduct(targetProductID)" title="Delete"></i>
+        </span>
+    </div>
+
+
+    <div class=" bg-main sColor my-5 w-50" >
+        <img src={{targetProduct.img}} class="card-img-top" alt={{targetProduct.name}} style="height: 200px; width:200px ">
+        <h1>Name: {{targetProduct.name}}</h1>
+        <h1>Price: {{targetProduct.price}}</h1>
+        <h1>Quantity: {{targetProduct.quantity}}</h1>
+        <h1>OverView: <span style="font-size:17px ;">{{targetProduct.overview}}</span></h1>
+    </div>
+  
+    
+  </div>
+
+

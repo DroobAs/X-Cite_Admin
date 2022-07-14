@@ -1,1 +1,69 @@
-<p>products works!</p>
+<div>
+  <!-- <button class="btn btn-warning " onclick="AddNewPrd()">Add New Product</button> -->
+</div>
+
+<button class="btn btn-warning" (click)="AddNewPrd()">
+  <i class="fa-solid fa-plus fs-4"></i>Add New Brand</button>
+
+<h1 class="text-center my-3"><b>*** All Products ***</b></h1>
+<div class="container-fluid d-flex flex-wrap justify-content-center">
+    <div class="card px-5 pt-5 text-center m-4 rounded-pill productcard" style="width: 18rem;" *ngFor="let product of list">
+      <div (click)="showDetailes(product.id)"> 
+        <div class="card-body mt-2">
+          <img src={{product.img}} class="card-img-top" alt={{product.name}}>
+          <h3 class="card-title"><b>Name:</b>{{product.name}}</h3>
+          <h3 class="card-title"><b>Price:</b>{{product.price}}</h3>
+<!-- 
+          <button (click)="deletePrd(prd.id)" class="btn btn-success">Delete</button>
+        <button (click)="updatePrd(prd.id)" class="btn btn-success">Update</button> -->
+
+
+        </div>
+      </div>
+      </div>
+      
+</div>
+
+
+
+<!-- <table class="table" m-2>
+  <thead>
+    <tr class="bg-dark text-light">
+      <th scope="col">No</th>
+      <th scope="col">Name</th>
+      <th scope="col">Image</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th> -->
+     <!-- <th scope="col">Delete</th>
+      <th scope="col">Update</th> -->
+     
+
+    <!-- </tr> -->
+
+  <!-- </thead>
+  
+
+  <tbody>
+      
+          <ng-container *ngFor="let product of list;let i=index;" >
+            <tr>
+              <td>{{i+1}}</td>
+              <td>{{product.name}}</td>
+              <td>{{product.img}}</td>
+              <td>{{product.quantity}}</td>
+              <td>{{product.price}}</td>
+    
+         
+              <td>  <button (click)="deletePrd(prd.id)" class="btn btn-success">Delete</button></td>
+              <td>  <button (click)="updatePrd(prd.id)" class="btn btn-success">Update</button></td>
+          
+        </tr>
+           
+        </ng-container>
+  
+
+  </tbody>
+</table> -->
+
+
+
