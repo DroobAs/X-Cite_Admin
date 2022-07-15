@@ -15,7 +15,9 @@ mat-toolbar{
   }
   .information-admin {
     display: flex;
-    align-items: center;
+    // align-items: center;
+    align-content: center;
+    align-items: flex-end;
     justify-content: center;
     gap: 10px;
     p {
@@ -38,7 +40,8 @@ mat-toolbar{
     font-size: 40px;
     text-transform: uppercase;
     font-weight: 700;
-    color: white;
+    color:rgba(254,197,38,1);
+    color:linear-gradient(270deg, rgb(255, 255, 255) 26%, rgba(254,197,38,1) 100%);
   }
   button {
     border: 0;
@@ -56,4 +59,12 @@ mat-toolbar{
   .user-image-icon{
     height: 18px;
     font-size: 16px;
+  }
+
+  .bg{
+    background: rgb(0,26,44);
+    background: linear-gradient(270deg, rgba(0,26,44,1) 24%, rgba(254,197,38,1) 100%);
+  }
+  .mColor{
+    color:rgb(254,197,38) !important;
   }

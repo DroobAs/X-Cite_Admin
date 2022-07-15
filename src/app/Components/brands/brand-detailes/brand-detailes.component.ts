@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Brand } from '../../../Models/brand';
 import { BrandService } from '../../../Services/brand.service';
@@ -17,9 +17,9 @@ export class BrandDetailesComponent implements OnInit, OnDestroy {
   @ViewChild('pre') btn !:ElementRef;
   sliderInterval:any ='';
 
-  constructor(  private routerActive: ActivatedRoute
+  constructor(  @Inject(ActivatedRoute) private routerActive: ActivatedRoute
               , private brandService: BrandService
-              , private router: Router ) { }
+              , @Inject(Router) private router: Router ) { }
 
   ngOnInit(): void {
     this.routerActive.paramMap.subscribe((param)=>{
@@ -47,9 +47,19 @@ export class BrandDetailesComponent implements OnInit, OnDestroy {
     this.router.navigate([`SaveBrand/${id}`])
   }
 
+  deleteBrand(id:string|null)
+  {
+    let sure = confirm(`Are you sure you want to delete '${this.targitBrand.Name}' Brand?`);
+    if(sure)
+    {
+      this.brandService.deleteBrand(id as string, this.targitBrand).then(()=>{
+          alert('Brand has deleted successfully!');
+          this.router.navigate(['Brands']);
+      })
+    }
+  }
+
   ngOnDestroy(): void {
     clearInterval(this.sliderInterval);
   }
-
-
 }

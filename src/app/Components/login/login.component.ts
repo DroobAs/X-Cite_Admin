@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Auth , signInWithEmailAndPassword } from '@angular/fire/auth';
 import { AdminService } from '../../Services/admin.service';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   isAdminLogged: boolean = false
   constructor(private auth:Auth,
      private authLog:AdminService,
-     private route:Router) { }
+     @Inject(Router) private route:Router) { }
 
   ngOnInit(): void {
   }

@@ -10,6 +10,9 @@ import { HomeComponent } from './Components/Home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { MainLayoutComponent } from './Components/main-layout/main-layout.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
+import { OrdersComponent } from './Components/orders/orders.component';
+import { AddUpdateProductComponent } from './Components/products/add-update-product/add-update-product.component';
+import { ProductDetailsComponent } from './Components/products/product-details/product-details.component';
 import { ProductsComponent } from './Components/products/products.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { SellersComponent } from './Components/sellers/sellers.component';
@@ -21,6 +24,9 @@ const routes: Routes = [
     {path: '', redirectTo:'/Home', pathMatch:'full'},
     {path: 'Home', component:HomeComponent},
     {path: 'Products', component:ProductsComponent},
+    {path: 'Product/:id', component:ProductDetailsComponent},
+    {path: 'SaveProduct/:id', component: AddUpdateProductComponent},
+    {path: 'SaveProduct', component: AddUpdateProductComponent},
     {path: 'Categories', component:CategoriesComponent},
     {path: 'Users', component: UsersComponent},
     {path: 'Sellers', component: SellersComponent},
@@ -30,14 +36,18 @@ const routes: Routes = [
     {path: 'SaveBrand', component: AddUpdateBrandComponent},
     {path: 'Analytics', component: AnalyticsComponent},
     {path: 'Profile', component: ProfileComponent},
-    {path: 'WebSite', component: WebConfigComponent}
+    {path: 'WebSite', component: WebConfigComponent},
+    {path: 'orders', component: OrdersComponent},
+
   ]},
   {path: 'Login', component:LoginComponent},
   {path:'**',component:NotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
