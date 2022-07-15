@@ -9,9 +9,9 @@ import { AdminService } from '../../Services/admin.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
   constructor(private authAdmin: AdminService,
               private router:Router) { }
+
   @Output() openAndClose: EventEmitter<any> = new EventEmitter();
   ngOnInit(): void {
   }
