@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'app/Models/product';
 import { ProductService } from 'app/Services/product.service';
@@ -15,9 +15,9 @@ export class ProductDetailsComponent implements OnInit {
   targetProduct:Product = {} as Product;
 ;
 
-  constructor(private activatedRoute:ActivatedRoute,
-   private productService:ProductService,
-    private route: Router) { }
+  constructor(  @Inject(ActivatedRoute) private activatedRoute:ActivatedRoute,
+                private productService:ProductService,
+                @Inject(Router) private route: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((param)=>{

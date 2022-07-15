@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Brand } from 'app/Models/brand';
 import { BrandService } from 'app/Services/brand.service';
 import { Offer } from 'app/Models/offer';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-add-update-brand',
@@ -20,10 +21,10 @@ export class AddUpdateBrandComponent implements OnInit {
 
   @ViewChild('img') img!: ElementRef;
 
-  constructor( private routerActive: ActivatedRoute
+  constructor( @Inject(ActivatedRoute) private routerActive: ActivatedRoute
              , private FormBuilder : FormBuilder
              , private brandService: BrandService
-             , private router: Router) {
+             , @Inject(Router) private router: Router) {
 
               this.saveBrandForm = FormBuilder.group({
                   BrandName: ['',[Validators.required, Validators.pattern('[a-z A-Z]{3,}')]],

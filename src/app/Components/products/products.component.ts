@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {ProductService} from '../../Services/product.service'
 import { Router } from '@angular/router';
@@ -11,7 +11,8 @@ import { Product } from 'app/Models/product';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private ProductService:ProductService, private route:Router) { }
+  constructor(  private ProductService:ProductService
+              , @Inject(Router) private route:Router) { }
   list :Product[]=[]
   subscriptions: Subscription[] = [];
 
