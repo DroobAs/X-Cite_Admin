@@ -29,9 +29,9 @@ export class CRUDService {
     return this.fs.doc(`${collectionName}/${docID}`).delete();
   }
 
-  updateDoc(collectionName:string, docID:string, data:any): Promise<void>
+  updateDoc(collectionName:string, docID:string, Updatedata:any): Promise<void>
   {
-    return this.fs.doc(`${collectionName}/${docID}`).update(data);
+    return this.fs.doc(`${collectionName}/${docID}`).update(Updatedata);
   }
 
 }

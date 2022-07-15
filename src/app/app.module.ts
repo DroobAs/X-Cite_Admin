@@ -33,13 +33,14 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-
 import { environment } from './../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule, SETTINGS } from '@angular/fire/compat/firestore';
 import { BrandDetailesComponent } from './Components/brands/brand-detailes/brand-detailes.component';
 import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/add-update-brand.component';
+import { AddUpdateProductComponent } from './Components/products/add-update-product/add-update-product.component';
+import { ProductDetailsComponent } from './Components/products/product-details/product-details.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/ad
     CategoriesComponent,
     BrandDetailesComponent,
     AddUpdateBrandComponent,
-    // HttpClientModule
+    AddUpdateProductComponent,
+    ProductDetailsComponent
 ],
   imports: [
     BrowserModule,
@@ -76,10 +78,8 @@ import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/ad
     MatDividerModule,
     CommonModule,
     BrowserAnimationsModule,
-// ///////////////////////////////////////////////////////////////////////
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-// ///////////////////////////////////////////////////////////////////////
     provideAuth(()=> getAuth()),
     provideFirestore(()=> getFirestore()),
     AngularFireDatabaseModule,
