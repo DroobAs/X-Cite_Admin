@@ -37,6 +37,8 @@ export class AddUpdateBrandComponent implements OnInit {
     this.routerActive.paramMap.subscribe((params)=>{
       if(params.get('id'))
       {
+        console.log('inonit');
+        
         this.Add = false;
         this.updatedID = params.get('id');
         this.brandService.getBrandByID(this.updatedID as string).subscribe((brand)=>{
@@ -99,6 +101,7 @@ export class AddUpdateBrandComponent implements OnInit {
 
   addNewCategory()
   {
+    console.log('in add cat');
     this.BrandCategoriesPro.push(this.FormBuilder.control('',[Validators.required, Validators.pattern('[a-z A-Z0-9]{3,}')]));
   }
   removeCategory(i:number)
@@ -166,9 +169,15 @@ export class AddUpdateBrandComponent implements OnInit {
     this.isload = false;
     this.done = true;
     this.saveBrandForm.reset(); 
-    setTimeout(() => {
-        this.router.navigate(['/Brands']);
-    }, 3000);
+    // setTimeout(() => {
+    //   if(this.Add)
+    //   {
+    //     this.router.navigate(['/Brands']);
+    //   }
+    //   else
+    //   {
+    //     this.router.navigate([`/Brand/${this.updatedID}`]);
+    //   }
+    // }, 3000);
   }
-
 }
