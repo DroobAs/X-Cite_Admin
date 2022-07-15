@@ -1,16 +1,19 @@
 <div class="container-fluid mt-3 mb-5">
     <div class="d-flex w-100 mb-4">
         <span class="col-5">
-            <img src={{targitBrand.Logo}} class="w-100">
+            <img src={{targitBrand.Logo}} class="w-100" style="height: 200px;">
         </span>
-        <span class="col-6 text-end">
+        <span class="col-5 text-start p-3">
+          <h1><b>{{targitBrand.Name}}</b></h1>
+        </span>
+        <span class="col-2 text-end ps-lg-3 ps-0">
             <i class="fa-solid fa-pen-to-square fs-3 m-3 cPointer mColor shadow" (click)="goToEditBrand(targetBrandID)" title="Edit"></i>
-            <i class="fa-solid fa-trash-can fs-3 m-3 cPointer mColor shadow" title="Delete"></i>
+            <i class="fa-solid fa-trash-can fs-3 m-3 cPointer mColor shadow" (click)="deleteBrand(targetBrandID)" title="Delete"></i>
         </span>
     </div>
 
     <div class=" bg-main sColor text-center my-3">
-        <h1>** Categories **</h1>
+        <h1 class="py-1">** Categories **</h1>
     </div>
     <div class="container-fluid d-flex flex-wrap w-100 mb-4">
         <span *ngFor="let cat of targitBrand.Categoris" class="m-3 col-2 shadow card rounded">
@@ -27,17 +30,26 @@
     </div>
 
     <div class=" bg-main sColor text-center my-3">
-        <h1>Offers</h1>
+        <h1 class="py-1">** Offers **</h1>
     </div>
 
   <div id="carouselExampleControls" class="carousel slide w-100 mb-5" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="../../../../assets/images/xcite-logo-ar.png" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="../../../../assets/images/xcite-logo-en.png" class="d-block w-100" alt="...">
-      </div>
+
+      <ng-container *ngIf="targitBrand.offers.length==0">
+          <h3 class="text-center">There's no offers for this Brand!</h3>
+      </ng-container>
+
+      <ng-container *ngFor='let offer of targitBrand.offers;let i=index;'>
+        <div class="carousel-item" *ngIf="i>0 else active">
+          <img src="{{offer.imgOffer}}" class="d-block w-100" title="{{offer.offerInfo}}" height="400px">
+        </div>
+        <ng-template #active>
+          <div class="carousel-item active">
+            <img src="{{offer.imgOffer}}" class="d-block w-100" title="{{offer.offerInfo}}" height="400px">
+          </div>
+        </ng-template>
+      </ng-container>
     </div>
 
     <button class="carousel-control-prev" #pre type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -49,6 +61,5 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-
 
 </div>

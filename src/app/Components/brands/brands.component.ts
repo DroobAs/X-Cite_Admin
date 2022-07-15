@@ -20,10 +20,12 @@ export class BrandsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
    let subscribe =  this.bransService.getAllBrands().subscribe((data)=>{
       this.Brands =  data.map(s=>{
+        console.log(data);
+        
             return{
               id: s.payload.doc.id, 
-              value: s.payload.doc.data()
-            }
+              ...s.payload.doc.data()
+            }            
           })
     })
     this.subscriptions.push(subscribe);
@@ -32,6 +34,11 @@ export class BrandsComponent implements OnInit, OnDestroy {
   showDetailes(Bid:string)
   {
     this.router.navigate([`Brand/${Bid}`])
+  }
+
+  goToAddNew()
+  {
+    this.router.navigate(['SaveBrand']);
   }
 
 

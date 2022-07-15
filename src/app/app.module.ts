@@ -32,6 +32,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -70,6 +71,7 @@ import { ProductsComponent } from './Components/products/products.component';
     FooterComponent,
     CategoriesComponent,
     BrandDetailesComponent,
+
     AddUpdateBrandComponent,
     SearchPipe,
     UpdateSellerComponent,
@@ -95,6 +97,7 @@ import { ProductsComponent } from './Components/products/products.component';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
+    AngularFireStorageModule
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     AngularFireDatabaseModule,

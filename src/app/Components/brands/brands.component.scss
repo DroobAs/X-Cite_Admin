@@ -13,5 +13,11 @@ $mainColorYellow: #d3a827;
     border-radius: 50% !important;
     box-shadow: 1px 1px 1px 1px $mainColorYellow;
     top: -20px;
+}
 
+.addNew{
+    color:$mainColorYellow;
+    text-decoration: underline;
+    cursor:pointer;
+    width: fit-content;
 }
