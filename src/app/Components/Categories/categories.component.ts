@@ -4,9 +4,9 @@ import { CategoriesService } from '../../Services/category.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs';
 @Component({
-  selector: 'app-categoryies',
-  templateUrl: './categoryies.component.html',
-  styleUrls: ['./categoryies.component.scss']
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
   // Used to add new catService

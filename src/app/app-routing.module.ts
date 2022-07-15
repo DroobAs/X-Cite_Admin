@@ -5,7 +5,7 @@ import { AnalyticsComponent } from './Components/analytics/analytics.component';
 import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/add-update-brand.component';
 import { BrandDetailesComponent } from './Components/brands/brand-detailes/brand-detailes.component';
 import { BrandsComponent } from './Components/brands/brands.component';
-import { CategoriesComponent } from './Components/Categories/categoryies.component';
+import { CategoriesComponent } from './Components/Categories/categories.component';
 import { HomeComponent } from './Components/Home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { MainLayoutComponent } from './Components/main-layout/main-layout.component';

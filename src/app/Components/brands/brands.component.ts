@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Brand } from 'src/app/Models/brand';
-import { BrandService } from 'src/app/Services/brand.service';
+import { Brand } from '../../../app/Models/brand';
+import { BrandService } from '../../Services/brand.service';
 
 @Component({
   selector: 'app-brands',

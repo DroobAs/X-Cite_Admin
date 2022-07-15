@@ -1,6 +1,6 @@
 import {  Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AdminService } from 'src/app/Services/admin.service';
+import { AdminService } from '../../Services/admin.service';
 
 @Component({
   selector: 'app-header',
