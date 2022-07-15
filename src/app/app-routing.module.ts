@@ -10,6 +10,7 @@ import { HomeComponent } from './Components/Home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { MainLayoutComponent } from './Components/main-layout/main-layout.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
+import { OrdersComponent } from './Components/orders/orders.component';
 import { AddUpdateProductComponent } from './Components/products/add-update-product/add-update-product.component';
 import { ProductDetailsComponent } from './Components/products/product-details/product-details.component';
 import { ProductsComponent } from './Components/products/products.component';
@@ -36,7 +37,9 @@ const routes: Routes = [
     {path: 'SaveBrand', component: AddUpdateBrandComponent},
     {path: 'Analytics', component: AnalyticsComponent},
     {path: 'Profile', component: ProfileComponent},
-    {path: 'WebSite', component: WebConfigComponent}
+    {path: 'WebSite', component: WebConfigComponent},
+    {path: 'orders', component: OrdersComponent},
+
   ]},
   {path: 'Login', component:LoginComponent},
   {path:'**',component:NotFoundComponent}

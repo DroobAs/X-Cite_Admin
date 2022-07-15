@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Product } from 'src/app/Models/product';
-import { ProductService } from 'src/app/Services/product.service';
+import {ProductService} from '../../Services/product.service'
 import { Router } from '@angular/router';
+import { Product } from 'app/Models/product';
 
 @Component({
   selector: 'app-products',
@@ -16,15 +16,15 @@ export class ProductsComponent implements OnInit {
   subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
-    let products= this.ProductService.getAllProducts().subscribe(prodlist=> {
+    let products= this.ProductService.getAllProducts().subscribe((prodlist: any[])=> {
     this.list =  prodlist.map(s=>{
       return{
-        id: s.payload.doc.id, 
+        id: s.payload.doc.id,
         ...s.payload.doc.data()
       }
     })
     console.log( this.list);
-    
+
    })
    this.subscriptions.push(products);
 
@@ -35,7 +35,7 @@ export class ProductsComponent implements OnInit {
 
 AddNewPrd(){
   this.route.navigate(['SaveProduct']);
-  
+
 }
 
 showDetailes(productID:string|undefined){
