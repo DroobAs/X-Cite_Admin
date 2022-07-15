@@ -33,8 +33,6 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';

@@ -3,8 +3,9 @@ import { Category } from '../../Models/category';
 import { CategoriesService } from '../../Services/category.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs';
+import { style } from '@angular/animations';
 @Component({
-  selector: 'app-categoryies',
+  selector: 'app-categories',
   templateUrl: './categoryies.component.html',
   styleUrls: ['./categoryies.component.scss']
 })
@@ -20,23 +21,25 @@ export class CategoriesComponent implements OnInit {
     Name : '',
     Description : '',
   } 
-
-
-
-
+  toDisplay = false;
+  gotId: string =''
+  selectedCatID:number=0;
   constructor(private catService:CategoriesService, private fs:AngularFirestore) {
     
   }
-
-
   ngOnInit(): void {
     this.retrieveCats()
   }  
   ngOnChanges(): void {
   }
-
-  
-  updateTutorial(id:any): void {
+  sendId(id:any){
+    this.gotId = id
+    console.log(id)
+    this.toDisplay = !this.toDisplay;
+  }
+  updateTutorial(id:any) : void {
+    this.toDisplay = !this.toDisplay;
+    
     const data = {
       Name: this.currentCategoryUpdate.Name,
       Description: this.currentCategoryUpdate.Description
@@ -47,7 +50,6 @@ export class CategoriesComponent implements OnInit {
         .catch(err => console.log(err));
     }
   }
-
 
   deleteTutorial(id:any): void {
     if (id) {
