@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray,  FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
-import { ProductService } from 'src/app/Services/product.service';
+
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/Models/product';
+import { Product } from 'app/Models/product';
+import { ProductService } from 'app/Services/product.service';
+
 
 
 
@@ -20,27 +22,27 @@ export class AddUpdateProductComponent implements OnInit {
   updatedProduct: Product = {} as Product;
 
 
-  constructor(private activatedRoute:ActivatedRoute , private route:Router,private FormBuilder : FormBuilder , private productService: ProductService) { 
+  constructor(private activatedRoute:ActivatedRoute , private route:Router,private FormBuilder : FormBuilder , private productService: ProductService) {
     this.saveProductForm = FormBuilder.group({
       ProductName: ['',[Validators.required, Validators.pattern('[a-z A-Z]{3,}')]],
       ProductQuantity: ['',[]],
       ProductPrice:['',[]],
       ProductOverView:['',[]],
-  
- 
+
+
   })
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params)=>{
       params.get('id')?this.Add = false: this.Add = true;
-      params.get('id')?this.updatedID = params.get('id'): this.updatedID = null;    
+      params.get('id')?this.updatedID = params.get('id'): this.updatedID = null;
 
       if(params.get('id'))
       {
         this.Add = false;
         this.updatedID = params.get('id');
-        this.productService.getByID(this.updatedID as string).subscribe((product)=>{
+        this.productService.getByID(this.updatedID as string).subscribe((product: Product)=>{
           this.updatedProduct=product;
 
           this.saveProductForm.patchValue({
@@ -55,9 +57,9 @@ export class AddUpdateProductComponent implements OnInit {
       else
       {
         this.Add = true;
-        this.updatedID = null; 
+        this.updatedID = null;
       }
-   
+
     })
   }
 
@@ -103,7 +105,7 @@ export class AddUpdateProductComponent implements OnInit {
 
     })
   }
-  else 
+  else
     {
       this.productService.updatePrd(this.updatedID as string,updatedProduct)
       this.Saved();
@@ -111,8 +113,8 @@ export class AddUpdateProductComponent implements OnInit {
   }
   Saved()
   {
-  
-    this.saveProductForm.reset(); 
+
+    this.saveProductForm.reset();
     setTimeout(() => {
         this.route.navigate(['/Products']);
     }, 2000);

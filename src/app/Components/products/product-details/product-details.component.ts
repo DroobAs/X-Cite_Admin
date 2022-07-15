@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/Models/product';
-import { ProductService } from 'src/app/Services/product.service';
-import { CRUDService } from 'src/app/Services/crud.service';
+import { Product } from 'app/Models/product';
+import { ProductService } from 'app/Services/product.service';
+
 
 
 @Component({
@@ -15,7 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   targetProduct:Product = {} as Product;
 ;
 
-  constructor(private activatedRoute:ActivatedRoute, 
+  constructor(private activatedRoute:ActivatedRoute,
    private productService:ProductService,
     private route: Router) { }
 
@@ -28,7 +28,7 @@ export class ProductDetailsComponent implements OnInit {
             this.targetProduct = product;
         })
         :'';
-   
+
     })
 
   }
@@ -46,6 +46,6 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
- 
+
 
 }
