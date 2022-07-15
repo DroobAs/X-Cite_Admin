@@ -1,0 +1,39 @@
+
+<div class="py-5">
+  <table class="table table-striped">
+    <!--Table head-->
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>id</th>
+        <th>customerName</th>
+        <th>itemName</th>
+        <th>price</th>
+        <th>quntaty</th>
+        <th>sellerName</th>
+
+      </tr>
+    </thead>
+    <!--Table head-->
+    <!--Table body-->
+    <tbody>
+      <tr
+        *ngFor="
+          let order of orderList ;
+          let i = index
+        "
+      >
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ order.id }}</td>
+        <td>{{ order.cutomerName }}</td>
+        <td>{{ order.itemName }}</td>
+        <td>{{ order.price }}</td>
+        <td>{{ order.quntaty }}</td>
+        <td>{{ order.sellerName }}</td>
+
+
+      </tr>
+    </tbody>
+    <!--Table body-->
+  </table>
+</div>

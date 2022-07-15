@@ -1,0 +1,105 @@
+<div class="container w-50">
+  <h1>{{this.id}}</h1>
+  <form
+    (ngSubmit)="updateSeller(formval.value)"
+    #formval="ngForm"
+    [formGroup]="usrFormGroup"
+    class="m-2"
+  >
+    <div class="row">
+      <div class="col-lg-6">
+
+        <div class="mb-3 form-group">
+          <label for="usrName" class="form-label">Full Name</label>
+
+          <input
+
+            type="text"
+            class="form-control"
+            name="usrName"
+            id="usrName"
+            formControlName="fullName"
+
+
+          />
+
+          <div
+            class="alert alert-warning"
+            [hidden]="fullName?.valid || fullName?.untouched"
+          >
+            <small *ngIf="fullName?.errors?.['required']">
+              Full Name is required
+            </small>
+            <small *ngIf="fullName?.errors?.['minlength']">
+              Full Name must be at least 3 letters
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="usrEmail" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            name="usrEmail"
+            id="usrEmail"
+            formControlName="email"
+
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="usrMobile">Mobile number</label>
+          <input
+            type="number"
+            class="form-control"
+            name="usrMobile"
+            id="usrMobile"
+            formControlName="mobileNo"
+
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="mb-3 ms-2">
+          <label for="usrCity" class="form-label">city address</label>
+          <input
+            type="text"
+            class="form-control"
+            name="usrCity"
+            id="usrCity"
+            formControlName="address"
+
+          />
+        </div>
+        <div class="mb-2 ms-2">
+          <label for="usrProduct" class="form-label">Product Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="usrProduct"
+            id="usrProduct"
+            formControlName="productName"
+
+          />
+        </div>
+        <div class="mb-3 ms-2">
+          <label for="usrage" class="form-label">Age</label>
+          <input
+            type="number"
+            class="form-control"
+            name="usrage"
+            id="usrage"
+            formControlName="age"
+
+          />
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <button class="d-flex align-items-center  btn btn-denger" type="submit" class="btn add-btn">
+          Update Data
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
