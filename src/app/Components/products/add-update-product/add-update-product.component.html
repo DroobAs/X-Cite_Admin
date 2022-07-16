@@ -1,0 +1,55 @@
+
+<h2 class="text-start mb-0" *ngIf="Add else update">
+  <i class='fa-solid fa-pen-to-square fs-3 m-3'></i> Add New Product:</h2>
+<ng-template #update>
+<h2 class="text-start mb-0"><i class='fa-solid fa-pen-to-square fs-3 m-3'></i> Update Product:</h2>
+</ng-template>
+
+<div class="w-75 mx-auto mb-5 px-5 pb-4 pt-1 mt-0">
+  <form [formGroup]="saveProductForm">
+
+    <!------------------------ ID ------------------------>
+    <div class="mb-4 text-center" *ngIf='!Add'>
+      <b>Product ID:</b> {{updatedID}}
+    </div>
+
+
+<div class="w-50 border border-primary border-4 mx-auto mb-5 px-5 py-4 shadow" style="background-color:lightgray ;">
+  <form [formGroup]="saveProductForm">
+
+      <div class="mb-3">
+        <label for="PName" class="form-label fs-5">Product Name:</label>
+        <input type="text" name="ProductName" id="PName" formControlName="ProductName" class="form-control"
+          placeholder="Enter Product Name .." [class.is-valid]="ProductName?.valid"
+          [class.is-invalid]="ProductName?.invalid && ProductName?.touched">
+      </div>
+
+      <div class="mb-3">
+        <label for="PPrice" class="form-label fs-5">Product Price:</label>
+        <input type="text" name="ProductPrice" id="PPrice" formControlName="ProductPrice" class="form-control"
+          placeholder="Enter Product Price .." [class.is-valid]="ProductName?.valid"
+          [class.is-invalid]="ProductPrice?.invalid && ProductPrice?.touched">
+      </div>
+
+      <div class="mb-3">
+        <label for="PQuantity" class="form-label fs-5">Product Quantity:</label>
+        <input type="text" name="ProductQuantity" id="PQuantity" formControlName="ProductQuantity" class="form-control"
+          placeholder="Enter Product Quantity .." [class.is-valid]="ProductName?.valid"
+          [class.is-invalid]="ProductQuantity?.invalid && ProductQuantity?.touched">
+      </div>
+      <div class="mb-3">
+        <label for="POverView" class="form-label fs-5">Product OverView:</label>
+        <input type="text" name="ProductOverView" id="POverView" formControlName="ProductOverView" class="form-control"
+          placeholder="Enter Product OverView.." [class.is-valid]="ProductOverView?.valid"
+          [class.is-invalid]="ProductOverView?.invalid && ProductOverView?.touched">
+      </div>
+
+      <div class="text-center">
+        <button [disabled]="saveProductForm.invalid" (click)="SaveProduct()" class="btn btn-primary px-5"> 
+          <b *ngIf="Add else upd">Add</b>
+          <ng-template #upd><b>Update</b></ng-template>
+        </button>
+      </div>
+      
+    </form>
+  </div>
