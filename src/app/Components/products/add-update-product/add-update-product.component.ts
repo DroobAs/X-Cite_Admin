@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {FormArray,  FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import {FormArray,  FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -22,14 +23,15 @@ export class AddUpdateProductComponent implements OnInit {
   updatedProduct: Product = {} as Product;
 
 
-  constructor(private activatedRoute:ActivatedRoute , private route:Router,private FormBuilder : FormBuilder , private productService: ProductService) {
-    this.saveProductForm = FormBuilder.group({
+  constructor(  @Inject(ActivatedRoute) private activatedRoute:ActivatedRoute 
+              , @Inject(Router) private route:Router
+              , @Inject(FormBuilder) private formBuilder : FormBuilder 
+              , private productService: ProductService) {
+    this.saveProductForm = formBuilder.group({
       ProductName: ['',[Validators.required, Validators.pattern('[a-z A-Z]{3,}')]],
       ProductQuantity: ['',[]],
       ProductPrice:['',[]],
       ProductOverView:['',[]],
-
-
   })
   }
 

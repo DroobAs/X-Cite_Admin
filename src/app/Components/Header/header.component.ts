@@ -1,6 +1,7 @@
-import {  Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {  Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../../Services/admin.service';
+
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,9 @@ import { AdminService } from '../../Services/admin.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
   constructor(private authAdmin: AdminService,
-               private router:Router) { }
+              private router:Router) { }
+
   @Output() openAndClose: EventEmitter<any> = new EventEmitter();
   ngOnInit(): void {
   }

@@ -27,7 +27,6 @@ const routes: Routes = [
     {path: 'Product/:id', component:ProductDetailsComponent},
     {path: 'SaveProduct/:id', component: AddUpdateProductComponent},
     {path: 'SaveProduct', component: AddUpdateProductComponent},
-    // {path: 'DeleteProduct/:id', component: AddUpdateProductComponent},
     {path: 'Categories', component:CategoriesComponent},
     {path: 'Users', component: UsersComponent},
     {path: 'Sellers', component: SellersComponent},
@@ -46,7 +45,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

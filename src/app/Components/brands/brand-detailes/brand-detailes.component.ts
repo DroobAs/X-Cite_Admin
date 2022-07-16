@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Brand } from '../../../Models/brand';
 import { BrandService } from '../../../Services/brand.service';
@@ -17,9 +17,9 @@ export class BrandDetailesComponent implements OnInit, OnDestroy {
   @ViewChild('pre') btn !:ElementRef;
   sliderInterval:any ='';
 
-  constructor(  private routerActive: ActivatedRoute
+  constructor(  @Inject(ActivatedRoute) private routerActive: ActivatedRoute
               , private brandService: BrandService
-              , private router: Router ) { }
+              , @Inject(Router) private router: Router ) { }
 
   ngOnInit(): void {
     this.routerActive.paramMap.subscribe((param)=>{
