@@ -38,9 +38,13 @@ export class AddUpdateBrandComponent implements OnInit {
     this.routerActive.paramMap.subscribe((params)=>{
       if(params.get('id'))
       {
+        console.log('inonit');
+        
         this.Add = false;
         this.updatedID = params.get('id');
         this.brandService.getBrandByID(this.updatedID as string).subscribe((brand)=>{
+          console.log('getted brand', brand);
+          
             this.updatedBrand = brand;
             // brand
             for(let i=0; i<brand.offers.length; i++)
@@ -52,16 +56,18 @@ export class AddUpdateBrandComponent implements OnInit {
             })
 
             // Category
-            for(let i=0; i<brand.Categoris.length-1; i++)
-            {
-              this.addNewCategory();
-            }
+            // for(let i=0; i<brand.categories.length-1; i++)
+            // {
+            //   this.addNewCategory();
+            // }
 
             this.saveBrandForm.patchValue({
-              BrandName: brand.Name,
-              BrandCategories: brand.Categoris,
+              BrandName: brand.name,
+              BrandCategories: brand.categories,
               BrandOffers: brand.offers
             });
+            console.log(this.Add,this.saveBrandForm);
+            
         })
       }
       else
@@ -100,6 +106,7 @@ export class AddUpdateBrandComponent implements OnInit {
 
   addNewCategory()
   {
+    console.log('in add cat');
     this.BrandCategoriesPro.push(this.FormBuilder.control('',[Validators.required, Validators.pattern('[a-z A-Z0-9]{3,}')]));
   }
   removeCategory(i:number)
@@ -142,9 +149,9 @@ export class AddUpdateBrandComponent implements OnInit {
 
     let file: File = this.img.nativeElement.files[0];
     let brand: Brand = {
-      Name: this.brandNamePro?.value,
-      Logo: this.Add?file:(file?file:this.updatedBrand.Logo),
-      Categoris: categories,
+      name: this.brandNamePro?.value,
+      logo: this.Add?file:(file?file:this.updatedBrand.logo),
+      categories: categories,
       offers: offers
     }
 
@@ -168,8 +175,14 @@ export class AddUpdateBrandComponent implements OnInit {
     this.done = true;
     this.saveBrandForm.reset(); 
     setTimeout(() => {
+      if(this.Add)
+      {
         this.router.navigate(['/Brands']);
+      }
+      else
+      {
+        this.router.navigate([`/Brand/${this.updatedID}`]);
+      }
     }, 3000);
   }
-
 }

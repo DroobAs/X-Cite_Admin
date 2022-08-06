@@ -10,7 +10,7 @@
     <div  class="card px-5 pt-5 text-center m-4 rounded-pill productcard" style="width: 18rem;" *ngFor="let product of list">
       <div (click)="showDetailes(product.id)">
         <div class="card-body mt-2">
-          <img src={{product?.img}} class="card-img-top" alt={{product?.name}}>
+          <img src={{product.images[0]}} class="card-img-top" alt={{product?.name}}>
           <h3 class="card-title"><b>Name:</b>{{product?.name}}</h3>
           <h3 class="card-title"><b>Price:</b>{{product?.price}}</h3>
 <!--

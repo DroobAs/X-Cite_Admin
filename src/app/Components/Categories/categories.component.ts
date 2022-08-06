@@ -11,15 +11,16 @@ import { style } from '@angular/animations';
 })
 export class CategoriesComponent implements OnInit {
   // Used to add new catService
-  category : Category = new Category()
+  // category : Category = new Category()
+  category : Category = {};
   submitted = false
   // Retrieve Cats
   categories?: Category[]
   currentCat?: Category;
   // Update
   currentCategoryUpdate : Category = {
-    Name : '',
-    Description : '',
+    name : '',
+    discount : 0,
   } 
   toDisplay = false;
   gotId: string =''
@@ -32,6 +33,7 @@ export class CategoriesComponent implements OnInit {
   }  
   ngOnChanges(): void {
   }
+
   sendId(id:any){
     this.gotId = id
     console.log(id)
@@ -41,8 +43,8 @@ export class CategoriesComponent implements OnInit {
     this.toDisplay = !this.toDisplay;
     
     const data = {
-      Name: this.currentCategoryUpdate.Name,
-      Description: this.currentCategoryUpdate.Description
+      name: this.currentCategoryUpdate.name,
+      discount: this.currentCategoryUpdate.discount
     };
     if (id) {
       this.catService.update( data,id)
@@ -62,16 +64,20 @@ export class CategoriesComponent implements OnInit {
 /////////////////////////////////////////////////////////////////////////////////
   retrieveCats():void{
     this.catService.getAllCat().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({
-          id : c.payload.doc.id, ...c.payload.doc.data()
-        }))
+      map(changes =>{
+          console.log('chngs',changes)
+        return changes.map(c => ({
+          id : c.payload.doc.id,
+          name: c.payload.doc.id,
+           ...c.payload.doc.data()
+        }))}
       )
     )
     .subscribe(data => {
       this.categories = data as Category[]
     })
   }
+
   setActiveCategory(category: Category, index: number): void {
     this.currentCat = category;
   }
@@ -83,7 +89,8 @@ export class CategoriesComponent implements OnInit {
   }
   newCat(){ // Damn Working dumb
     this.submitted = false
-    this.category = new Category()
+    // this.category = new Category()
+    this.category = {}
   }
 /////////////////////////////////////////////////////////////////////////////////
 

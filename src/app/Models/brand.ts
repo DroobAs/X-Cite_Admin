@@ -2,10 +2,10 @@ import { Offer } from "./offer";
 
 export interface Brand {
     id?:string,
-    Name: string,
-    Logo:File | string,
+    name: string,
+    logo:File | string,
     // overView:string,
-    Categoris:string[],
-    Products?:string[],
+    categories:string[],
+    products?:string[],
     offers: Offer[]
 }

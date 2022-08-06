@@ -1,8 +1,14 @@
 export interface Product {
     id?: string,
     name: string,
-    img?: string,
+    brandName:string,
+    description:string,
     quantity: number,
     price: number,
-    overview?: string,
+    discount:number,
+    images: string[],
+    sku:string,
+    categoryName:string,
+    seller:string,
+    imgsDescription?: string[],
 }
