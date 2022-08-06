@@ -1,6 +1,7 @@
-export class Category {
+export interface Category {
     id?:number;
-    Name?:string;
-    Description?:string;
+    name?:string;
+    discount?:number;
+    img?: string;
     Published?:boolean
 }

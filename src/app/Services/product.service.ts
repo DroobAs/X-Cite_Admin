@@ -8,24 +8,24 @@ import { CRUDService } from './crud.service';
   providedIn: 'root'
 })
 export class ProductService {
+  collectionName:string = "Products";
 
   constructor(private MyCrud:CRUDService) { 
     
   }
 
   getAllProducts():Observable<DocumentChangeAction<Product>[]>{
-    return this.MyCrud.getAll('products') }
-
-
+    return this.MyCrud.getAll(`${this.collectionName}`) 
+  }
 
   getByID(PrdID:string):Observable<Product>{
-      return this.MyCrud.getByID('products',PrdID)
+      return this.MyCrud.getByID(`${this.collectionName}`,PrdID)
     }
 
   addNewPrd(NewPrd:Product):  Promise<boolean>{
-    // return this.MyCrud.addNewDoc('products',NewPrd)
+    // return this.MyCrud.addNewDoc(`${this.collectionName}`,NewPrd)
     return new Promise((resolve)=>{
-        this.MyCrud.addNewDoc('products',NewPrd).then(()=>{
+        this.MyCrud.addNewDoc(`${this.collectionName}`,NewPrd).then(()=>{
       console.log('added successfully');
       resolve(true);
     }).catch((err)=>{console.log(err);
@@ -35,7 +35,7 @@ export class ProductService {
 
   deletePrd(PrdID:string): Promise<void>{
     return  new Promise((resolve)=>{
-      this.MyCrud.deleteDoc('products',PrdID).then(()=>{
+      this.MyCrud.deleteDoc(`${this.collectionName}`,PrdID).then(()=>{
       resolve();
     })
   })
@@ -44,9 +44,9 @@ export class ProductService {
 
   updatePrd(PrdID:string, UpdatedPrd:Product): Promise<void>
   {
-    // return this.MyCrud.updateDoc('products',PrdID,UpdatedPrd)
+    // return this.MyCrud.updateDoc(`${this.collectionName}`,PrdID,UpdatedPrd)
     return new Promise((resolve)=>{
-      this.MyCrud.updateDoc('products',PrdID,UpdatedPrd).then(()=>{
+      this.MyCrud.updateDoc(`${this.collectionName}`,PrdID,UpdatedPrd).then(()=>{
         resolve();
   }).catch((err)=>{console.log(err)})
     })

@@ -49,7 +49,7 @@ export class BrandDetailesComponent implements OnInit, OnDestroy {
 
   deleteBrand(id:string|null)
   {
-    let sure = confirm(`Are you sure you want to delete '${this.targitBrand.Name}' Brand?`);
+    let sure = confirm(`Are you sure you want to delete '${this.targitBrand.name}' Brand?`);
     if(sure)
     {
       this.brandService.deleteBrand(id as string, this.targitBrand).then(()=>{

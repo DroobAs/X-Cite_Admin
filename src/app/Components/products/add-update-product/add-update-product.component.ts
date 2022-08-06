@@ -51,7 +51,7 @@ export class AddUpdateProductComponent implements OnInit {
             ProductName: product.name,
             ProductQuantity: product.quantity,
             ProductPrice: product.price,
-            ProductOverView:product.overview,
+            ProductOverView:product.description,
           });
         })
 
@@ -90,15 +90,26 @@ export class AddUpdateProductComponent implements OnInit {
       name: this.ProductName?.value,
       price:this.ProductPrice?.value,
       quantity:this.ProductQuantity?.value,
-      overview:this.ProductOverView?.value,
+      description:this.ProductOverView?.value,
+      discount:0,
+      images:[],
+      sku:'',
+      seller:"X-Cite",
+      categoryName: '',
+      brandName: ''
 
     }
     let updatedProduct: Product = {
       name: this.ProductName?.value,
       price:this.ProductPrice?.value,
       quantity:this.ProductQuantity?.value,
-      overview:this.ProductOverView?.value,
-
+      description:this.ProductOverView?.value,
+      discount:0,
+      images:[],
+      sku:'',
+      seller:"X-Cite",
+      categoryName: '',
+      brandName: ''
     }
     if (this.Add)
     {

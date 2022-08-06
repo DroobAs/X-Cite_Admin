@@ -21,6 +21,5 @@ export class AdminService {
   }
   get getIsAdminLogged():boolean{
     return (localStorage.getItem("token"))?true : false
-  }
-  
+  } 
 }
