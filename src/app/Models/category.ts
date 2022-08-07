@@ -1,7 +1,8 @@
 export interface Category {
-    id?:number;
-    name?:string;
-    discount?:number;
-    img?: string;
+    id:string;
+    name:string;
+    discount:number;
+    img: string;
+    subcollections:string[];
     Published?:boolean
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { where, WhereFilterOp } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,6 +20,11 @@ export class CRUDService {
   getByID(collectionName:string, docID:string) :Observable<any>
   {
     return this.fs.doc(`${collectionName}/${docID}`).valueChanges();
+  }
+
+  getByQuery(collectionName:string, fieldName:string, condition:WhereFilterOp, target:any):Observable<DocumentChangeAction<any>[]>
+  {
+    return this.fs.collection(collectionName, ref=> ref.where(fieldName, condition, target)).snapshotChanges();
   }
 
   addNewDoc(collectionName:string, newData:any) : Promise<DocumentReference<any>>
@@ -76,4 +82,5 @@ export class CRUDService {
   {
     return this.storage.refFromURL(path).delete()
   }
+
 }

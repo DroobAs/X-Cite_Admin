@@ -1,18 +1,19 @@
                                 <!-- Display all Categories -->
 <div class="all">
-<div class="container category-show" >
-<div>
-    <div class="row ">
-      <div class="card text-center" style="width:20rem;" *ngFor="let category of categories; let i = index"  >
-        <div class="card-body">
-          <h2 class="card-title">Title: {{ category.name }}</h2>
-          <p class="card-text">discount: {{ category.discount }}</p>
+  <div class="container category-show" >
+    <div>
+            <div class="row justify-content-center">
+                <div class="card text-center me-4 mb-4" style="width:20rem;height:20rem" *ngFor="let category of categories; let i = index"  >
+                    <div class="card-body h-100">
+                        <img src={{category.img}} class="card-img-top h-50 cPointer" (click)="toOwnProducts(category.id, category.subcollections)"/>
+                        <h2 class="card-title cPointer" (click)="toOwnProducts(category.id, category.subcollections)">{{ category.id }}</h2>
+                        <p class="card-text">discount: {{ category.discount }}%</p>
 
-          <button href="#" class="btn btn-primary" (click)="deleteTutorial(category.id)">Delete</button>
-          <button href="#" class="btn btn-primary" (click)="sendId(category.id)">Update</button>
-        </div>
-      </div>
-    </div>               
+                        <button href="#" class="btn btn-primary" (click)="deleteTutorial(category.id)">Delete</button>
+                        <button href="#" class="btn btn-primary" (click)="sendId(category.id)">Update</button>
+                    </div>
+                </div>
+            </div>           
     <form  [(ngModel)]="category.id" (submit)="updateTutorial(gotId)" *ngIf="toDisplay"> 
         <div class="form-group" >
             <label for="title">Name</label>
