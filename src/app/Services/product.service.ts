@@ -20,7 +20,12 @@ export class ProductService {
 
   getByID(PrdID:string):Observable<Product>{
       return this.MyCrud.getByID(`${this.collectionName}`,PrdID)
-    }
+  }
+
+  getProductsByCatsIds(catId:string[]):Observable<DocumentChangeAction<Product>[]>
+  {
+    return this.MyCrud.getByQuery(this.collectionName, 'categoryName', 'in', catId);
+  }
 
   addNewPrd(NewPrd:Product):  Promise<boolean>{
     // return this.MyCrud.addNewDoc(`${this.collectionName}`,NewPrd)
@@ -40,7 +45,6 @@ export class ProductService {
     })
   })
   }
-
 
   updatePrd(PrdID:string, UpdatedPrd:Product): Promise<void>
   {

@@ -17,9 +17,9 @@ export class BrandDetailesComponent implements OnInit, OnDestroy {
   @ViewChild('pre') btn !:ElementRef;
   sliderInterval:any ='';
 
-  constructor(  @Inject(ActivatedRoute) private routerActive: ActivatedRoute
+  constructor(  private routerActive: ActivatedRoute
               , private brandService: BrandService
-              , @Inject(Router) private router: Router ) { }
+              , private router: Router ) { }
 
   ngOnInit(): void {
     this.routerActive.paramMap.subscribe((param)=>{

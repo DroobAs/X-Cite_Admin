@@ -4,6 +4,7 @@ import { CategoriesService } from '../../Services/category.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs';
 import { style } from '@angular/animations';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -12,26 +13,37 @@ import { style } from '@angular/animations';
 export class CategoriesComponent implements OnInit {
   // Used to add new catService
   // category : Category = new Category()
-  category : Category = {};
+  category : Category = {} as Category;
   submitted = false
   // Retrieve Cats
-  categories?: Category[]
+  categories: Category[]=[] as Category[];
   currentCat?: Category;
   // Update
   currentCategoryUpdate : Category = {
+    id: '',
     name : '',
+    img:'',
     discount : 0,
+    subcollections:[]
   } 
   toDisplay = false;
   gotId: string =''
   selectedCatID:number=0;
-  constructor(private catService:CategoriesService, private fs:AngularFirestore) {
-    
+  constructor(  private catService:CategoriesService
+              , private fs:AngularFirestore
+              , private router :Router
+              ) {
   }
   ngOnInit(): void {
     this.retrieveCats()
   }  
   ngOnChanges(): void {
+  }
+
+  toOwnProducts(catId:string, subCats:string[])
+  {
+    console.log(catId, subCats)
+    this.router.navigate(['/Products',{state: JSON.stringify(subCats)}])
   }
 
   sendId(id:any){
@@ -65,12 +77,13 @@ export class CategoriesComponent implements OnInit {
   retrieveCats():void{
     this.catService.getAllCat().snapshotChanges().pipe(
       map(changes =>{
-          console.log('chngs',changes)
-        return changes.map(c => ({
-          id : c.payload.doc.id,
-          name: c.payload.doc.id,
-           ...c.payload.doc.data()
-        }))}
+        console.log(changes)
+        return changes.map(c =>({
+            ...c.payload.doc.data(),
+            id : c.payload.doc.id,
+            name: c.payload.doc.id,
+      })
+        )}
       )
     )
     .subscribe(data => {
@@ -90,7 +103,7 @@ export class CategoriesComponent implements OnInit {
   newCat(){ // Damn Working dumb
     this.submitted = false
     // this.category = new Category()
-    this.category = {}
+    this.category = {} as Category;
   }
 /////////////////////////////////////////////////////////////////////////////////
 

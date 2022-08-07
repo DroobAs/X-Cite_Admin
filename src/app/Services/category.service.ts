@@ -10,8 +10,6 @@ export class CategoriesService {
   collectionName: string = "Categories";
 
   constructor(private fs:  AngularFirestore) { 
-
-
   }
   getAllCat():AngularFirestoreCollection<Category>{
       return this.fs.collection(`${this.collectionName}`)
