@@ -3,8 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'app/Models/product';
 import { ProductService } from 'app/Services/product.service';
 
-
-
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -39,13 +37,13 @@ export class ProductDetailsComponent implements OnInit {
 
   goToDeleteProduct(id:string | null)
   {
-    if(confirm('Are you sure to delete this product')){
-    this.productService.deletePrd(id as string).then(()=>{
-      this.route.navigate(['Products']);
-  })
+    if(confirm('Are you sure to delete this product?'))
+    {
+      this.productService.deletePrd(id as string, this.targetProduct).then(()=>{
+        alert('Product has deleted successfully!');
+        this.route.navigate(['Products']);
+        })
     }
   }
-
-
 
 }

@@ -21,15 +21,16 @@ export class AddUpdateBrandComponent implements OnInit {
 
   @ViewChild('img') img!: ElementRef;
 
-  constructor( @Inject(ActivatedRoute) private routerActive: ActivatedRoute
+  constructor( private routerActive: ActivatedRoute
              , private FormBuilder : FormBuilder
              , private brandService: BrandService
-             , @Inject(Router) private router: Router) {
+             , private router: Router) {
 
               this.saveBrandForm = FormBuilder.group({
                   BrandName: ['',[Validators.required, Validators.pattern('[a-z A-Z]{3,}')]],
                   BrandLogo: ['',[]],
-                  BrandCategories: FormBuilder.array([['',[Validators.required, Validators.pattern('[a-z A-Z0-9]{3,}')]]]),
+                  // BrandCategories: FormBuilder.array([['',[Validators.required, Validators.pattern('[a-z A-Z0-9]{3,}')]]]),
+                  BrandCategories: FormBuilder.array([['',[]]]),
                   BrandOffers: FormBuilder.array([])
               })
             }

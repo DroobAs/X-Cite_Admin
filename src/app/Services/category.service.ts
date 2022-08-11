@@ -25,4 +25,9 @@ export class CategoriesService {
     console.log(id)
     return this.fs.collection(`${this.collectionName}`).doc(id).delete();
   }
+
+  getSubCategory(subCatID:string)
+  {
+    return this.fs.collectionGroup(`${subCatID}`).snapshotChanges();
+  }
 }
