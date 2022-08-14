@@ -1,15 +1,1291 @@
-
 <h2 class="text-start mb-0" *ngIf="Add else update">
   <i class='fa-solid fa-pen-to-square fs-3 m-3'></i> Add New Product:</h2>
 <ng-template #update>
 <h2 class="text-start mb-0"><i class='fa-solid fa-pen-to-square fs-3 m-3'></i> Update Product:</h2>
 </ng-template>
 
-<div class="w-75 mx-auto mb-5 px-5 pb-4 pt-1 mt-0">
+<div class="w-75 mx-auto mb-5 px-5 pb-4 pt-1 mt-3">
   <form [formGroup]="saveProductForm">
 
     <!------------------------ ID ------------------------>
     <div class="mb-4 text-center" *ngIf='!Add'>
+      <b>Product ID:</b> {{updatedID}}
+    </div>
+
+    <!-- <div>
+      {{saveProductForm.get('processor')?.errors| json}}
+    </div> -->
+    <!-- <div>
+      {{saveProductForm?.errors| json}}
+    </div>
+    <div>
+      {{ProBrandPro?.errors| json}}
+    </div>
+    <div>
+      {{ProBrandProAR?.errors| json}}
+    </div> -->
+    <!-- <div>
+      {{ProNamePro?.errors| json}}
+    </div> -->
+    <!------------------------ Product Name ------------------------>
+    <div class="mb-4 d-flex flex-wrap">
+      <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+      <label for="proName" class="form-label fs-7"><b>Product Name:</b></label>
+      <input type="text" name="productName" id="proName" formControlName="ProName" class="form-control input shadow"
+        placeholder="Enter Product Name .." [class.is-valid]="ProNamePro?.valid"
+        [class.is-invalid]="ProNamePro?.invalid && ProNamePro?.touched">
+
+        <div class="text-danger" *ngIf="!ProNamePro?.invalid || !ProNamePro?.untouched">
+          <small *ngIf="ProNamePro?.errors?.['required']">
+            * Product Name is required!
+          </small>
+          <small *ngIf="ProNamePro?.errors?.['minlength']">
+            * Product Name should be 5 chars at least!
+          </small>
+        </div>
+      </div>
+      <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+        <label for="proNamear" class="form-label fs-7"><b>اسم المنتج:</b></label>
+        <input type="text" name="productNamear" id="proNamear" formControlName="ProNameAR" class="form-control input shadow"
+          placeholder="أدخل اسم المنتج ..." [class.is-valid]="ProNameProAR?.valid"
+          [class.is-invalid]="ProNameProAR?.invalid && ProNameProAR?.touched">
+  
+          <div class="text-danger" *ngIf="!ProNameProAR?.invalid || !ProNameProAR?.untouched">
+            <small *ngIf="ProNameProAR?.errors?.['required']">
+              * اسم المنتج مطلوب
+            </small>
+            <small *ngIf="ProNameProAR?.errors?.['minlength']">
+              * اسم المنتج لا بد أن يحتوي على 5 أحرف على الأقل!
+            </small>
+          </div>
+        </div>
+    </div>
+
+    <!------------------------ Product Description ------------------------>
+    <div class="mb-4 d-flex flex-wrap">
+      <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+      <label for="discription" class="form-label fs-7"><b>Description:</b></label>
+      <input type="text" name="discription" id="discription" formControlName="ProDescription" class="form-control input shadow"
+        placeholder="Enter Product Description .." [class.is-valid]="ProDescriptionPro?.valid"
+        [class.is-invalid]="ProDescriptionPro?.invalid && ProDescriptionPro?.touched">
+
+        <div class="text-danger" *ngIf="!ProDescriptionPro?.invalid || !ProDescriptionPro?.untouched">
+          <small *ngIf="ProDescriptionPro?.errors?.['required']">
+            * Description is required!
+          </small>
+          <small *ngIf="ProDescriptionPro?.errors?.['minlength']">
+            * Description should be 8 chars at least!
+          </small>
+        </div>
+      </div>
+      <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+        <label for="discriptionar" class="form-label fs-7"><b>وصف المنتج:</b></label>
+        <input type="text" name="discriptionar" id="discriptionar" formControlName="ProDescriptionAR" class="form-control input shadow"
+          placeholder="أدخل وصف المنتج .." [class.is-valid]="ProDescriptionProAR?.valid"
+          [class.is-invalid]="ProDescriptionProAR?.invalid && ProDescriptionProAR?.touched">
+
+          <div class="text-danger" *ngIf="!ProDescriptionProAR?.invalid || !ProDescriptionProAR?.untouched">
+            <small *ngIf="ProDescriptionProAR?.errors?.['required']">
+              *وصف المنتج مطلوب
+            </small>
+            <small *ngIf="ProDescriptionProAR?.errors?.['minlength']">
+              * وصف المنتج لا بد أن يحتوي على 8 أحرف على الأقل!
+            </small>
+          </div>
+      </div>
+    </div>
+
+    <!------------------------ Product Brand Name ------------------------>
+    <div class="mb-4 d-flex flex-wrap">
+      <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+        <label for="bName" class="form-label fs-7"><b>Brand Name:</b></label>
+        <ng-select
+          id="bName"
+          class="shadow"
+          [items]="brandList"
+          bindLabel="name"
+          placeholder="Select Brand Name"
+          appendTo="body"
+          [multiple]="false"
+          formControlName="ProBrandName"
+          >
+        </ng-select>
+          <div class="text-danger" *ngIf="!ProBrandPro?.invalid || !ProBrandPro?.untouched">
+            <small *ngIf="ProBrandPro?.errors?.['required']">
+              * Brand Name is required!
+            </small>
+            <small *ngIf="saveProductForm?.errors?.['brandsLang']">
+              * Brand Name with Ar & En should be equal! 
+            </small>
+          </div>
+      </div>
+
+      <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+        <label for="bName" class="form-label fs-7"><b>اسم الماركة:</b></label>
+        <ng-select
+          id="bName"
+          class="shadow"
+          [items]="brandList"
+          bindLabel="nameAR"
+          placeholder="حدد اسم الماركة"
+          appendTo="body"
+          [multiple]="false"
+          formControlName="ProBrandNameAR"
+          >
+        </ng-select>
+          <div class="text-danger" *ngIf="!ProBrandProAR?.invalid || !ProBrandProAR?.untouched">
+            <small *ngIf="ProBrandProAR?.errors?.['required']">
+              * اسم الماركة مطلوب!
+            </small>
+            <small *ngIf="saveProductForm?.errors?.['brandsLang']">
+              * ينبغي أن تكون نفس الماركة في كلا اللغتين
+            </small>
+          </div>
+      </div>
+    </div>
+
+    <!------------------------ Product Quantity ------------------------>
+    <div class="mb-4">
+      <div class="d-flex justify-content-between">
+        <label for="quantity" class="form-label fs-7"><b>Quantity:</b></label>
+        <label for="quantity" class="form-label fs-7" dir="rtl"><b>الكمية:</b></label>
+      </div>
+      <input type="number" min="1" name="quantity" id="quantity" formControlName="ProQuantity" class="form-control input shadow"
+        placeholder="Enter Product Quantity .." [class.is-valid]="ProQuantityPro?.valid"
+        [class.is-invalid]="ProQuantityPro?.invalid && ProQuantityPro?.touched">
+
+        <div class="text-danger" *ngIf="!ProQuantityPro?.invalid || !ProQuantityPro?.untouched">
+          <div class="d-flex justify-content-between">
+            <small *ngIf="ProQuantityPro?.errors?.['required']">
+              * Quantity is required!
+            </small>
+            <small *ngIf="ProQuantityPro?.errors?.['required']" dir="rtl">
+              * الكمية مطلوبة!
+            </small>
+          </div>
+          <div class="d-flex justify-content-between">
+            <small *ngIf="ProQuantityPro?.errors?.['pattern']">
+              * Quantity isn't match!
+            </small>
+            <small *ngIf="ProQuantityPro?.errors?.['pattern']" dir="rtl">
+              * الكمية خاطئة!
+            </small>
+          </div>
+        </div>
+    </div>
+
+    <!------------------------ Product Price ------------------------>
+    <div class="mb-4">
+      <div class="d-flex justify-content-between">
+        <label for="price" class="form-label fs-7"><b>Price:</b></label>
+        <label for="price" class="form-label fs-7" dir="rtl"><b>السعر:</b></label>
+      </div>
+      <input type="number" min="1" name="price" id="price" formControlName="ProPrice" class="form-control input shadow"
+        placeholder="Enter Product price .." [class.is-valid]="ProPricePro?.valid"
+        [class.is-invalid]="ProPricePro?.invalid && ProPricePro?.touched">
+
+        <div class="text-danger" *ngIf="!ProPricePro?.invalid || !ProPricePro?.untouched">
+          <div class="d-flex justify-content-between">
+            <small *ngIf="ProPricePro?.errors?.['required']">
+              * Price is required!
+            </small>
+            <small *ngIf="ProPricePro?.errors?.['required']" dir="rtl">
+              * السعر مطلوب!
+            </small>
+          </div>
+          <div class="d-flex justify-content-between">
+            <small *ngIf="ProPricePro?.errors?.['pattern']">
+              * Price isn't match!
+            </small>
+            <small *ngIf="ProPricePro?.errors?.['pattern']" dir="rtl">
+              * السعر خاطئ!
+            </small>
+          </div>
+        </div>
+    </div>
+
+    <!------------------------ Product Discount ------------------------>
+    <div class="mb-4">
+      <div class="d-flex justify-content-between">
+        <label for="discount" class="form-label fs-7"><b>Discount:</b></label>
+        <label for="discount" class="form-label fs-7" dir="rtl"><b>الخصم:</b></label>
+      </div>
+      <input type="number" min="0" name="discount" id="discount" formControlName="ProDiscount" class="form-control input shadow"
+        placeholder="Enter Product Discount .." [class.is-valid]="ProDiscountPro?.valid"
+        [class.is-invalid]="ProDiscountPro?.invalid && ProDiscountPro?.touched">
+
+        <div class="text-danger" *ngIf="!ProDiscountPro?.invalid || !ProDiscountPro?.untouched">
+          <div class="d-flex justify-content-between">
+            <small *ngIf="ProDiscountPro?.errors?.['required']">
+              * Discount is required!
+            </small>
+            <small *ngIf="ProDiscountPro?.errors?.['required']" dir="rtl">
+              * الخصم مطلوب!
+            </small>
+          </div>
+          <div class="d-flex justify-content-between">
+            <small *ngIf="ProDiscountPro?.errors?.['pattern']">
+              * Discount isn't match!
+            </small>
+            <small *ngIf="ProDiscountPro?.errors?.['pattern']" dir="rtl">
+              * الخصم خاطئ!
+            </small>
+          </div>
+        </div>
+    </div>
+
+    <!------------------------ Product SKU ------------------------>
+    <div class="mb-4">
+      <div class="d-flex justify-content-between">
+        <label for="sku" class="form-label fs-7"><b>Product SKU:</b></label>
+        <label for="sku" class="form-label fs-7" dir="rtl"><b>رمز الماسح الضوئي:</b></label>
+      </div>
+      <input type="text" name="sku" id="sku" formControlName="ProSku" class="form-control input shadow"
+        placeholder="Enter Product SKU .." [class.is-valid]="ProSKUPro?.valid"
+        [class.is-invalid]="ProSKUPro?.invalid && ProSKUPro?.touched">
+
+        <div class="text-danger" *ngIf="!ProSKUPro?.invalid || !ProSKUPro?.untouched">
+          <div class="d-flex justify-content-between">
+            <small *ngIf="ProSKUPro?.errors?.['required']">
+              * Product SKU is required!
+            </small>
+            <small *ngIf="ProSKUPro?.errors?.['required']" dir="rtl">
+              * رمز الماسح الضوئي مطلوب!
+            </small>
+          </div>
+          <div class="d-flex justify-content-between">
+            <small *ngIf="ProSKUPro?.errors?.['pattern']">
+              * Product SKU should be 6 chars!
+            </small>
+            <small *ngIf="ProSKUPro?.errors?.['pattern']" dir="rtl">
+              * رمز الماسح الضوئي يجب أن يحتوي على 6 أرقام فقط!
+            </small>
+          </div>
+        </div>
+    </div>
+
+    <!------------------------ Product Images ------------------------>
+    <div formArrayName="ProImages" class="mb-4">
+      <div class="d-flex justify-content-between">
+        <label for="proImgs" class="form-label fs-7"><b>Images:</b></label>
+        <label for="proImgs" class="form-label fs-7" dir="rtl"><b>صور المنتج:</b></label>
+      </div>
+      <div class="mb-3" *ngFor="let proImg of ProImgsPro.controls ; let i = index">
+
+        <div class="d-flex">
+          <input type="file" name="{{'proImg-'+i}}" id="{{'proImg-'+i}}" formControlName="{{i}}"
+            class="form-control input shadow" placeholder="Img .." [class.is-valid]="proImg?.valid"
+            [class.is-invalid]="proImg?.invalid && proImg?.touched">
+
+          <button class="btn offerbtn" [class.d-none]="i!=ProImgsPro.controls.length-1"
+            [disabled]="proImg?.invalid" (click)="addNewProductImg()">+</button>
+          <button class="btn offerbtn" [class.d-none]="i==0" (click)="removeProductImg(i)">-</button>
+        </div>
+        
+        <div class="text-danger" *ngIf="!proImg?.invalid || !proImg?.untouched">
+          <div class="d-flex justify-content-between">
+            <small *ngIf="proImg?.errors?.['required']">
+              * Product image is required!
+            </small>
+            <small *ngIf="proImg?.errors?.['required']" dir="rtl">
+              * صورة المنتج مطلوبة!
+            </small>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!------------------------ Product Categories ------------------------>
+    <div class="mb-4 d-flex flex-wrap" *ngIf="Add">
+      <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+        <label for="proCat" class="form-label fs-7"><b>Category Name:</b></label>
+          <ng-select
+            class="shadow mb-2"
+            [items]="catList"
+            bindLabel="name"
+            (change)="changeCat()"
+            placeholder="Select Category"
+            appendTo="body"
+            [multiple]="false"
+            [(ngModel)]="parentCat"
+            [ngModelOptions]='{standalone: true}'
+          >
+          </ng-select>
+          <ng-select
+            class="shadow"
+            [items]="childCatList"
+            bindLabel="EN"
+            (change)="changeSubCat()"
+            placeholder="Select subcategory"
+            appendTo="body"
+            [multiple]="false"
+            [(ngModel)]="subCat"
+            [ngModelOptions]='{standalone: true}'
+            >
+            <!-- formControlName="ProCatName" -->
+          </ng-select>
+        <div class="text-danger" *ngIf="!ProCategoryPro?.invalid || !ProCategoryPro?.untouched">
+          <small *ngIf="ProCategoryPro?.errors?.['required']">
+            * Category Name is required!
+          </small>
+        </div>
+      </div>
+      <div  class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+        <label for="proCat" class="form-label fs-7"><b>اسم الفئة:</b></label>
+          <ng-select
+            class="shadow mb-2"
+            [items]="catList"
+            bindLabel="nameAR"
+            (change)="changeCat()"
+            placeholder="حدد الفئة"
+            appendTo="body"
+            [multiple]="false"
+            [(ngModel)]="parentCat"
+            [ngModelOptions]='{standalone: true}'
+          >
+          </ng-select>
+          <ng-select
+            class="shadow"
+            [items]="childCatList"
+            bindLabel="AR"
+            (change)="changeSubCat()"
+            placeholder="حدد الفئة الفرعية"
+            appendTo="body"
+            [multiple]="false"
+            [(ngModel)]="subCat"
+            [ngModelOptions]='{standalone: true}'
+            >
+            <!-- formControlName="ProCatNameAR" -->
+          </ng-select>
+        <div class="text-danger" *ngIf="!ProCategoryProAR?.invalid || !ProCategoryProAR?.untouched">
+          <small *ngIf="ProCategoryProAR?.errors?.['required']">
+            * اسم الفئة مطلوبة
+          </small>
+        </div>
+      </div>
+    </div>
+
+<!--===================================================================================-->
+<!--============================= Product Special Form ================================-->
+ 
+    <!------------------------ Labtop & Tablet Processor ------------------------>
+    <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('processor') && saveProductForm.get('processorAR')">
+      <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+          <label for="processor" class="form-label fs-7"><b>Processor:</b></label>
+          <ng-select
+            id="processor"
+            class="shadow"
+            [items]="processor"
+            bindLabel="EN"
+            placeholder="Select Processor"
+            appendTo="body"
+            [multiple]="false"
+            (change)="changeField(true, 'processor')"
+            formControlName="processor"
+            >
+          </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('processor')?.invalid || !saveProductForm.get('processor')?.untouched">
+            <small *ngIf="saveProductForm.get('processor')?.errors?.['required']">
+              * Processor is required!
+            </small>
+          </div>
+      </div>
+      <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+        <label for="processorAR" class="form-label fs-7"><b>المعالج:</b></label>
+          <ng-select
+            id="processorAR"
+            class="shadow"
+            [items]="processor"
+            bindLabel="AR"
+            placeholder="حدد المعالج"
+            appendTo="body"
+            [multiple]="false"
+            (change)="changeField(false, 'processor')"
+            [(ngModel)]="Binds.processor"
+            [ngModelOptions]='{standalone: true}'
+            >
+            <!-- [(ngModel)]="processorBind" -->
+          </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('processor')?.invalid || !saveProductForm.get('processor')?.untouched">
+            <small *ngIf="saveProductForm.get('processor')?.errors?.['required']">
+              * المعالج مطلوب!
+            </small>
+          </div>
+      </div>
+    </div>
+
+    <!----------------------------- Ram  ------------------------------->
+    <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('Ram') && saveProductForm.get('RamAR')">
+      <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+        <label for="Ram" class="form-label fs-7"><b>Ram:</b></label>
+          <ng-select
+            id="Ram"
+            class="shadow"
+            bindLabel="EN"
+            [items]="Ram"
+            placeholder="Select Ram"
+            appendTo="body"
+            (change)="changeField(true, 'Ram')"
+            [multiple]="false"
+            formControlName="Ram"
+            >
+          </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('Ram')?.invalid || !saveProductForm.get('Ram')?.untouched">
+            <small *ngIf="saveProductForm.get('Ram')?.errors?.['required']">
+              * Ram is required!
+            </small>
+          </div>
+    </div>
+    <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+      <label for="RamAR" class="form-label fs-7"><b>ذاكرة الرام:</b></label>
+          <ng-select
+            id="RamAR"
+            class="shadow"
+            bindLabel="AR"
+            [items]="Ram"
+            placeholder="حدد الرام"
+            appendTo="body"
+            (change)="changeField(false, 'Ram')"
+            [multiple]="false"
+            [(ngModel)]="Binds.Ram"
+            [ngModelOptions]='{standalone: true}'
+            >
+          </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('Ram')?.invalid || !saveProductForm.get('Ram')?.untouched">
+            <small *ngIf="saveProductForm.get('Ram')?.errors?.['required']">
+              * ذاكرة الرام مطلوبة!
+            </small>
+          </div>
+      </div>
+    </div>
+
+    <!--------------------------- Display Size  ----------------------------->
+    <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('displaySize') && saveProductForm.get('displaySizeAR')">
+      <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+        <label for="DisplaySize" class="form-label fs-7"><b>Display Size:</b></label>
+          <ng-select
+            id="DisplaySize"
+            class="shadow"
+            [items]="displaySize"
+            bindLabel="EN"
+            placeholder="Select Display Size"
+            appendTo="body"
+            [multiple]="false"
+            formControlName="displaySize"
+            (change)="changeField(true, 'displaySize')"
+          >
+      </ng-select>
+      <div class="text-danger" *ngIf="!saveProductForm.get('displaySize')?.invalid || !saveProductForm.get('displaySize')?.untouched">
+        <small *ngIf="saveProductForm.get('displaySize')?.errors?.['required']">
+          * Display Size is required!
+        </small>
+      </div>
+      </div>
+      
+      <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+        <label for="DisplaySizeAR" class="form-label fs-7"><b>حجم الشاشة:</b></label>
+          <ng-select
+            id="DisplaySizeAR"
+            class="shadow"
+            [items]="displaySize"
+            bindLabel="AR"
+            placeholder="حدد حجم الشاشة"
+            appendTo="body"
+            [multiple]="false"
+            (change)="changeField(false, 'displaySize')"
+            [(ngModel)]="Binds.displaySize"
+            [ngModelOptions]='{standalone: true}'
+          >
+        </ng-select>
+        <div class="text-danger" *ngIf="!saveProductForm.get('displaySize')?.invalid || !saveProductForm.get('displaySize')?.untouched">
+          <small *ngIf="saveProductForm.get('displaySize')?.errors?.['required']">
+            * حجم الشاشة مطلوب!
+          </small>
+        </div>
+      </div>
+    </div>
+
+      <!------------------------------- OS  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('OS') && saveProductForm.get('OSAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+          <label for="OS" class="form-label fs-7"><b>Operating System:</b></label>
+            <ng-select
+              id="OS"
+              class="shadow"
+              [items]="OS"
+              bindLabel="EN"
+              placeholder="Select Operating System"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="OS"
+              (change)="changeField(true, 'OS')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('OS')?.invalid || !saveProductForm.get('OS')?.untouched">
+            <small *ngIf="saveProductForm.get('OS')?.errors?.['required']">
+              * OS is required!
+            </small>
+          </div>
+       </div>
+
+       <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+        <label for="OSAR" class="form-label fs-7"><b>نظام التشغيل:</b></label>
+            <ng-select
+              id="OSAR"
+              class="shadow"
+              [items]="OS"
+              bindLabel="AR"
+              placeholder="حدد نظام التشغيل"
+              appendTo="body"
+              [multiple]="false"
+              (change)="changeField(false, 'OS')"
+              [(ngModel)]="Binds.OS"
+              [ngModelOptions]='{standalone: true}'
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('OS')?.invalid || !saveProductForm.get('OS')?.untouched">
+            <small *ngIf="saveProductForm.get('OS')?.errors?.['required']">
+              * نظام التشغيل مطلوب!
+            </small>
+          </div>
+      </div>
+      </div>
+
+      <!------------------------------- Labs & Mobs & Digitals Type  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('type') && saveProductForm.get('typeAR')">
+          <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+            <label for="type" class="form-label fs-7"><b>Type:</b></label>
+              <ng-select
+                id="type"
+                class="shadow"
+                [items]="type"
+                bindLabel="EN"
+                placeholder="Select Type"
+                appendTo="body"
+                [multiple]="false"
+                formControlName="type"
+                (change)="changeField(true, 'type')"
+                >
+              </ng-select>
+            <div class="text-danger" *ngIf="!saveProductForm.get('type')?.invalid || !saveProductForm.get('type')?.untouched">
+              <small *ngIf="saveProductForm.get('type')?.errors?.['required']">
+                * Type is required!
+              </small>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+            <label for="typeAR" class="form-label fs-7"><b>النوع:</b></label>
+            <ng-select
+              id="typeAR"
+              class="shadow"
+              [items]="type"
+              bindLabel="AR"
+              placeholder="حدد النوع"
+              appendTo="body"
+              [multiple]="false"
+              (change)="changeField(false, 'type')"
+              [(ngModel)]="Binds.type"
+              [ngModelOptions]='{standalone: true}'
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('type')?.invalid || !saveProductForm.get('type')?.untouched">
+            <small *ngIf="saveProductForm.get('type')?.errors?.['required']">
+              * النوع مطلوب!
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!------------------------------- Storage  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('storage') && saveProductForm.get('storageAR')">        
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+          <label for="Storage" class="form-label fs-7"><b>Storage:</b></label>
+            <ng-select
+              id="Storage"
+              class="shadow"
+              [items]="storage"
+              bindLabel="EN"
+              placeholder="Select Storage"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="storage"
+              (change)="changeField(true, 'storage')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('storage')?.invalid || !saveProductForm.get('storage')?.untouched">
+            <small *ngIf="saveProductForm.get('storage')?.errors?.['required']">
+              * Storage is required!
+            </small>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+          <label for="StorageAR" class="form-label fs-7"><b>سعة التخزين:</b></label>
+            <ng-select
+              id="StorageAR"
+              class="shadow"
+              [items]="storage"
+              bindLabel="AR"
+              placeholder="حدد سعة التخزين"
+              appendTo="body"
+              [multiple]="false"
+              (change)="changeField(false, 'storage')"
+              [(ngModel)]="Binds.storage"
+              [ngModelOptions]='{standalone: true}'
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('storage')?.invalid || !saveProductForm.get('storage')?.untouched">
+            <small *ngIf="saveProductForm.get('storage')?.errors?.['required']">
+              * سعة التخزين مطلوبة
+            </small>
+          </div>
+
+      </div> 
+      </div>
+
+      <!------------------------------- Graphics Memory  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('graphicsMemory') && saveProductForm.get('graphicsMemoryAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+          <label for="GraphicsMemory" class="form-label fs-7"><b>Graphics Memory:</b></label>
+            <ng-select
+              id="GraphicsMemory"
+              class="shadow"
+              [items]="graphicsMemory"
+              bindLabel="EN"
+              placeholder="Select Graphics Memory"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="graphicsMemory"
+              (change)="changeField(true, 'graphicsMemory')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('graphicsMemory')?.invalid || !saveProductForm.get('graphicsMemory')?.untouched">
+            <small *ngIf="saveProductForm.get('graphicsMemory')?.errors?.['required']">
+              * Graphics Memory is required!
+            </small>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+          <label for="GraphicsMemoryAR" class="form-label fs-7"><b>سعة بطاقة الجرافيك:</b></label>
+          <ng-select
+            id="GraphicsMemoryAR"
+            class="shadow"
+            [items]="graphicsMemory"
+            bindLabel="AR"
+            placeholder="حدد سعة بطاقة الجرافيك"
+            appendTo="body"
+            [multiple]="false"
+            (change)="changeField(false, 'graphicsMemory')"
+            [(ngModel)]="Binds.graphicsMemory"
+            [ngModelOptions]='{standalone: true}'
+            >
+          </ng-select>
+        <div class="text-danger" *ngIf="!saveProductForm.get('graphicsMemory')?.invalid || !saveProductForm.get('graphicsMemory')?.untouched">
+          <small *ngIf="saveProductForm.get('graphicsMemory')?.errors?.['required']">
+            * سعة بطاقة الجرافيك مطلوبة!
+          </small>
+        </div>
+      </div> 
+
+
+
+
+
+      </div>
+
+      <!------------------------------- Color  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('color') && saveProductForm.get('colorAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">    
+          <label for="Color" class="form-label fs-7"><b>Color:</b></label>
+            <ng-select
+              id="Color"
+              class="shadow"
+              [items]="color"
+              bindLabel="EN"
+              placeholder="Select Color"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="color"
+              (change)="changeField(true, 'color')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('color')?.invalid || !saveProductForm.get('color')?.untouched">
+            <small *ngIf="saveProductForm.get('color')?.errors?.['required']">
+              * Color is required!
+            </small>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+          <label for="ColorAR" class="form-label fs-7"><b>اللون:</b></label>
+          <ng-select
+            id="ColorAR"
+            class="shadow"
+            [items]="color"
+            bindLabel="AR"
+            placeholder="حدد اللون"
+            appendTo="body"
+            [multiple]="false"
+            (change)="changeField(false, 'color')"
+            [(ngModel)]="Binds.color"
+            [ngModelOptions]='{standalone: true}'
+            >
+          </ng-select>
+        <div class="text-danger" *ngIf="!saveProductForm.get('color')?.invalid || !saveProductForm.get('color')?.untouched">
+          <small *ngIf="saveProductForm.get('color')?.errors?.['required']">
+            * اللون مطلوب!
+          </small>
+        </div>
+      </div> 
+    </div>
+
+      <!------------------------ Touch Screen ------------------------>
+      <div class="mb-4" *ngIf="saveProductForm.get('touchScreen')">
+        <div class="d-flex justify-content-between">
+          <label for="touchScreen" class="form-label fs-7"><b>Touch Screen:</b></label>
+          <label for="touchScreen" class="form-label fs-7" dir="rtl"><b>توفر شاشة اللمس:</b></label>
+        </div>
+        <ng-select
+          id="touchScreen"
+          class="shadow"
+          [items]="[true,false]"
+          placeholder="Select Touch Screen"
+          appendTo="body"
+          [multiple]="false"
+          formControlName="touchScreen"
+          (change)="channgBoolianFormLang('touchScreen')"
+          >
+        </ng-select>
+        <div class="text-danger d-flex justify-content-between" *ngIf="!saveProductForm.get('touchScreen')?.invalid || !saveProductForm.get('touchScreen')?.untouched">
+          <small *ngIf="saveProductForm.get('touchScreen')?.errors?.['required']">
+            * TouchScreen is required!
+          </small>
+          <small *ngIf="saveProductForm.get('touchScreen')?.errors?.['required']" dir="rtl">
+            *توفر شاشة اللمس مطلوب!
+          </small>
+        </div>
+      </div>
+
+      <!------------------------------- Rear Camera  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('rearCamera') && saveProductForm.get('rearCameraAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">              
+          <label for="rearCamera" class="form-label fs-7"><b>Rear Camera:</b></label>
+            <ng-select
+              id="rearCamera"
+              class="shadow"
+              [items]="rearCamera"
+              bindLabel="EN"
+              placeholder="Select Rear Camera"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="rearCamera"
+              (change)="changeField(true, 'rearCamera')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('rearCamera')?.invalid || !saveProductForm.get('rearCamera')?.untouched">
+            <small *ngIf="saveProductForm.get('rearCamera')?.errors?.['required']">
+              * Rear Camera is required!
+            </small>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+          <label for="rearCameraAR" class="form-label fs-7"><b>الكاميرا الخلفية:</b></label>
+          <ng-select
+            id="rearCameraAR"
+            class="shadow"
+            [items]="rearCamera"
+            bindLabel="AR"
+            placeholder="حدد الكاميرا الخلفية"
+            appendTo="body"
+            [multiple]="false"
+            (change)="changeField(false, 'rearCamera')"
+            [(ngModel)]="Binds.rearCamera"
+            [ngModelOptions]='{standalone: true}'
+            >
+          </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('rearCamera')?.invalid || !saveProductForm.get('rearCamera')?.untouched">
+            <small *ngIf="saveProductForm.get('rearCamera')?.errors?.['required']">
+              * الكاميرا الخلفية مطلوبة!
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!------------------------------- Connectivity  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('connectivity') && saveProductForm.get('connectivityAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">    
+          <label for="Connectivity" class="form-label fs-7"><b>Connectivity:</b></label>
+            <ng-select
+              id="Connectivity"
+              class="shadow"
+              [items]="connectivity"
+              bindLabel="EN"
+              placeholder="Select Connectivity"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="connectivity"
+              (change)="changeField(true, 'connectivity')"
+              >
+            </ng-select>
+        <div class="text-danger" *ngIf="!saveProductForm.get('connectivity')?.invalid || !saveProductForm.get('connectivity')?.untouched">
+          <small *ngIf="saveProductForm.get('connectivity')?.errors?.['required']">
+            * Connectivity is required!
+          </small>
+        </div>
+        </div>
+
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+            <label for="ConnectivityAR" class="form-label fs-7"><b>اتصال الكومبيوتر اللوحي:</b></label>
+              <ng-select
+                id="ConnectivityAR"
+                class="shadow"
+                [items]="connectivity"
+                bindLabel="AR"
+                placeholder="حدد الاتصال"
+                appendTo="body"
+                [multiple]="false"
+                (change)="changeField(false, 'connectivity')"
+                [(ngModel)]="Binds.connectivity"
+                [ngModelOptions]='{standalone: true}'
+                >
+              </ng-select>
+            <div class="text-danger" *ngIf="!saveProductForm.get('connectivity')?.invalid || !saveProductForm.get('connectivity')?.untouched">
+              <small *ngIf="saveProductForm.get('connectivity')?.errors?.['required']">
+                * اتصال الكمبيوتر اللوحي مطلوب!
+              </small>
+            </div>
+        </div>
+      </div>
+
+      <!------------------------------- SIMCount  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('SIMCount') && saveProductForm.get('SIMCountAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">    
+        <label for="SIMCount" class="form-label fs-7"><b>SIM Count:</b></label>
+          <ng-select
+            id="SIMCount"
+            class="shadow"
+            [items]="SIMCount"
+            bindLabel="EN"
+            placeholder="Select SIM Count"
+            appendTo="body"
+            [multiple]="false"
+            formControlName="SIMCount"
+            (change)="changeField(true, 'SIMCount')"
+            >
+          </ng-select>
+        <div class="text-danger" *ngIf="!saveProductForm.get('SIMCount')?.invalid || !saveProductForm.get('SIMCount')?.untouched">
+          <small *ngIf="saveProductForm.get('SIMCount')?.errors?.['required']">
+            * SIM Count is required!
+          </small>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+        <label for="SIMCountAR" class="form-label fs-7"><b>عدد شرائح الخط:</b></label>
+          <ng-select
+            id="SIMCountAR"
+            class="shadow"
+            [items]="SIMCount"
+            bindLabel="AR"
+            placeholder="حدد عدد الشرائح"
+            appendTo="body"
+            [multiple]="false"
+            (change)="changeField(false, 'SIMCount')"
+            [(ngModel)]="Binds.SIMCount"
+            [ngModelOptions]='{standalone: true}'
+            >
+          </ng-select>
+        <div class="text-danger" *ngIf="!saveProductForm.get('SIMCount')?.invalid || !saveProductForm.get('SIMCount')?.untouched">
+          <small *ngIf="saveProductForm.get('SIMCount')?.errors?.['required']">
+            * عدد شرائح الخط مطلوب!
+          </small>
+        </div>
+    </div>
+
+
+
+
+
+
+      </div>
+
+        <!------------------------------- GPS  ------------------------------>
+        <div class="mb-4" *ngIf="saveProductForm.get('GPS')">
+          <div class="d-flex justify-content-between">
+            <label for="GPS" class="form-label fs-7"><b>GPS:</b></label>
+            <label for="GPS" class="form-label fs-7" dir="rtl"><b>نظام الملاحة:</b></label>
+          </div>
+          <ng-select
+            id="GPS"
+            class="shadow"
+            [items]="[true, false]"
+            placeholder="Select GPS"
+            appendTo="body"
+            [multiple]="false"
+            formControlName="GPS"
+            (change)="channgBoolianFormLang('GPS')"
+            >
+          </ng-select>
+          <div class="text-danger d-flex justify-content-between" *ngIf="!saveProductForm.get('GPS')?.invalid || !saveProductForm.get('GPS')?.untouched">
+            <small *ngIf="saveProductForm.get('GPS')?.errors?.['required']">
+              * GPS is required!
+            </small>
+            <small *ngIf="saveProductForm.get('GPS')?.errors?.['required']" dir="rtl">
+              * نظام الملاحة مطلوب!
+            </small>
+          </div>
+        </div>
+
+      <!------------------------------- TV Category  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('tvCat') && saveProductForm.get('tvCatAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+          <label for="tvCat" class="form-label fs-7"><b>TV Category:</b></label>
+            <ng-select
+              id="tvCat"
+              class="shadow"
+              [items]="tvCat"
+              bindLabel="EN"
+              placeholder="Select TV Category"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="tvCat"
+              (change)="changeField(true, 'tvCat')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('tvCat')?.invalid || !saveProductForm.get('tvCat')?.untouched">
+            <small *ngIf="saveProductForm.get('tvCat')?.errors?.['required']">
+              * TV Category is required!
+            </small>
+          </div>
+        </div>
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+          <label for="tvCatAR" class="form-label fs-7"><b>فئة التلفزيون:</b></label>
+              <ng-select
+                id="tvCatAR"
+                class="shadow"
+                [items]="tvCat"
+                bindLabel="AR"
+                placeholder="حدد فئة التلفزيون"
+                appendTo="body"
+                [multiple]="false"
+                (change)="changeField(false, 'tvCat')"
+                [(ngModel)]="Binds.tvCat"
+                [ngModelOptions]='{standalone: true}'
+                >
+              </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('tvCat')?.invalid || !saveProductForm.get('tvCat')?.untouched">
+            <small *ngIf="saveProductForm.get('tvCat')?.errors?.['required']">
+              * فئة التلفزيون مطلوبة!
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!------------------------------- HDtech  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('HDtech') && saveProductForm.get('HDtechAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">          
+          <label for="HDtech" class="form-label fs-7"><b>HD Technology:</b></label>
+            <ng-select
+              id="HDtech"
+              class="shadow"
+              [items]="HDtech"
+              bindLabel="EN"
+              placeholder="Select HD Technology"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="HDtech"
+              (change)="changeField(true, 'HDtech')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('HDtech')?.invalid || !saveProductForm.get('HDtech')?.untouched">
+            <small *ngIf="saveProductForm.get('HDtech')?.errors?.['required']">
+              * HD Technology is required!
+            </small>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+          <label for="HDtechAR" class="form-label fs-7"><b>تقنية إتش دي:</b></label>
+              <ng-select
+                id="HDtechAR"
+                class="shadow"
+                [items]="HDtech"
+                bindLabel="AR"
+                placeholder="حدد تقنية إتش دي"
+                appendTo="body"
+                [multiple]="false"
+                (change)="changeField(false, 'HDtech')"
+                [(ngModel)]="Binds.HDtech"
+                [ngModelOptions]='{standalone: true}'
+                >
+              </ng-select>
+            <div class="text-danger" *ngIf="!saveProductForm.get('HDtech')?.invalid || !saveProductForm.get('HDtech')?.untouched">
+              <small *ngIf="saveProductForm.get('HDtech')?.errors?.['required']">
+                * تقنية إتش دي مطلوبة!
+              </small>
+            </div>
+        </div>
+      </div>
+
+      <!------------------------------- TV Type  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('Type') && saveProductForm.get('TypeAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+          <label for="Type" class="form-label fs-7"><b>TV Type:</b></label>
+            <ng-select
+              id="Type"
+              class="shadow"
+              [items]="Type"
+              bindLabel="EN"
+              placeholder="Select TV Type"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="Type"
+              (change)="changeField(true, 'Type')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('Type')?.invalid || !saveProductForm.get('Type')?.untouched">
+            <small *ngIf="saveProductForm.get('Type')?.errors?.['required']">
+              * TV Type is required!
+            </small>
+          </div>
+        </div>
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+          <label for="TypeAR" class="form-label fs-7"><b>نوع التلفزيون:</b></label>
+            <ng-select
+              id="TypeAR"
+              class="shadow"
+              [items]="Type"
+              bindLabel="AR"
+              placeholder="حدد نوع التلفزيون"
+              appendTo="body"
+              [multiple]="false"
+              (change)="changeField(false, 'Type')"
+              [(ngModel)]="Binds.Type"
+              [ngModelOptions]='{standalone: true}'
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('Type')?.invalid || !saveProductForm.get('Type')?.untouched">
+            <small *ngIf="saveProductForm.get('Type')?.errors?.['required']">
+              * نوع التلفزيون مطلوب!
+            </small>
+          </div>
+      </div> 
+      </div>
+
+      <!------------------------------- Motion Rate  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('motionRate') && saveProductForm.get('motionRateAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+          <label for="motionRate" class="form-label fs-7"><b>Motion Rate:</b></label>
+            <ng-select
+              id="motionRate"
+              class="shadow"
+              [items]="motionRate"
+              bindLabel="EN"
+              placeholder="Select Motion Rate"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="motionRate"
+              (change)="changeField(true, 'motionRate')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('motionRate')?.invalid || !saveProductForm.get('motionRate')?.untouched">
+            <small *ngIf="saveProductForm.get('motionRate')?.errors?.['required']">
+              * Motion Rate is required!
+            </small>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+          <label for="motionRateAR" class="form-label fs-7"><b>معدل سرعة الحركة:</b></label>
+            <ng-select
+              id="motionRateAR"
+              class="shadow"
+              [items]="motionRate"
+              bindLabel="AR"
+              placeholder="حدد معدل سرعة الحركة"
+              appendTo="body"
+              [multiple]="false"
+              (change)="changeField(false, 'motionRate')"
+              [(ngModel)]="Binds.motionRate"
+              [ngModelOptions]='{standalone: true}'
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('motionRate')?.invalid || !saveProductForm.get('motionRate')?.untouched">
+            <small *ngIf="saveProductForm.get('motionRate')?.errors?.['required']">
+              * معدل سرعة الحركة مطلوب
+            </small>
+          </div>
+        </div>
+       </div>
+
+      <!------------------------------- Display Type  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('displayType') && saveProductForm.get('displayTypeAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+          <label for="displayType" class="form-label fs-7"><b>Display Type:</b></label>
+            <ng-select
+              id="displayType"
+              class="shadow"
+              [items]="displayType"
+              bindLabel="EN"
+              placeholder="Select Display Type"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="displayType"
+              (change)="changeField(true, 'displayType')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('displayType')?.invalid || !saveProductForm.get('displayType')?.untouched">
+            <small *ngIf="saveProductForm.get('displayType')?.errors?.['required']">
+              * Display Type is required!
+            </small>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+          <label for="displayTypeAR" class="form-label fs-7"><b>نوع الشاشة:</b></label>
+          <ng-select
+            id="displayTypeAR"
+            class="shadow"
+            [items]="displayType"
+            bindLabel="AR"
+            placeholder="حدد نوع الشاشة"
+            appendTo="body"
+            [multiple]="false"
+            (change)="changeField(false, 'displayType')"
+            [(ngModel)]="Binds.displayType"
+            [ngModelOptions]='{standalone: true}'
+            >
+          </ng-select>
+        <div class="text-danger" *ngIf="!saveProductForm.get('displayType')?.invalid || !saveProductForm.get('displayType')?.untouched">
+          <small *ngIf="saveProductForm.get('displayType')?.errors?.['required']">
+            * نوع الشاشة مطلوب!
+          </small>
+        </div>
+        </div> 
+      </div>
+
+      <!------------------------------- Digital value  ------------------------------>
+      <div class="mb-4 d-flex flex-wrap" *ngIf="saveProductForm.get('value') && saveProductForm.get('valueAR')">
+        <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+          <label for="value" class="form-label fs-7"><b>Card value:</b></label>
+            <ng-select
+              id="value"
+              class="shadow"
+              [items]="value"
+              bindLabel="EN"
+              placeholder="Select value"
+              appendTo="body"
+              [multiple]="false"
+              formControlName="value"
+              (change)="changeField(true, 'value')"
+              >
+            </ng-select>
+          <div class="text-danger" *ngIf="!saveProductForm.get('value')?.invalid || !saveProductForm.get('value')?.untouched">
+            <small *ngIf="saveProductForm.get('value')?.errors?.['required']">
+              * Card value is required!
+            </small>
+          </div>
+        </div>
+        <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+          <label for="valueAR" class="form-label fs-7"><b>قيمة البطاقة:</b></label>
+              <ng-select
+                id="valueAR"
+                class="shadow"
+                [items]="value"
+                bindLabel="AR"
+                placeholder="حدد القيمة"
+                appendTo="body"
+                [multiple]="false"
+                (change)="changeField(false, 'value')"
+                [(ngModel)]="Binds.value"
+                [ngModelOptions]='{standalone: true}'
+                >
+              </ng-select>
+            <div class="text-danger" *ngIf="!saveProductForm.get('value')?.invalid || !saveProductForm.get('value')?.untouched">
+              <small *ngIf="saveProductForm.get('value')?.errors?.['required']">
+                * قيمة البطاقة مطلوبة!
+              </small>
+            </div>
+        </div> 
+      </div>
+
+
+      <div class="my-3">&nbsp; </div>
+    <!------------------------ Submit ------------------------>
+    <hr class="mt-5 mx-2 mb-2">
+    <div class="text-center d-flex justify-content-center mb-5">
+
+      <button [disabled]="saveProductForm.invalid || isload" (click)="SaveProduct()" class="btn submitbtn px-5">
+        <b *ngIf="Add else upd">Add</b>
+        <ng-template #upd><b>Update</b></ng-template>
+      </button>
+
+      <div *ngIf='isload' class="spinner-border text-warning ms-4" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div *ngIf='done' class="text-dark ms-4">
+        <h2>Product has <b *ngIf="Add else up">Added</b><ng-template #up><b>Updated</b></ng-template> succeccfully!</h2>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+<!-- 
+<div>
+  {{saveProductForm.value| json}}
+</div>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h2 class="text-start mb-0" *ngIf="Add else update">
+  <i class='fa-solid fa-pen-to-square fs-3 m-3'></i> Add New Product:</h2>
+<ng-template #update>
+<h2 class="text-start mb-0"><i class='fa-solid fa-pen-to-square fs-3 m-3'></i> Update Product:</h2>
+</ng-template>
+
+<div class="w-75 mx-auto mb-5 px-5 pb-4 pt-1 mt-0">
+  <form [formGroup]="saveProductForm"> -->
+
+    <!------------------------ ID ------------------------>
+    <!-- <div class="mb-4 text-center" *ngIf='!Add'>
       <b>Product ID:</b> {{updatedID}}
     </div>
 
@@ -52,4 +1328,4 @@
       </div>
       
     </form>
-  </div>
+  </div> -->

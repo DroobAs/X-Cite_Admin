@@ -26,11 +26,20 @@ export class ProductsComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
+    // this.ProductService.addTest().then((res)=>{
+    //   console.log(res);
+    //   console.log("donneeee");
+    // })
+    // this.ProductService.addSubTest().then((res)=>{
+    //   console.log(res);
+    //   console.log('doonneee');
+      
+    // })
 
     this.routerActive.paramMap.subscribe((param)=>{
       if(param.get('state'))
       {
-        this.catID = JSON.parse(param.get('state') as string).map((cat: string)=>({id:cat}));
+        this.catID = JSON.parse(param.get('state') as string).map((cat: any)=>({id:cat.EN}));
       }
     })
 
@@ -38,9 +47,9 @@ export class ProductsComponent implements OnInit {
    let catgs = this.categoryService.getAllCat().snapshotChanges().subscribe((categories: any[])=>{
     this.catList=[{id:'All'}];
       categories.map(cat=>{
-       cat.payload.doc.data().subcollections.forEach((ele: string) => {
+       cat.payload.doc.data().subcollections.forEach((ele:any) => {
           this.catList.push({
-            id: ele
+            id: ele.EN
           })
        });
        console.log(this.catList);
