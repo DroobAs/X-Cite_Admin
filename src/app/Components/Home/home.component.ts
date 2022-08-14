@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'app/Services/user.service';
 import { Order } from '../../Models/order';
 
 import { Seller } from '../../Models/seller';
@@ -13,14 +14,14 @@ import { SellerService } from '../../Services/seller.service';
 export class HomeComponent implements OnInit {
   sellersList: Seller[] | any;
   orderList:Order[]| any
-  constructor(private _SellerService: SellerService,private _order:OrdersService) {}
+  constructor(private users: UserService,private _order:OrdersService) {}
 
   ngOnInit(): void {
-    this.getAllSeller();
+    this.getAllUsers();
     this.getAllOrders()
   }
-  getAllSeller() {
-    this._SellerService.getAllSellers().subscribe((data) => {
+  getAllUsers() {
+    this.users.getAllUsers().subscribe((data) => {
       this.sellersList = data.map((s) => {
         return {
           id: s.payload.doc.id,
