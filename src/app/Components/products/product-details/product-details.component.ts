@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'app/Models/product';
 import { ProductService } from 'app/Services/product.service';
-
-
 
 @Component({
   selector: 'app-product-details',
@@ -15,9 +13,9 @@ export class ProductDetailsComponent implements OnInit {
   targetProduct:Product = {} as Product;
 ;
 
-  constructor(private activatedRoute:ActivatedRoute,
-   private productService:ProductService,
-    private route: Router) { }
+  constructor(  @Inject(ActivatedRoute) private activatedRoute:ActivatedRoute,
+                private productService:ProductService,
+                @Inject(Router) private route: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((param)=>{
@@ -39,13 +37,13 @@ export class ProductDetailsComponent implements OnInit {
 
   goToDeleteProduct(id:string | null)
   {
-    if(confirm('Are you sure to delete this product')){
-    this.productService.deletePrd(id as string).then(()=>{
-      this.route.navigate(['Products']);
-  })
+    if(confirm('Are you sure to delete this product?'))
+    {
+      this.productService.deletePrd(id as string, this.targetProduct).then(()=>{
+        alert('Product has deleted successfully!');
+        this.route.navigate(['Products']);
+        })
     }
   }
-
-
 
 }

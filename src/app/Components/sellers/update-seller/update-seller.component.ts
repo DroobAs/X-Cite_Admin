@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Seller } from 'app/Models/seller';
 import { SellerService } from 'app/Services/seller.service';
 // import { FormsModule }   from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+// import { NgModule } from '@angular/core';
+// import { NgForm } from '@angular/forms';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-update-seller',
@@ -23,11 +22,11 @@ export class UpdateSellerComponent implements OnInit {
   seller: Seller | undefined;
   dynamicVariable = false;
   constructor(
-    private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute,
+    @Inject(FormBuilder) private fb: FormBuilder,
+    @Inject(ActivatedRoute) private activatedRoute: ActivatedRoute,
     private updateseller: SellerService,
-    private router: Router,
-    private form:FormGroup
+    @Inject(Router) private router: Router,
+    // private form:FormGroup
 
   ) {
     this.usrFormGroup = this.fb.group({

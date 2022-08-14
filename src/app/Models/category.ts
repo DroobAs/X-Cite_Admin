@@ -1,6 +1,8 @@
-export class Category {
-    id?:number;
-    Name?:string;
-    Description?:string;
+export interface Category {
+    id:string;
+    name:string;
+    discount:number;
+    img: string;
+    subcollections:string[];
     Published?:boolean
 }

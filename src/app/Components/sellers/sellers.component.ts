@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {SearchPipe} from '../../pipes/search.pipe';
-import { NgForm } from '@angular/forms';
+// import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { Router } from '@angular/router';
 import { Seller } from 'app/Models/seller';
 import { SellerService } from 'app/Services/seller.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sellers',
@@ -23,8 +24,8 @@ export class SellersComponent implements OnInit {
   //constructor
   constructor(
     private seller: SellerService,
-    private fb: FormBuilder,
-    private router: Router
+    @Inject(FormBuilder) private fb: FormBuilder,
+    @Inject(Router) private router: Router
   ) {
     this.usrFormGroup = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(5)]],

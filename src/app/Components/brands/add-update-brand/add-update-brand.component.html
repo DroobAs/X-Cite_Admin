@@ -1,94 +1,145 @@
-<h2 class="text-center">** Save Brand **</h2>
-<div class="w-50 border border-primary border-4 mx-auto mb-5 px-5 py-4 shadow" style="background-color:lightgray ;">
+<h2 class="text-start mb-0" *ngIf="Add else update">
+  <i class='fa-solid fa-pen-to-square fs-3 m-3'></i> Add New Brand:</h2>
+<ng-template #update>
+<h2 class="text-start mb-0"><i class='fa-solid fa-pen-to-square fs-3 m-3'></i> Update Brand:</h2>
+</ng-template>
+
+<div class="w-75 mx-auto mb-5 px-5 pb-4 pt-1 mt-0">
   <form [formGroup]="saveBrandForm">
 
-     <!------------------------ ID ------------------------>
-     <div class="mb-3">
-        <label for="ID" class="form-label fs-5">ID:</label>
-        <input type="text" name="ID" id="ID" formControlName="ID" class="form-control" placeholder="ID .."
-          [class.is-valid]="brandIDPro?.valid" [class.is-invalid]="brandIDPro?.invalid && brandIDPro?.touched">
-      </div>
+    <!------------------------ ID ------------------------>
+    <div class="mb-4 text-center" *ngIf='!Add'>
+      <b>Brand ID:</b> {{updatedID}}
+    </div>
 
     <!------------------------ Brand Name ------------------------>
-    <div class="mb-3">
-      <label for="bName" class="form-label fs-5">Brand Name:</label>
-      <input type="text" name="brandName" id="bName" formControlName="BrandName" class="form-control"
+    <div class="mb-4">
+      <label for="bName" class="form-label fs-7"><b>Brand Name:</b></label>
+      <input type="text" name="brandName" id="bName" formControlName="BrandName" class="form-control input shadow"
         placeholder="Enter Brand Name .." [class.is-valid]="brandNamePro?.valid"
         [class.is-invalid]="brandNamePro?.invalid && brandNamePro?.touched">
+
+        <div class="text-danger" *ngIf="!brandNamePro?.invalid || !brandNamePro?.untouched">
+          <small *ngIf="brandNamePro?.errors?.['required']">
+            * Brand Name is required!
+          </small>
+          <small *ngIf="brandNamePro?.errors?.['pattern']">
+            * Brand Name isn't match!
+          </small>
+        </div>
     </div>
 
-
-
-
-
+    <!------------------------ Brand Logo ------------------------>
+    <div class="mb-5">
+      <label for="img" class="form-label fs-7"><b>Brand Logo:</b> </label>
+      <small class='text-muted' style='font-size:0.6rem;'> (*.PNG, *.JPG, *.JPEG)</small>
+      <input type="file" name="img" id="img" class="form-control shadow" accept=".png,.jpg,.jpeg" #img
+      formControlName="BrandLogo">
+      <!-- [class.is-valid]="BrandLogoPro?.valid" [class.is-invalid]="BrandLogoPro?.invalid && BrandLogoPro?.touched" -->
+      
+      <div class="text-danger" *ngIf="!BrandLogoPro?.invalid || !BrandLogoPro?.untouched">
+        <small *ngIf="BrandLogoPro?.errors?.['required']">
+          * Brand Logo is required!
+        </small>
+      </div>
+    </div>
 
     <!------------------------ Brand Categories ------------------------>
-    <div formArrayName="BrandCategories">
-    <div class="mb-3" *ngFor="let brandCat of BrandCategoriesPro.controls ; let i = index">
+    <div formArrayName="BrandCategories" class="mb-4">
+        <label for="brandCat" class="form-label fs-7"><b>Categories:</b></label>
+      <div class="mb-3" *ngFor="let brandCat of BrandCategoriesPro.controls ; let i = index">
 
-      <label for="{{'brandCat-'+i}}" class="form-label fs-5">Category {{i+1}}:</label>
 
-      <div class="d-flex">
-        <input type="text" name="{{'brandCat-'+i}}" id="{{'brandCat-'+i}}" formControlName="{{i}}" class="form-control"
-          placeholder="category .." [class.is-valid]="brandCat?.valid"
-          [class.is-invalid]="brandCat?.invalid && brandCat?.touched">
+        <div class="d-flex">
+          <input type="text" name="{{'brandCat-'+i}}" id="{{'brandCat-'+i}}" formControlName="{{i}}"
+            class="form-control input shadow" placeholder="category .." [class.is-valid]="brandCat?.valid"
+            [class.is-invalid]="brandCat?.invalid && brandCat?.touched">
 
-          <button class="btn btn-dark" [class.d-none]="i!=BrandCategoriesPro.controls.length-1" [disabled]="brandCat?.invalid" (click)="addNewCategory()">+</button>
-          <button class="btn btn-dark" [class.d-none]="i==0" (click)="removeCategory(i)">-</button>
-      </div>
-      
-    </div>
-  </div>
-
-  <!------------------------ Brand Offers ------------------------>
-  <div formArrayName="BrandOffers">
-
-    <div class="mb-3" *ngFor="let offer of BrandOffersPro.controls ; let i = index">
-      <label for="{{'offer-'+i}}" class="form-label fs-5">offer {{i+1}}:</label>
-
-      <div class="d-flex" formGroupName="{{i}}">
-
-        <div class="mb-3">
-            <label for="offerInfo" class="form-label fs-5">offerInfo:</label>
-            <input type="text" name="offerInfo" id="offerInfo" formControlName="offerInfo" class="form-control" placeholder="offerInfo .."
-              [class.is-valid]="offer.get('offerInfo')?.valid" [class.is-invalid]="offer.get('offerInfo')?.invalid && offer.get('offerInfo')?.touched">
-          </div>
-
-        <div class="mb-3">
-        <label for="offerImg" class="form-label fs-5">offerImg:</label>
-        <input type="text" name="offerImg" id="offerImg" formControlName="offerImg" class="form-control" placeholder="offerImg .."
-            [class.is-valid]="offer.get('offerImg')?.valid" [class.is-invalid]="offer.get('offerImg')?.invalid && offer.get('offerImg')?.touched">
+          <button class="btn offerbtn" [class.d-none]="i!=BrandCategoriesPro.controls.length-1"
+            [disabled]="brandCat?.invalid" (click)="addNewCategory()">+</button>
+          <button class="btn offerbtn" [class.d-none]="i==0" (click)="removeCategory(i)">-</button>
+        </div>
+        
+        <div class="text-danger" *ngIf="!brandCat?.invalid || !brandCat?.untouched">
+          <small *ngIf="brandCat?.errors?.['required']">
+            * Brand Category is required!
+          </small>
+          <small *ngIf="brandCat?.errors?.['pattern']">
+            * Brand Category isn't match!
+          </small>
         </div>
 
-          
       </div>
-
-        <button class="btn btn-dark" [class.d-none]="i!=BrandOffersPro.controls.length-1" [disabled]="offer?.invalid" (click)="addNewoffer()">+</button>
-        <button class="btn btn-dark" [class.d-none]="i==0" (click)="removeOffer(i)">-</button>
     </div>
 
-  </div>
+    <!------------------------ Brand Offers ------------------------>
+    <div formArrayName="BrandOffers" class="w-100">
+
+      <button class="btn offerbtn" [class.d-none]="BrandOffersPro.controls.length!=0"
+            (click)="addNewoffer()">Add New Offer</button>
+      <div class="mb-3" *ngFor="let offer of BrandOffersPro.controls ; let i = index">
+        <p *ngIf="i==0" class="fs-7 text-center mt-5"><b>---------------- offers ----------------</b></p>
+        <hr *ngIf="i>=1" class="mt-0 mb-4 mx-5">
+        <label for="{{'offer-'+i}}" class="form-label fs-7"><b>offer {{i+1}}:</b></label>
+
+        <div class="w-100 mb-3 fs-7" formGroupName="{{i}}">
+          <div class="mb-3 d-flex">
+            <label class='py-2 me-xl-3 me-0'>Add Img Offer:</label>
+            <input type="file" name="offerImg" id="offerImg{{i}}" formControlName="offerImg"  class="form-control input shadow"
+              placeholder="offerImg .." style='width:85%'>
+          </div>
+          <div class="mb-3">
+            <textarea name="offerInfo" id="offerInfo{{i}}" formControlName="offerInfo" class="form-control input shadow"
+              placeholder="offer Information .."></textarea>
+          </div>
+
+          <div class="text-danger" *ngIf="!offer.get('offerInfo')?.invalid || !offer.get('offerInfo')?.untouched">
+            <small *ngIf="offer.get('offerInfo')?.errors?.['required']">
+              * Brand offer info is required!
+            </small>
+            <small *ngIf="offer.get('offerInfo')?.errors?.['minlength']">
+              * Brand offer info must containe 10 characters at least!
+            </small>
+          </div>
+          <div class="text-danger" *ngIf="!offer.get('offerImg')?.invalid || !offer.get('offerImg')?.untouched">
+            <small *ngIf="offer.get('offerImg')?.errors?.['required']">
+              * Brand offer img is required!
+            </small>
+          </div>
+          
+          <div class="text-end">
+          <button class="btn offerbtn" [class.d-none]="i!=BrandOffersPro.controls.length-1" [disabled]="offer?.invalid"
+            (click)="addNewoffer()">Add New Offer</button>
+          <button class="btn offerbtn" [class.d-none]="i<0" (click)="removeOffer(i)">-</button>
+        </div>
+
+      </div>
+
+      </div>
+    </div>
 
 
     <!------------------------ Submit ------------------------>
-    <div class="text-center">
-      <button [disabled]="saveBrandForm.invalid" (click)="submitSaveBrand()" class="btn btn-primary px-5">Save</button>
+    <hr class="mt-4 mx-2 mb-2">
+    <div class="text-center d-flex justify-content-center">
+
+      <button [disabled]="saveBrandForm.invalid || isload" (click)="SaveBrand()" class="btn submitbtn px-5">
+        <b *ngIf="Add else upd">Add</b>
+        <ng-template #upd><b>Update</b></ng-template>
+      </button>
+
+      <div *ngIf='isload' class="spinner-border text-warning ms-4" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div *ngIf='done' class="text-dark ms-4">
+        <h2>Brand has <b *ngIf="Add else up">Added</b><ng-template #up><b>Updated</b></ng-template> succeccfully!</h2>
+      </div>
+
     </div>
 
   </form>
 </div>
 
-<div>
-    {{saveBrandForm.value | json}}
-</div>
-
-
-
-<!-- <div class="text-danger" *ngIf="!brandNamePro?.invalid || !brandNamePro?.untouched">
-    <small *ngIf="brandNamePro?.errors?.['required']">
-      * Brand Name is required!
-    </small>
-    <small *ngIf="brandNamePro?.errors?.['pattern']">
-      * Brand Name isn't match!
-    </small>
-  </div> -->
+<!-- <div>
+  {{saveBrandForm.value| json}}
+</div> -->
