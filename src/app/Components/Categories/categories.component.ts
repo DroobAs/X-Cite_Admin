@@ -4,6 +4,8 @@ import { CategoriesService } from '../../Services/category.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
+import { style } from '@angular/animations';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -14,13 +16,24 @@ export class CategoriesComponent implements OnInit {
   Attributes : FormGroup;
   uploadUpdateImg : FormGroup;
 
-  category : Category = new Category()
+  // Used to add new catService
+  // category : Category = new Category()
+  category : Category = {} as Category;
   submitted = false
 
   // Retrieve Cats
-  categories?: Category[]
 
   // Display and Hide
+  categories: Category[]=[] as Category[];
+  currentCat?: Category;
+  // Update
+  currentCategoryUpdate : Category = {
+    id: '',
+    name : '',
+    img:'',
+    discount : 0,
+    subcollections:[]
+  } 
   toDisplay = false;
   toDisplayImg = false;
 
@@ -32,8 +45,9 @@ export class CategoriesComponent implements OnInit {
   newName:string = ''
   newNameAr:string = ''
   newDiscount:number = 0
+  selectedCatID:number=0;
   //////////////////////////////////////////////////////////////////////////
-  constructor(private formBulider : FormBuilder,private catService:CategoriesService, private fs:AngularFirestore) {
+  constructor(private formBulider : FormBuilder,private catService:CategoriesService, private fs:AngularFirestore, private router :Router) {
 //////////////////////////////////////////////////////////////////////////////////////
     this.userFormGroup = this.formBulider.group({
       name:['',[Validators.required]],
@@ -122,7 +136,13 @@ get name(){
 //////////////////////////////////////////////////////////////////////////////////////
   ngOnChanges(): void {
   }
-// Send Id and Data to Update
+
+  toOwnProducts(catId:string, subCats:string[])
+  {
+    console.log(catId, subCats)
+    this.router.navigate(['/Products',{state: JSON.stringify(subCats)}])
+  }
+
   sendId(id:any,name:string,nameAr:string, discount:number, subcollections:any){
     this.gotId = id
     this.newName = name
@@ -183,10 +203,14 @@ deleteTutorial(id:any): void {
 //////////////////////////////////////////////////////////////////////////////////////
   retrieveCats():void{
     this.catService.getAllCat().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({
-          id : c.payload.doc.id, ...c.payload.doc.data()
-        }))
+      map(changes =>{
+        console.log(changes)
+        return changes.map(c =>({
+            ...c.payload.doc.data(),
+            id : c.payload.doc.id,
+            name: c.payload.doc.id,
+      })
+        )}
       )
     )
     .subscribe(data => {
@@ -228,7 +252,8 @@ deleteTutorial(id:any): void {
 
   newCat(){
     this.submitted = false
-    this.category = new Category()
+    // this.category = new Category()
+    this.category = {} as Category;
   }
 /////////////////////////////////////////////////////////////////////////////////
 

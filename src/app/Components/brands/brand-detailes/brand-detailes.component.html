@@ -1,10 +1,10 @@
 <div class="container-fluid mt-3 mb-5">
     <div class="d-flex w-100 mb-4">
         <span class="col-5">
-            <img src={{targitBrand.Logo}} class="w-100" style="height: 200px;">
+            <img src={{targitBrand.logo}} class="w-100" style="height: 200px;">
         </span>
         <span class="col-5 text-start p-3">
-          <h1><b>{{targitBrand.Name}}</b></h1>
+          <h1><b>{{targitBrand.name}}</b></h1>
         </span>
         <span class="col-2 text-end ps-lg-3 ps-0">
             <i class="fa-solid fa-pen-to-square fs-3 m-3 cPointer mColor shadow" (click)="goToEditBrand(targetBrandID)" title="Edit"></i>
@@ -16,14 +16,14 @@
         <h1 class="py-1">** Categories **</h1>
     </div>
     <div class="container-fluid d-flex flex-wrap w-100 mb-4">
-        <span *ngFor="let cat of targitBrand.Categoris" class="m-3 col-2 shadow card rounded">
+        <span *ngFor="let cat of targitBrand.categories" class="m-3 col-2 shadow card rounded">
             <img src="dsf" class="card-img-top">
             <h4 class="card-body">{{cat}}</h4>
         </span>
     </div>
     <h2>** Products of category x **</h2>
     <div class="container-fluid d-flex flex-wrap w-100 mb-4">
-        <span *ngFor="let pro of targitBrand.Products" class="m-3 col-2 shadow card rounded">
+        <span *ngFor="let pro of targitBrand.products" class="m-3 col-2 shadow card rounded">
             <img src="dsf" class="card-img-top">
             <h4 class="card-body">{{pro}}</h4>
         </span>

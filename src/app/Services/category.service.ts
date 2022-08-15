@@ -7,7 +7,8 @@ import { CRUDService } from './crud.service';
   providedIn: 'root'
 })
 export class CategoriesService {
-items:Category[]=[]
+  items:Category[]=[]
+  collectionName: string = "Categories";
 
   constructor(
 
@@ -50,5 +51,6 @@ items:Category[]=[]
   }
   addToCategory( cat:string ,docID:string, data:any){
     return this.CRUD.setNewDocWithImg_SpecificID(cat,docID, data, 'Categories', 'img')
-  }
+}
+
 }

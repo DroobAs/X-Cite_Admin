@@ -52,6 +52,7 @@ import {AngularFirestoreModule, SETTINGS} from '@angular/fire/compat/firestore';
 
 import { SearchPipe } from './pipes/search.pipe';
 import { RouterModule } from '@angular/router';
+import { NgSelectModule } from "@ng-select/ng-select";
 
 @NgModule({
   declarations: [
@@ -104,6 +105,8 @@ import { RouterModule } from '@angular/router';
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     RouterModule,
+    NgSelectModule
+    // NgSelectModule
     // Injectable
   ],
   providers: [

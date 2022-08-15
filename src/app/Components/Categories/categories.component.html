@@ -199,7 +199,21 @@
                 </div>
             </div>
             <button [disabled]="Attributes.invalid" (click)="addCollectionInDoc()" class="btn btn-success">Submit</button>
-        </div>
+
+  <div class="container category-show" >
+    <div>
+            <div class="row justify-content-center">
+                <div class="card text-center me-4 mb-4" style="width:20rem;height:20rem" *ngFor="let category of categories; let i = index"  >
+                    <div class="card-body h-100">
+                        <img src={{category.img}} class="card-img-top h-50 cPointer" (click)="toOwnProducts(category.id, category.subcollections)"/>
+                        <h2 class="card-title cPointer" (click)="toOwnProducts(category.id, category.subcollections)">{{ category.id }}</h2>
+                        <p class="card-text">discount: {{ category.discount }}%</p>
+
+                        <button href="#" class="btn btn-primary" (click)="deleteTutorial(category.id)">Delete</button>
+                        <button href="#" class="btn btn-primary" (click)="sendId(category.id,category.name,category.nameAr,category.discount,category.subcollections)">Update</button>
+                    </div>
+                </div>
+            </div>           
         
     </div>
 </div>
@@ -314,24 +328,3 @@
         </form>
     </div>
     </div>
-
-
-
-
-
-        <!-- 
-            <label for="description">Image</label>
-            <input type="file" name="img" id="img" class="form-control" accept=".png,.jpg,.jpeg" 
-                required
-                formControlName="img"> -->
-
-                <!--<div class="form-group">
-            
-            <input
-            class="form-control"
-            id="description"
-            required
-            [(ngModel)]="img"
-            name="description"
-            />
-        </div> -->

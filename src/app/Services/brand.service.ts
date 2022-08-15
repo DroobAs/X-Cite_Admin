@@ -8,26 +8,27 @@ import { CRUDService } from './crud.service';
   providedIn: 'root'
 })
 export class BrandService {
+  collectionName:string = 'Brands';
 
   constructor(private crudService: CRUDService) {}
 
   getAllBrands():Observable<DocumentChangeAction<Brand>[]>
   {
-    return this.crudService.getAll('Brand');
+    return this.crudService.getAll(`${this.collectionName}`);
   }
 
   getBrandByID(Bid:string) :Observable<Brand>
   {
-    return this.crudService.getByID('Brand', Bid);
+    return this.crudService.getByID(`${this.collectionName}`, Bid);
   }
 
   addNewBrand(brand:Brand): Promise<boolean>
     {
         return new Promise((resolve)=>{
         this.uploadOfferImg(brand).then(()=>{
-          this.crudService.uploadImg(brand['Logo'] as File,'Brands/').then((url)=>{   
-              brand['Logo'] = url;
-              this.crudService.addNewDoc('Brand', brand).then(()=>{
+          this.crudService.uploadImg(brand['logo'] as File,`${this.collectionName}/`).then((url)=>{   
+              brand['logo'] = url;
+              this.crudService.addNewDoc(`${this.collectionName}`, brand).then(()=>{
                 console.log('added successfully');
                   resolve(true);
               }).catch((err)=>{console.log(err);
@@ -42,7 +43,7 @@ export class BrandService {
     return new Promise((resolve)=>{
       this.updateOffers(brand, originBrand).then(()=>{
         this.updateLogo(brand, originBrand).then(()=>{
-          this.crudService.updateDoc('Brand', id, brand).then(()=>{
+          this.crudService.updateDoc(`${this.collectionName}`, id, brand).then(()=>{
             resolve();
           })
           })
@@ -53,18 +54,18 @@ export class BrandService {
   deleteBrand(Bid:string, brand:Brand): Promise<void>
   {
     return new Promise((resolve)=>{
-      this.crudService.deleteImg(brand.Logo as string).subscribe(()=>{
+      this.crudService.deleteImg(brand.logo as string).subscribe(()=>{
         brand.offers.forEach((offer, index)=>{
           this.crudService.deleteImg(offer.imgOffer).subscribe(()=>{
             if(index == brand.offers.length-1)
             {
-              this.crudService.deleteDoc('Brand',Bid).then(()=>{
+              this.crudService.deleteDoc(`${this.collectionName}`,Bid).then(()=>{
                   resolve();
               })
             }
           })
         })
-        this.crudService.deleteDoc('Brand',Bid).then(()=>{
+        this.crudService.deleteDoc(`${this.collectionName}`,Bid).then(()=>{
           resolve();
         })
       })
@@ -74,14 +75,14 @@ export class BrandService {
   updateLogo(brand:Brand, origin:Brand): Promise<void>
   {
     return new Promise((resolve)=>{
-      if (typeof(brand.Logo) == 'string')
+      if (typeof(brand.logo) == 'string')
       {
         resolve();
       }
       else
       {
-        this.crudService.updateImg(brand.Logo, origin.Logo as string).then((url)=>{
-              brand.Logo = url;
+        this.crudService.updateImg(brand.logo, origin.logo as string).then((url)=>{
+              brand.logo = url;
               resolve();
         })
       }
@@ -131,7 +132,7 @@ export class BrandService {
       }
       while(i>=origin.offers.length && (i<brand.offers.length))
       {
-      console.log('in second while', i);
+        console.log('in second while', i);
           await this.crudService.uploadImg(brand.offers[i].imgOffer,'Offers/').then((url)=>{
               brand.offers[i].imgOffer = url;
               i++;

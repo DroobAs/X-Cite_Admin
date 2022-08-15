@@ -17,9 +17,9 @@ export class BrandDetailesComponent implements OnInit, OnDestroy {
   @ViewChild('pre') btn !:ElementRef;
   sliderInterval:any ='';
 
-  constructor(  @Inject(ActivatedRoute) private routerActive: ActivatedRoute
+  constructor(  private routerActive: ActivatedRoute
               , private brandService: BrandService
-              , @Inject(Router) private router: Router ) { }
+              , private router: Router ) { }
 
   ngOnInit(): void {
     this.routerActive.paramMap.subscribe((param)=>{
@@ -49,7 +49,7 @@ export class BrandDetailesComponent implements OnInit, OnDestroy {
 
   deleteBrand(id:string|null)
   {
-    let sure = confirm(`Are you sure you want to delete '${this.targitBrand.Name}' Brand?`);
+    let sure = confirm(`Are you sure you want to delete '${this.targitBrand.name}' Brand?`);
     if(sure)
     {
       this.brandService.deleteBrand(id as string, this.targitBrand).then(()=>{

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { where, WhereFilterOp } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -23,9 +24,25 @@ export class CRUDService {
     return this.fs.doc(`${collectionName}/${docID}`).valueChanges();
   }
 
+  getByQuery(collectionName:string, fieldName:string, condition:WhereFilterOp, target:any):Observable<DocumentChangeAction<any>[]>
+  {
+    return this.fs.collection(collectionName, ref=> ref.where(fieldName, condition, target)).snapshotChanges();
+  }
+
+  getCollectionGroub(collectionName:string):Observable<DocumentChangeAction<any>[]>
+  {
+    return this.fs.collectionGroup(`${collectionName}`).snapshotChanges();
+  }
+
   addNewDoc(collectionName:string, newData:any) : Promise<DocumentReference<any>>
   {
     return this.fs.collection(`${collectionName}`).add(newData)
+  }
+
+
+  addSubCollectionInSpecificDoc(collectionName:string, docId:string, newSubCollectionID:string) : Promise<DocumentReference<any>>
+  {
+    return this.fs.collection(`${collectionName}`).doc(`${docId}`).collection(`${newSubCollectionID}`).add({});
   }
 
   addNewDocWithImg(collectionName:string, newData:any, path:string, propertyName:string): Promise<void>
@@ -33,7 +50,19 @@ export class CRUDService {
     return new Promise((resolve)=>{
       this.uploadImg(newData[propertyName], path).then((res)=>{
           newData[propertyName] = res;
-          this.fs.collection(`${collectionName}`).add(newData).then(()=>{
+          this.addNewDoc(collectionName, newData).then(()=>{
+            resolve();
+          })
+      })
+    });
+  }
+  
+  setNewDocWithImg_SpecificID(collectionName:string, docId:string, newData:any, path:string, propertyName:string): Promise<void>
+  {
+    return new Promise((resolve)=>{
+      this.uploadImg(newData[propertyName], path).then((res)=>{
+          newData[propertyName] = res;
+          this.addDocWithSpecificId(collectionName, docId, newData).then(()=>{
             resolve();
           })
       })
@@ -50,11 +79,10 @@ export class CRUDService {
     return this.fs.doc(`${collectionName}/${docID}`).delete();
   }
 
-  addDocWithSpecificId(cat:string, docId:string, data:any)
+  addDocWithSpecificId(collectionName:string, docId:string, data:any):Promise<void>
   {
-    return this.fs.collection(`${cat}`).doc(`${docId}`).set(data)
+    return this.fs.collection(`${collectionName}`).doc(`${docId}`).set(data);
   }
-
 // George Upload new Image
   newImage(cat:string, docId:string, data:any)
   {
@@ -73,17 +101,6 @@ UploadImageNew(collectionName:string, docId:string, newData:any, path:string, pr
   });
 }
 
-  setNewDocWithImg_SpecificID(collectionName:string, docId:string, newData:any, path:string, propertyName:string): Promise<void>
-  {
-    return new Promise((resolve)=>{
-      this.uploadImg(newData[propertyName], path).then((res)=>{
-          newData[propertyName] = res;
-          this.addDocWithSpecificId(collectionName, docId, newData).then(()=>{
-            resolve();
-          })
-      })
-    });
-  }
 //===== storage CRUD ============================================
   uploadImg(img:File, path:string) : Promise<string>
   {
@@ -112,6 +129,4 @@ UploadImageNew(collectionName:string, docId:string, newData:any, path:string, pr
   {
     return this.storage.refFromURL(path).delete()
   }
-  
-
 }

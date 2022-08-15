@@ -15,7 +15,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   constructor(  private bransService: BrandService
-              , @Inject(Router) private router:Router) {}
+              , private router:Router) {}
 
   ngOnInit(): void {
    let subscribe =  this.bransService.getAllBrands().subscribe((data)=>{
