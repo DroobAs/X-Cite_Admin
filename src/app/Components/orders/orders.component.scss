@@ -1,0 +1,13 @@
+$mainColorBlue: #001a2c;
+$mainColorYellow: #d3a827;
+
+.bordered{
+    // border-top: 1px solid $mainColorBlue;
+    border-bottom: 2px solid $mainColorBlue;
+}
+.borderedEnd{
+    border-inline-end: 0.2px solid lightgray;
+}
+.cPointer{
+    cursor: pointer;
+}

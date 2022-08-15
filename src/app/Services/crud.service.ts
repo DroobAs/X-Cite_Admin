@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { where, WhereFilterOp } from 'firebase/firestore';
+import { documentId, where, WhereFilterOp } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -22,6 +22,11 @@ export class CRUDService {
   getByID(collectionName:string, docID:string) :Observable<any>
   {
     return this.fs.doc(`${collectionName}/${docID}`).valueChanges();
+  }
+
+  getByGroubIds(collectionName:string, Ids:string[]):Observable<DocumentChangeAction<any>[]>
+  {
+    return this.fs.collection(collectionName, ref=> ref.where(documentId(), 'in', Ids)).snapshotChanges();
   }
 
   getByQuery(collectionName:string, fieldName:string, condition:WhereFilterOp, target:any):Observable<DocumentChangeAction<any>[]>

@@ -1,8 +1,98 @@
+<!-- <table class="w-100 mx-auto shadow">
+  <thead>
+    <tr style="background-color:#001a2c;">
+      <th class="text-light py-2 text-center col-2">Order Id</th>
+      <th class="text-light py-2 ps-2 col-5">purchase Units</th>
+      <th class="text-light py-2 text-center col-2">Order State</th>
+      <th class="text-light py-2 text-center col-2">user Name</th>
+      <th class="text-light py-2 text-center col-2">user Email</th>
+      <th class="text-light py-2 text-center col-2">user Name</th>
+      <th class="text-light py-2 text-center col-2">Time created</th>
+      <th class="text-light py-2 text-center col-2">Order id</th>
+      <th class="text-light py-2 text-center col-1">Total Paid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let order of orderList">
+      <tr class="bg-light">
+        <td class="col-5 py-3 border border-end border-1">
 
-<div class="py-5">
-  <table class="table table-striped">
+        </td>
+        <td class="col-2 text-center border border-end border-1">{order.state}</td>
+        <td class="col-2 text-center border border-end border-1">{order.timeCreated}</td>
+        <td class="col-2 text-center border border-end border-1">{order.id}</td>
+        <td class="col-1 text-center border border-end border-1">{order.totalPaid}$</td>
+      </tr>
+      <tr>
+        <td colSpan={5} class='py-1' style="background-color:#001a2c">
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table> -->
+
+<div class="container">
+  <p class="fs-1 my-4">ORDERS</p>
+  <div class="d-flex flex-wrap col-12 bordered rounded shadow my-0 pt-2" [ngStyle]="{'background-color':i%2?'#fcc426':'#69c3e8'}"
+                  *ngFor="let order of orderList; let i = index">
+    <div class="col-lg-5 col-12 ps-3 pe-1 borderedEnd">
+      <p class="text-muted">{{order.timeCreated}}</p>
+      <p><b>Purchase Unites:</b></p>
+      <ul>
+        <li class="cPointer" *ngFor="let unit of order.purchase_units" (click)="goToProduct(unit.product.id)">
+          {{unit.product.name}} <b>({{unit.amount}})</b>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-4 col-12 ps-3 pe-1 borderedEnd">
+      <p><b>Total Paid:</b> {{order.totalPaid}}$</p>
+      <p><b>User Name:</b> {{order.userName}}</p>
+      <p><b>User Email:</b> {{order.userEmail}}</p>
+      <p><b>paid with:</b> {{order.paypalMail}}</p>
+    </div>
+    <div class="col-lg-3 col-12 p-3">
+      <p><b>Order Id:</b> {{order.id}}</p>
+      <p class="mb-1"><b>State:</b></p>
+      <p class="d-flex flex-wrap align-items-center">
+        <ng-select
+        class="shadow col-lg-9 col-12"
+        [items]="['Pending', 'charged', 'Completed']"
+        placeholder="Status"
+        appendTo="body"
+        [multiple]="false"
+        required
+        (change)="changeOrderUpToDate(states[i])"
+        [(ngModel)]="states[i].state"
+        >
+      </ng-select>
+      <button class="col-lg-3 col-12 btn btn-dark btn-sm" [disabled]="states[i].upToDate" (click)="updateOrderState(states[i])">Update</button>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="py-5">
+  <table class="table table-striped"> -->
     <!--Table head-->
-    <thead>
+    <!-- <thead>
       <tr>
         <th>#</th>
         <th>id</th>
@@ -13,10 +103,10 @@
         <th>sellerName</th>
 
       </tr>
-    </thead>
+    </thead> -->
     <!--Table head-->
     <!--Table body-->
-    <tbody>
+    <!-- <tbody>
       <tr
         *ngFor="
           let order of orderList ;
@@ -33,7 +123,7 @@
 
 
       </tr>
-    </tbody>
+    </tbody> -->
     <!--Table body-->
-  </table>
-</div>
+  <!-- </table>
+</div> -->

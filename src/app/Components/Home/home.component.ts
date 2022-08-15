@@ -34,8 +34,8 @@ export class HomeComponent implements OnInit {
     this._order.getAllOrders().subscribe((data) => {
       this.orderList = data.map((s) => {
         return {
-          id: s.payload.doc.id,
           ...s.payload.doc.data(),
+          id: s.payload.doc.id,
         };
       });
     });
