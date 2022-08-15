@@ -354,8 +354,8 @@ export class AddUpdateProductComponent implements OnInit {
     let Prd:Product = {
       name: this.ProNamePro?.value,
       nameAR: this.ProNameProAR?.value,
-      brandName: this.ProBrandPro?.value.name,
-      brandNameAR: this.ProBrandProAR?.value.nameAR,
+      brandName: this.ProBrandPro?.value.name?this.ProBrandPro?.value.name:this.ProBrandPro?.value,
+      brandNameAR: this.ProBrandProAR?.value.nameAR?this.ProBrandProAR?.value.nameAR:this.ProBrandProAR?.value,
       description:this.ProDescriptionPro?.value,
       descriptionAR:this.ProDescriptionProAR?.value,
       quantity:this.ProQuantityPro?.value,
@@ -557,9 +557,9 @@ export class AddUpdateProductComponent implements OnInit {
    {EN: '1TB + 256GB SSD', AR:'1 تيرا بايت + 256 جيجا بايت إس إس دي'},
    {EN: '256GB SSD, 1TB SSHD', AR:'256 إس إس دي، 1 تيرا بايت إس إس إتش دي'} ]
 
-  graphicsMemory:Array<{EN:string, AR:string}>=[{EN: 'Integrated', AR:'مدمج'}, {EN: '2 GB', AR:'2 جيجا بايت'},
-    {EN: '4 GB', AR:'4 جيجا بايت'}, {EN: '6 GB', AR:'6 جيجا بايت'}, {EN: '8 GB', AR:'8 جيجا بايت'},
-    {EN: '12 GB', AR:'12 جيجا بايت'}, {EN: '16 GB', AR:'16 جيجا بايت'}]
+  graphicsMemory:Array<{EN:string, AR:string}>=[{EN: '-', AR:'-'}, {EN: 'Integrated', AR:'مدمج'},
+    {EN: '2 GB', AR:'2 جيجا بايت'}, {EN: '4 GB', AR:'4 جيجا بايت'}, {EN: '6 GB', AR:'6 جيجا بايت'},
+    {EN: '8 GB', AR:'8 جيجا بايت'}, {EN: '12 GB', AR:'12 جيجا بايت'}, {EN: '16 GB', AR:'16 جيجا بايت'}]
 
   color:Array<{EN:string, AR:string}>=[{EN: 'Silver', AR:'فضي'}, {EN: 'Black', AR:'أسود'}, {EN: 'White', AR:'أبيض'},
     {EN: 'Green', AR:'أخضر'}, {EN: 'Red', AR:'أحمر'}, {EN: 'Yellow', AR:'أصفر'}, {EN: 'Grey', AR:'رمادي'},
@@ -584,7 +584,7 @@ export class AddUpdateProductComponent implements OnInit {
 
   Type:Array<{EN:string, AR:string}>=[{EN: 'Smart', AR:'ذكي'}, {EN: 'Standard', AR:'عادي'}]
 
-  displayType:Array<{EN:string, AR:string}>=[{EN: '2D', AR:'ثنائي الأبعاد'}, {EN: '3D', AR:'ثلاثي الأبعاد'}]
+  displayType:Array<{EN:string, AR:string}>=[{EN: '-', AR:'-'}, {EN: '2D', AR:'ثنائي الأبعاد'}, {EN: '3D', AR:'ثلاثي الأبعاد'}]
 
   rearCamera:Array<{EN:string, AR:string}>=[{EN: '2 Megapixels', AR:'2 ميجابكسل'},
   {EN: '0.3 Megapixels', AR:'0.3 ميجابكسل'}, {EN: '5 Megapixels', AR:'5 ميجابكسل'},

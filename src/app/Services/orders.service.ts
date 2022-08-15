@@ -9,12 +9,19 @@ import { CRUDService } from './crud.service';
   providedIn: 'root',
 })
 export class OrdersService {
-  sellers: Order[] = [];
-  constructor(
-
-   private curd: CRUDService
-  ) {}
-  getAllOrders(): Observable<DocumentChangeAction<Order>[]> {
-    return this.curd.getAll('Orders');
+  colletionName:string = "Orders";
+  constructor( private curd: CRUDService) {}
+  
+  getAllOrders(): Observable<DocumentChangeAction<Order>[]>
+  {
+    return this.curd.getAll(this.colletionName);
+  }
+  getOrderById(id:string):Observable<Order>
+  {
+    return this.curd.getByID(this.colletionName, id)
+  }
+  updateOrderState(docId:string, updatedData:Order):Promise<void>
+  {
+    return this.curd.updateDoc(this.colletionName, docId, updatedData)
   }
 }

@@ -32,6 +32,11 @@ export class ProductService {
       return this.MyCrud.getByID(`${this.collectionName}`,PrdID)
   }
 
+  getSpecificProductsWithIds(Ids:string[]):Observable<DocumentChangeAction<Product>[]>
+  {
+    return this.MyCrud.getByGroubIds(this.collectionName, Ids)
+  }
+
   getProductsByCatsIds(catId:string[]):Observable<DocumentChangeAction<Product>[]>
   {
     return this.MyCrud.getByQuery(this.collectionName, 'categoryName', 'in', catId);

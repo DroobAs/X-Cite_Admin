@@ -1,7 +1,12 @@
 export interface Order {
-  customerName :string,
-  itemName: string,
-  price:number,
-  quntaty:number,
-  sellerName:string
+  fsId:string, //order id firestore
+  id :string, //order id of orders
+  state: string,
+  purchase_units:any[],
+  userId:string,
+  userName:string,
+  userEmail:string,
+  timeCreated:Date,
+  paypalMail:string,
+  totalPaid:string
 }
