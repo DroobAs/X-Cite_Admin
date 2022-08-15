@@ -22,9 +22,9 @@ export class AddUpdateBrandComponent implements OnInit {
   @ViewChild('img') img!: ElementRef;
 
   constructor( @Inject(ActivatedRoute) private routerActive: ActivatedRoute
-             , private FormBuilder : FormBuilder
-             , private brandService: BrandService
-             , @Inject(Router) private router: Router) {
+              , private FormBuilder : FormBuilder
+              , private brandService: BrandService
+              , @Inject(Router) private router: Router) {
 
               this.saveBrandForm = FormBuilder.group({
                   BrandName: ['',[Validators.required, Validators.pattern('[a-z A-Z]{3,}')]],

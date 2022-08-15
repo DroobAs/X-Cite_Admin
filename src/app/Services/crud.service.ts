@@ -9,7 +9,9 @@ import { Observable } from 'rxjs';
 export class CRUDService {
 
   constructor( private fs: AngularFirestore
-             , private storage: AngularFireStorage) { }
+            , private storage: AngularFireStorage) { }
+            
+
 
   getAll(collectionName:string) :Observable<DocumentChangeAction<any>[]>
   {
@@ -48,6 +50,40 @@ export class CRUDService {
     return this.fs.doc(`${collectionName}/${docID}`).delete();
   }
 
+  addDocWithSpecificId(cat:string, docId:string, data:any)
+  {
+    return this.fs.collection(`${cat}`).doc(`${docId}`).set(data)
+  }
+
+// George Upload new Image
+  newImage(cat:string, docId:string, data:any)
+  {
+    return this.fs.collection(`${cat}`).doc(`${docId}`).update(data);
+  }
+  // George Upload new Image
+UploadImageNew(collectionName:string, docId:string, newData:any, path:string, propertyName:string): Promise<void>
+{
+  return new Promise((resolve)=>{
+    this.uploadImg(newData[propertyName], path).then((res)=>{
+        newData[propertyName] = res;
+        this.newImage(collectionName, docId, newData).then(()=>{
+          resolve();
+        })
+    })
+  });
+}
+
+  setNewDocWithImg_SpecificID(collectionName:string, docId:string, newData:any, path:string, propertyName:string): Promise<void>
+  {
+    return new Promise((resolve)=>{
+      this.uploadImg(newData[propertyName], path).then((res)=>{
+          newData[propertyName] = res;
+          this.addDocWithSpecificId(collectionName, docId, newData).then(()=>{
+            resolve();
+          })
+      })
+    });
+  }
 //===== storage CRUD ============================================
   uploadImg(img:File, path:string) : Promise<string>
   {
@@ -76,4 +112,6 @@ export class CRUDService {
   {
     return this.storage.refFromURL(path).delete()
   }
+  
+
 }

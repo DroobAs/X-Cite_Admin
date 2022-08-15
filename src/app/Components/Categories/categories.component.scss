@@ -1,7 +1,6 @@
 .all{
     background-image: linear-gradient(#032B47, #69C3E8);
     padding: 20px;
-    height: 2000px;
     margin: auto;
     width: 100%;
 }
@@ -20,7 +19,7 @@
     }
     button{
         background-color: #032B47;
-        box-shadow: 10px 10px 10px #202020;
+        box-shadow: 0px 9px 14px #202020c7;
         margin: 0 20px;
         border-color:#202020 ;
     }
@@ -29,22 +28,22 @@ form{
     // margin-top: 100px;
     z-index: 100;
     box-shadow: 0px 10px 20px 8px #69C3E8;
-    padding: 20px;
+    padding: 10px;
     margin: auto;
     // position: fixed;
     background-image: linear-gradient(#05426d, #05426d);
     position: fixed;
     top: 50%;
     left: 60%;
-    width: 1100px;
+    width: 900px;
     transform: translate(-50%, -50%);
     color:#69C3E8 ;
     border-radius: 10px;
     label{
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     input{
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     button{
     text-align: center;
@@ -63,14 +62,14 @@ form{
     color: #69C3E8;
     background-color: #032B47;
     padding: 5px;
-    width: 50%;
+    width: 94%;
     box-shadow: 0px 6px 10px 0px #69c3e88a;
     margin: auto;
 }
 .submit-form{
     text-align: center;
     margin: auto;
-    width: 70%;
+    width: 98%;
     margin-top: 20px;
     box-shadow: 0px 6px 10px 7px #032B47;
     padding: 20px;

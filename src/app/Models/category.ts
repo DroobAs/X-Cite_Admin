@@ -1,6 +1,8 @@
 export class Category {
-    id?:number;
-    Name?:string;
-    Description?:string;
-    Published?:boolean
+    id?:any;
+    discount?:any;
+    name?:any;
+    nameAr?:any;
+    img?:any | File;
+    subcollections?:any;
 }
