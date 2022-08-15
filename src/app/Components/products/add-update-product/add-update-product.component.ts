@@ -279,7 +279,7 @@ export class AddUpdateProductComponent implements OnInit {
   changeCat()
   {
       this.childCatList = [];
-      this.catList.find((cat)=>cat.id==this.parentCat?.id)?.subcollections.forEach((ele)=>{
+      this.catList.find((cat)=>cat.id==this.parentCat?.id)?.subcollections.forEach((ele: string)=>{
         this.childCatList?.push(ele);
       })
   }

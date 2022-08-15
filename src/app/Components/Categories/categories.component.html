@@ -1,7 +1,123 @@
 
 
 <div class="all">
-                                            <!-- Add Category -->
+    
+                <!-- Display all Categories -->
+<div class="container category-show"  style="margin-top: 30px;">
+    <div>
+        <div class="row justify-content-between">
+          <div class="card text-center col-4 mb-5" style="width:20rem;" *ngFor="let category of categories; let i = index"  >
+            <div class="card-body" style="text-align: left;">
+                <p class="card-text">Id:  <span style="font-weight: bold;">{{ category.id }}</span> </p>
+                <p class="card-text cPointer" (click)="toOwnProducts(category.id, category.subcollections)">Name:  
+                    <span style="font-weight: bold;">{{ category.name }}</span> 
+                </p>
+                <p class="card-text cPointer" (click)="toOwnProducts(category.id, category.subcollections)">NameAr:  
+                    <span style="font-weight: bold;">{{ category.nameAR }}</span> 
+                </p>
+                <p class="card-text">Discount:  <span style="font-weight: bold;">{{ category.discount }}%</span> </p>
+                <p class="card-text" *ngFor="let cat of category.subcollections">
+                    <span style="font-weight: bold;"> EN: {{cat.EN}} | </span> 
+                    <span style="font-weight: bold;"> AR: {{cat.AR}} | </span> 
+                </p>
+                <hr>
+                <img style="width:250px ;height: 150px;box-shadow: 0px 0px 10px #000; 
+                border-radius: 10px;" src={{category.img}} class="cPointer" (click)="toOwnProducts(category.id, category.subcollections)"/>
+                <!-- <img style="width:250px ;height: 150px;box-shadow: 0px 0px 10px #000; 
+                border-radius: 10px;" src={{category.imgUrl}}/> -->
+                    <div style="text-align: center;margin-top: 10%;">
+                        <button href="#" class="btn btn-primary" (click)="deleteTutorial(category.id)">Delete</button>
+                        <button href="#" class="btn btn-primary" (click)="sendId(category.id,category.name,category.nameAR, category.discount, category.subcollections)">Update</button>
+                        <button href="#" class="btn btn-primary"  style="margin-top:10% ;margin-left:10%;" (click)="sendIdImage(category.id)">Update Image</button>
+                    </div>
+                </div>
+            </div>
+        </div>               
+        <div *ngFor="let category of categories; let i = index" >
+            <div *ngFor="let cat of category.subcollections">
+            <form  (submit)="updateTutorial(gotId)" *ngIf="toDisplay"> 
+                <div [formGroup]="userFormGroup">
+                <div class="form-group">
+                    <label for="Description">Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="newName"
+                        value={{newName}}
+                        formControlName="name"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="Description">Name Ar</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="Description"
+                        [(ngModel)]="newnameAR"
+                        value={{newnameAR}}
+                        formControlName="nameAr"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="Description">Discount</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        type="number"
+                        id="Description"
+                        [(ngModel)]="newDiscount"
+                        formControlName="discount"
+                    />
+                </div>
+                <div formArrayName="subcollections" class="form-group"> 
+                    <div *ngFor="let sub of subcollections.controls; let index=index">
+                            <div formGroupName="{{index}}"> 
+                                <label for="subcollections{{index}}" class="form-label">SubCollections {{cat.EN}} {{index}}</label>
+                                    <input type="text" class="form-control" id="subcollections{{index}}" formControlName="EN" >
+                            </div>
+                            <div formGroupName="{{index}}">
+                                <label for="subcollectionsAR{{index}}" class="form-label">SubCollectionsAR {{cat.AR}} {{index}}</label>
+                                <input type="text" class="form-control" id="subcollectionsAR{{index}}" formControlName="AR">
+                            </div>
+                            <button 
+                            style=
+                                "font-size: 20px;
+                                margin-right: 10px;
+                                width: 40px;
+                                margin-bottom: 20px;
+                                "
+                                *ngIf="sub.value&&index==subcollections.controls.length-1"  (click)="addSub()" class="btn btn-warning">+</button>
+                            <button
+                            style=
+                                "font-size: 20px;
+                                margin-right: 10px;
+                                width: 40px;
+                                margin-bottom: 20px;"  
+                                *ngIf="sub.value&&index==subcollections.controls.length-1"   (click)="RemoveSub()" class="btn btn-primary">-</button>
+
+                    </div>
+                </div>
+                </div>
+                <button href="#" class="btn btn-primary update" type="submit" >Update</button>
+            </form>
+            </div>
+        </div>
+        <form  (submit)="updateImage(gotId)" *ngIf="toDisplayImg"> 
+            <div [formGroup]="uploadUpdateImg">
+                <label for="description">Image</label>
+                <div class="text-danger" *ngIf="!img?.invalid || !img?.untouched">
+                    <small *ngIf="img?.errors?.['required']" style="background-color: #000;padding: 5px;margin-bottom: 20px;">
+                    Image is required!
+                    </small>    
+                </div>
+                <input type="file" name="addImgUpdate" id="addImgUpdate" class="form-control" accept=".png,.jpg,.jpeg" formControlName="updateImg">     
+            </div>
+            <button href="#" class="btn btn-primary update" type="submit" >Update</button>
+        </form>
+    </div>
+    </div>  
+    
+    <!-- Add Category -->
 <div class="col-lg-12 d-flex">
     <div class="col-lg-6">
         <h2 class="add-cat">Add New Category</h2>
@@ -23,9 +139,9 @@
                         />
                     </div>  
                     <div class="form-group">
-                        <label for="title">Name Ar</label>
-                        <div class="text-danger" *ngIf="!nameAr?.invalid || !nameAr?.untouched">
-                            <small *ngIf="nameAr?.errors?.['required']" style="background-color: #000;padding: 5px;margin-bottom: 20px;">
+                        <label for="title">Name AR</label>
+                        <div class="text-danger" *ngIf="!nameAR?.invalid || !nameAR?.untouched">
+                            <small *ngIf="nameAR?.errors?.['required']" style="background-color: #000;padding: 5px;margin-bottom: 20px;">
                                 ادخل الاسم من فضلك
                             </small>
                         </div>
@@ -33,7 +149,7 @@
                         type="text"
                         class="form-control"
                         id="title"
-                        formControlName="nameAr"
+                        formControlName="nameAR"
                         name="title"
                         />
                     </div>
@@ -46,8 +162,6 @@
                         />
                     </div>   
                     <div formArrayName="subcollections" class="form-group">
-
-                        
                         <div *ngFor="let sub of subcollections.controls; let index=index">
                             <div formGroupName="{{index}}">
                                 <label for="subcollections{{index}}" class="form-label">SubCollections  {{index}}</label>
@@ -58,8 +172,6 @@
                                 <input type="text" class="form-control" id="subcollectionsAR{{index}}" formControlName="AR">
                             </div>
                         </div>
-                        
-                        
                         <button 
                         style=
                             "font-size: 20px;
@@ -199,132 +311,8 @@
                 </div>
             </div>
             <button [disabled]="Attributes.invalid" (click)="addCollectionInDoc()" class="btn btn-success">Submit</button>
-
-  <div class="container category-show" >
-    <div>
-            <div class="row justify-content-center">
-                <div class="card text-center me-4 mb-4" style="width:20rem;height:20rem" *ngFor="let category of categories; let i = index"  >
-                    <div class="card-body h-100">
-                        <img src={{category.img}} class="card-img-top h-50 cPointer" (click)="toOwnProducts(category.id, category.subcollections)"/>
-                        <h2 class="card-title cPointer" (click)="toOwnProducts(category.id, category.subcollections)">{{ category.id }}</h2>
-                        <p class="card-text">discount: {{ category.discount }}%</p>
-
-                        <button href="#" class="btn btn-primary" (click)="deleteTutorial(category.id)">Delete</button>
-                        <button href="#" class="btn btn-primary" (click)="sendId(category.id,category.name,category.nameAr,category.discount,category.subcollections)">Update</button>
-                    </div>
-                </div>
-            </div>           
-        
-    </div>
+       </div>
+       </div>
 </div>
-                                <!-- Display all Categories -->
 
-<div class="container category-show"  style="margin-top: 30px;">
-    <div>
-        <div class="row ">
-          <div class="card text-center" style="width:20rem;" *ngFor="let category of categories; let i = index"  >
-            <div class="card-body" style="text-align: left;">
-                <p class="card-text">Id:  <span style="font-weight: bold;">{{ category.id }}</span> </p>
-                <p class="card-text">Name:  <span style="font-weight: bold;">{{ category.name }}</span> </p>
-                <p class="card-text">NameAr:  <span style="font-weight: bold;">{{ category.nameAr }}</span> </p>
-                <p class="card-text">Discount:  <span style="font-weight: bold;">{{ category.discount }}%</span> </p>
-                <p class="card-text" *ngFor="let cat of category.subcollections">
-                    <span style="font-weight: bold;"> EN: {{cat.EN}} | </span> 
-                    <span style="font-weight: bold;"> AR: {{cat.AR}} | </span> 
-                </p>
-                <hr>
-                <img style="width:250px ;height: 150px;box-shadow: 0px 0px 10px #000; 
-                border-radius: 10px;" src={{category.img}}/>
-                <!-- <img style="width:250px ;height: 150px;box-shadow: 0px 0px 10px #000; 
-                border-radius: 10px;" src={{category.imgUrl}}/> -->
-                    <div style="text-align: center;margin-top: 10%;">
-                        <button href="#" class="btn btn-primary" (click)="deleteTutorial(category.id)">Delete</button>
-                        <button href="#" class="btn btn-primary" (click)="sendId(category.id,category.name,category.nameAr, category.discount, category.subcollections)">Update</button>
-                        <button href="#" class="btn btn-primary"  style="margin-top:10% ;margin-left:10%;" (click)="sendIdImage(category.id)">Update Image</button>
-                    </div>
-                </div>
-            </div>
-        </div>               
-        <div *ngFor="let category of categories; let i = index" >
-            <div *ngFor="let cat of category.subcollections">
-            <form  (submit)="updateTutorial(gotId)" *ngIf="toDisplay"> 
-                <div [formGroup]="userFormGroup">
-                <div class="form-group">
-                    <label for="Description">Name</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        [(ngModel)]="newName"
-                        value={{newName}}
-                        formControlName="name"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="Description">Name Ar</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="Description"
-                        [(ngModel)]="newNameAr"
-                        value={{newNameAr}}
-                        formControlName="nameAr"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="Description">Discount</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        type="number"
-                        id="Description"
-                        [(ngModel)]="newDiscount"
-                        formControlName="discount"
-                    />
-                </div>
-                <div formArrayName="subcollections" class="form-group"> 
-                    <div *ngFor="let sub of subcollections.controls; let index=index">
-                            <div formGroupName="{{index}}"> 
-                                <label for="subcollections{{index}}" class="form-label">SubCollections {{cat.EN}} {{index}}</label>
-                                    <input type="text" class="form-control" id="subcollections{{index}}" formControlName="EN" >
-                            </div>
-                            <div formGroupName="{{index}}">
-                                <label for="subcollectionsAR{{index}}" class="form-label">SubCollectionsAR {{cat.AR}} {{index}}</label>
-                                <input type="text" class="form-control" id="subcollectionsAR{{index}}" formControlName="AR">
-                            </div>
-                            <button 
-                            style=
-                                "font-size: 20px;
-                                margin-right: 10px;
-                                width: 40px;
-                                margin-bottom: 20px;
-                                "
-                                *ngIf="sub.value&&index==subcollections.controls.length-1"  (click)="addSub()" class="btn btn-warning">+</button>
-                            <button
-                            style=
-                                "font-size: 20px;
-                                margin-right: 10px;
-                                width: 40px;
-                                margin-bottom: 20px;"  
-                                *ngIf="sub.value&&index==subcollections.controls.length-1"   (click)="RemoveSub()" class="btn btn-primary">-</button>
-
-                    </div>
-                </div>
-                </div>
-                <button href="#" class="btn btn-primary update" type="submit" >Update</button>
-            </form>
-            </div>
-        </div>
-        <form  (submit)="updateImage(gotId)" *ngIf="toDisplayImg"> 
-            <div [formGroup]="uploadUpdateImg">
-                <label for="description">Image</label>
-                <div class="text-danger" *ngIf="!img?.invalid || !img?.untouched">
-                    <small *ngIf="img?.errors?.['required']" style="background-color: #000;padding: 5px;margin-bottom: 20px;">
-                    Image is required!
-                    </small>    
-                </div>
-                <input type="file" name="addImgUpdate" id="addImgUpdate" class="form-control" accept=".png,.jpg,.jpeg" formControlName="updateImg">     
-            </div>
-            <button href="#" class="btn btn-primary update" type="submit" >Update</button>
-        </form>
-    </div>
-    </div>
+</div>

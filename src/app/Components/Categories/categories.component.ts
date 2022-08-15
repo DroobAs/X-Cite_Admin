@@ -43,7 +43,7 @@ export class CategoriesComponent implements OnInit {
   // Get Data To Show it in Input
   discount:string = ''
   newName:string = ''
-  newNameAr:string = ''
+  newnameAR:string = ''
   newDiscount:number = 0
   selectedCatID:number=0;
   //////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ export class CategoriesComponent implements OnInit {
 //////////////////////////////////////////////////////////////////////////////////////
     this.userFormGroup = this.formBulider.group({
       name:['',[Validators.required]],
-      nameAr:['',[Validators.required]],
+      nameAR:['',[Validators.required]],
       discount:[''],
       img:['',[Validators.required]],
       // imgUrl:[''],
@@ -78,8 +78,8 @@ export class CategoriesComponent implements OnInit {
 get name(){
     return this.userFormGroup.get('name')
   }
-  get nameAr(){
-    return this.userFormGroup.get('nameAr')
+  get nameAR(){
+    return this.userFormGroup.get('nameAR')
   }
   get discont(){
     return this.userFormGroup.get('discount')
@@ -143,10 +143,10 @@ get name(){
     this.router.navigate(['/Products',{state: JSON.stringify(subCats)}])
   }
 
-  sendId(id:any,name:string,nameAr:string, discount:number, subcollections:any){
+  sendId(id:any,name:string,nameAR:string, discount:number, subcollections:any){
     this.gotId = id
     this.newName = name
-    this.newNameAr = nameAr
+    this.newnameAR = nameAR
     this.newDiscount = discount
     this.userFormGroup.value.subcollections = subcollections
     
@@ -168,7 +168,7 @@ get name(){
     this.toDisplay = !this.toDisplay;
     const data = {
       name:this.newName,
-      nameAr:this.newNameAr,
+      nameAR:this.newnameAR,
       discount:this.newDiscount,
       subcollections: this.userFormGroup.value.subcollections,
     };
@@ -226,7 +226,7 @@ deleteTutorial(id:any): void {
         this.userFormGroup.value.name, 
         {
           name:this.userFormGroup.value.name,
-          nameAr:this.userFormGroup.value.nameAr,
+          nameAR:this.userFormGroup.value.nameAR,
           discount:this.userFormGroup.value.discount,
           subcollections:this.userFormGroup.value.subcollections,
           img:((document.getElementById('addImg') as HTMLInputElement)?.files as FileList)[0]

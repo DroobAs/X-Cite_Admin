@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { SubCategory } from 'app/Models/sub-category';
 import { Category } from '../Models/category';
 import { CRUDService } from './crud.service';
 
@@ -9,14 +10,11 @@ import { CRUDService } from './crud.service';
 export class CategoriesService {
   items:Category[]=[]
   collectionName: string = "Categories";
-
   constructor(
-
     private fs:  AngularFirestore,
     private CRUD : CRUDService) { 
-
-
   }
+
   getAllCat():AngularFirestoreCollection<Category>{
       return this.fs.collection('Categories')
       // return this.fs.collection('category').valueChanges()
@@ -51,6 +49,11 @@ export class CategoriesService {
   }
   addToCategory( cat:string ,docID:string, data:any){
     return this.CRUD.setNewDocWithImg_SpecificID(cat,docID, data, 'Categories', 'img')
+}
+
+getSubCategory(collectionName:string)
+{
+  return this.CRUD.getCollectionGroub(collectionName)
 }
 
 }
