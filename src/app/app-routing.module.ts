@@ -5,6 +5,7 @@ import { AnalyticsComponent } from './Components/analytics/analytics.component';
 import { AddUpdateBrandComponent } from './Components/brands/add-update-brand/add-update-brand.component';
 import { BrandDetailesComponent } from './Components/brands/brand-detailes/brand-detailes.component';
 import { BrandsComponent } from './Components/brands/brands.component';
+import { AddCatComponent } from './Components/Categories/AddCategories/add-cat/add-cat.component';
 import { CategoriesComponent } from './Components/Categories/categories.component';
 import { HomeComponent } from './Components/Home/home.component';
 import { LoginComponent } from './Components/login/login.component';
@@ -38,6 +39,7 @@ const routes: Routes = [
     {path: 'Profile', component: ProfileComponent},
     {path: 'WebSite', component: WebConfigComponent},
     {path: 'orders', component: OrdersComponent},
+    {path: 'saveCat', component: AddCatComponent},
 
   ]},
   {path: 'Login', component:LoginComponent},

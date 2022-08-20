@@ -1,0 +1,191 @@
+<div class="all">
+    <div class="col-lg-12 d-flex">
+        <div class="col-lg-6">
+            <h2 class="add-cat">Add New Category</h2>
+            <div class="submit-form" >
+                <div *ngIf="!submitted">
+                    <div [formGroup]="userFormGroup">
+                            <div class="form-group">
+                                <label for="title">Name</label>
+                                <div class="text-danger" *ngIf="!name?.invalid || !name?.untouched">
+                                    <small *ngIf="name?.errors?.['required']" style="background-color: #000;padding: 5px;margin-bottom: 20px;">
+                                        Name is required!
+                                    </small>
+                                </div>
+                                <input
+                                type="text"
+                                class="form-control"
+                                formControlName="name"
+                                />
+                            </div>  
+                            <div class="form-group">
+                                <label for="title">Name AR</label>
+                                <div class="text-danger" *ngIf="!nameAR?.invalid || !nameAR?.untouched">
+                                    <small *ngIf="nameAR?.errors?.['required']" style="background-color: #000;padding: 5px;margin-bottom: 20px;">
+                                        ادخل الاسم من فضلك
+                                    </small>
+                                </div>
+                                <input
+                                type="text"
+                                class="form-control"
+                                id="title"
+                                formControlName="nameAR"
+                                name="title"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Discount</label>
+                                <input
+                                type="number" min="0"
+                                class="form-control"
+                                formControlName="discount"
+                                />
+                            </div>   
+                            <div formArrayName="subcollections" class="form-group">
+                                <div *ngFor="let sub of subcollections.controls; let index=index">
+                                    <div formGroupName="{{index}}">
+                                        <label for="subcollections{{index}}" class="form-label">SubCollections  {{index}}</label>
+                                        <input type="text" class="form-control" id="subcollections{{index}}" formControlName="EN">
+                                    </div>
+                                    <div formGroupName="{{index}}">
+                                        <label for="subcollectionsAR{{index}}" class="form-label">SubCollectionsAR  {{index}}</label>
+                                        <input type="text" class="form-control" id="subcollectionsAR{{index}}" formControlName="AR">
+                                    </div>
+                                </div>
+                                <button 
+                                style=
+                                    "font-size: 20px;
+                                    margin-right: 10px;
+                                    width: 40px;
+                                    margin-bottom: 20px;
+                                    "  (click)="addSub()" class="btn btn-warning">+</button>
+                                <button
+                                style=
+                                    "font-size: 20px;
+                                    margin-right: 10px;
+                                    width: 40px;
+                                    margin-bottom: 20px;
+                                    "   (click)="RemoveSub()" class="btn btn-primary">-</button>
+                            </div>
+
+                            <label for="description">Image</label>
+                            <div class="text-danger" *ngIf="!img?.invalid || !img?.untouched">
+                                <small *ngIf="img?.errors?.['required']" style="background-color: #000;padding: 5px;margin-bottom: 20px;">
+                                Image is required!
+                                </small>    
+                            </div>
+                            <input type="file" name="img" id="addImg" class="form-control" accept=".png,.jpg,.jpeg" formControlName="img">     
+                        </div> 
+                        <button [disabled]="userFormGroup.invalid" (click)="saveCat()" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+            <div *ngIf="submitted">
+                <h4>You submitted successfully!</h4>
+                <button class="btn btn-success" (click)="newCat()">Add</button>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <h2 class="add-cat" >Create Attributes</h2>
+            <div class="submit-form" [formGroup]="Attributes">
+
+                <div *ngIf="!submitted">
+                    <div class="mb-2">
+                        <label for="prodCat">Select Category: </label>
+                        <select name="cat"  class="form-control" formControlName="Newid">   
+                            <option *ngFor="let cat of categories" [value]="cat.id">{{cat.id}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Category Name</label>
+                        <div class="text-danger" *ngIf="!newCatName?.invalid || !newCatName?.untouched">
+                            <small *ngIf="newCatName?.errors?.['required']" style="background-color: #000;padding: 5px;">
+                                Category Name is required!
+                            </small>
+                        </div>
+                        <input
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        formControlName="newCatName"
+                        />
+                    </div> 
+                    <div class="form-group">
+                        <label for="title">Document Name</label>
+                        <div class="text-danger" *ngIf="!newDocID?.invalid || !newDocID?.untouched">
+                            <small *ngIf="newDocID?.errors?.['required']" style="background-color: #000;padding: 5px;">
+                                Document ID is required!
+                            </small>
+                        </div>
+                        <input
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        formControlName="newDocID"
+                        />
+                    </div> 
+                    <div [formGroup]="Attributes">
+                        <div class="text-danger" *ngIf="!attributes?.invalid || !attributes?.untouched">
+                            <small *ngIf="attributes?.errors?.['required']" style="background-color: #000;padding: 5px;">
+                                Attributes is required!
+                            </small>
+                        </div>
+                        <div 
+                            formArrayName="attributes"
+                            class="form-group"  
+                            *ngFor="let sub of attributes.controls; let index=index"
+                            >
+                            <label for="attributes{{index}}" class="form-label">Attributes  {{index}}</label>
+                            <input type="text" class="form-control" id="{{index+1}}" formControlName="{{index}}">
+                            <button 
+                            style=
+                                "font-size: 20px;
+                                margin-right: 10px;
+                                width: 40px;
+                                margin-bottom: 20px;
+                                "  (click)="addAttributes()" class="btn btn-warning">+</button>
+                            <button
+                            style=
+                                "font-size: 20px;
+                                margin-right: 10px;
+                                width: 40px;
+                                margin-bottom: 20px;
+                                "   (click)="RemoveAttributes()" class="btn btn-primary">-</button>
+                        </div>
+                    </div>
+                    <div [formGroup]="Attributes">
+                        <div class="text-danger" *ngIf="!attributesAr?.invalid || !attributesAr?.untouched">
+                            <small *ngIf="attributesAr?.errors?.['required']" style="background-color: #000;padding: 5px;">
+                                AttributesAr is required!
+                            </small>
+                        </div>
+                        <div 
+                            formArrayName="attributesAr"
+                            class="form-group"  
+                            *ngFor="let sub of attributesAr.controls; let index=index"
+                            >
+                            <label for="attributesAr{{index}}" class="form-label" >Attrubites Ar {{index}}</label>
+                            <input type="text" class="form-control" id="{{index+1}}" formControlName="{{index}}">
+                            <button 
+                            style=
+                                "font-size: 20px;
+                                margin-right: 10px;
+                                width: 40px;
+                                margin-bottom: 20px;
+                                "  (click)="addAttributesAr()" class="btn btn-warning">+</button>
+                            <button
+                            style=
+                                "font-size: 20px;
+                                margin-right: 10px;
+                                width: 40px;
+                                margin-bottom: 20px;
+                                "   (click)="RemoveAttributesAr()" class="btn btn-primary">-</button>
+                        </div>
+                    </div>
+                </div>
+                <button [disabled]="Attributes.invalid" (click)="addCollectionInDoc()" class="btn btn-success">Submit</button>
+        </div>
+        </div>
+    </div>
+</div>

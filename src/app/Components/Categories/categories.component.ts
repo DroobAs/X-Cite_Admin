@@ -144,20 +144,24 @@ get name(){
   }
 
   sendId(id:any,name:string,nameAR:string, discount:number, subcollections:any){
+    console.log(this.subcollections.controls)
     this.gotId = id
     this.newName = name
     this.newnameAR = nameAR
     this.newDiscount = discount
     this.userFormGroup.value.subcollections = subcollections
-    
-    this.toDisplay = !this.toDisplay;
+    console.log(this.subcollections.controls)
     for(let i=0; i<subcollections.length-1;i++){
       this.addSub()
     }
     this.userFormGroup.patchValue({
       subcollections : subcollections
     })
+    console.log(this.subcollections.controls)
+    this.toDisplay = !this.toDisplay;
+    console.log(this.subcollections.controls)
   }
+
   sendIdImage(id:any){
     this.gotId = id
     this.toDisplayImg = !this.toDisplayImg;
@@ -165,7 +169,6 @@ get name(){
 //////////////////////////////////////////////////////////////////////////////////////
 // Updating
   updateTutorial(id:any) : void {
-    this.toDisplay = !this.toDisplay;
     const data = {
       name:this.newName,
       nameAR:this.newnameAR,
@@ -177,6 +180,7 @@ get name(){
         .then(() => console.log('done'))
         .catch(err => console.log(err));
     }
+    this.toDisplay = !this.toDisplay;
   }
   updateImage(id:any) : void {
     this.toDisplayImg = !this.toDisplayImg;
@@ -256,7 +260,10 @@ deleteTutorial(id:any): void {
     this.category = {} as Category;
   }
 /////////////////////////////////////////////////////////////////////////////////
-
+goToSaveCat()
+{
+  this.router.navigate(['saveCat']);
+}
 
 ngOnInit(): void {
   this.retrieveCats()

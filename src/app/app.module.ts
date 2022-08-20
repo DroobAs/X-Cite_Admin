@@ -53,6 +53,7 @@ import {AngularFirestoreModule, SETTINGS} from '@angular/fire/compat/firestore';
 import { SearchPipe } from './pipes/search.pipe';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from "@ng-select/ng-select";
+import { AddCatComponent } from './Components/Categories/AddCategories/add-cat/add-cat.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { NgSelectModule } from "@ng-select/ng-select";
     OrdersComponent,
     PiachartComponent,
     CharttwoComponent,
-    SearchPipe
+    SearchPipe,
+    AddCatComponent
   ],
   imports: [
     BrowserModule,
