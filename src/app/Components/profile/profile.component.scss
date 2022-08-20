@@ -1,0 +1,15 @@
+$mainColorBlue: #001a2c;
+$mainColorYellow: #d3a827;
+.addNew{
+    color:$mainColorYellow;
+    text-decoration: underline;
+    cursor:pointer;
+    width: fit-content;
+}
+.cPointer{
+    cursor: pointer;
+}
+
+.mColor{
+    color: $mainColorBlue !important;
+}

@@ -28,9 +28,10 @@ export class AddUpdateBrandComponent implements OnInit {
 
               this.saveBrandForm = FormBuilder.group({
                   BrandName: ['',[Validators.required, Validators.pattern('[a-z A-Z]{3,}')]],
+                  BrandNameAR: ['',[Validators.required, Validators.pattern('[ء-ي ]{3,}')]],
                   BrandLogo: ['',[]],
                   // BrandCategories: FormBuilder.array([['',[Validators.required, Validators.pattern('[a-z A-Z0-9]{3,}')]]]),
-                  BrandCategories: FormBuilder.array([['',[]]]),
+                  // BrandCategories: FormBuilder.array([['',[]]]),
                   BrandOffers: FormBuilder.array([])
               })
             }
@@ -64,7 +65,8 @@ export class AddUpdateBrandComponent implements OnInit {
 
             this.saveBrandForm.patchValue({
               BrandName: brand.name,
-              BrandCategories: brand.categories,
+              BrandNameAR: brand.nameAR,
+              // BrandCategories: brand.categories,
               BrandOffers: brand.offers
             });
             console.log(this.Add,this.saveBrandForm);
@@ -84,14 +86,18 @@ export class AddUpdateBrandComponent implements OnInit {
   {
     return this.saveBrandForm.get('BrandName');
   }
+  get brandNameARPro()
+  {
+    return this.saveBrandForm.get('BrandNameAR');
+  }
   get BrandLogoPro()
   {
     return this.saveBrandForm.get('BrandLogo');
   }
-  get BrandCategoriesPro()
-  {
-    return this.saveBrandForm.get('BrandCategories') as FormArray;
-  }
+  // get BrandCategoriesPro()
+  // {
+  //   return this.saveBrandForm.get('BrandCategories') as FormArray;
+  // }
   get BrandOffersPro()
   {
     return this.saveBrandForm.get('BrandOffers') as FormArray;
@@ -105,15 +111,15 @@ export class AddUpdateBrandComponent implements OnInit {
     return this.saveBrandForm.get('BrandOffers')?.get('offerInfo');
   }
 
-  addNewCategory()
-  {
-    console.log('in add cat');
-    this.BrandCategoriesPro.push(this.FormBuilder.control('',[Validators.required, Validators.pattern('[a-z A-Z0-9]{3,}')]));
-  }
-  removeCategory(i:number)
-  {
-    this.BrandCategoriesPro.removeAt(i);
-  }
+  // addNewCategory()
+  // {
+  //   console.log('in add cat');
+  //   this.BrandCategoriesPro.push(this.FormBuilder.control('',[Validators.required, Validators.pattern('[a-z A-Z0-9]{3,}')]));
+  // }
+  // removeCategory(i:number)
+  // {
+  //   this.BrandCategoriesPro.removeAt(i);
+  // }
   addNewoffer()
   {
     this.BrandOffersPro.push(this.FormBuilder.group({
@@ -133,10 +139,10 @@ export class AddUpdateBrandComponent implements OnInit {
   SaveBrand()
   {
     this.isload = true;
-    let categories: string[]=[];
-    this.BrandCategoriesPro.controls.forEach((cat)=>{
-      categories.push(cat.value);
-    })
+    // let categories: string[]=[];
+    // this.BrandCategoriesPro.controls.forEach((cat)=>{
+    //   categories.push(cat.value);
+    // })
 
     let offers: Offer[] = [];
     this.BrandOffersPro.controls.forEach((offer, index)=>{
@@ -151,8 +157,9 @@ export class AddUpdateBrandComponent implements OnInit {
     let file: File = this.img.nativeElement.files[0];
     let brand: Brand = {
       name: this.brandNamePro?.value,
+      nameAR: this.brandNameARPro?.value,
       logo: this.Add?file:(file?file:this.updatedBrand.logo),
-      categories: categories,
+      // categories: categories,
       offers: offers
     }
 

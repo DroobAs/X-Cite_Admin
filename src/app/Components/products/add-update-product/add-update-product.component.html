@@ -121,13 +121,13 @@
       </div>
 
       <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
-        <label for="bName" class="form-label fs-7"><b>اسم الماركة:</b></label>
+        <label for="bName" class="form-label fs-7"><b>العلامة التجارية:</b></label>
         <ng-select
           id="bName"
           class="shadow"
           [items]="brandList"
           bindLabel="nameAR"
-          placeholder="حدد اسم الماركة"
+          placeholder="حدد العلامة التجارية"
           appendTo="body"
           [multiple]="false"
           formControlName="ProBrandNameAR"
@@ -135,10 +135,10 @@
         </ng-select>
           <div class="text-danger" *ngIf="!ProBrandProAR?.invalid || !ProBrandProAR?.untouched">
             <small *ngIf="ProBrandProAR?.errors?.['required']">
-              * اسم الماركة مطلوب!
+              * العلامة التجارية مطلوبة!
             </small>
             <small *ngIf="saveProductForm?.errors?.['brandsLang']">
-              * ينبغي أن تكون نفس الماركة في كلا اللغتين
+              * ينبغي أن تكون نفس العلامة التجارية في كلا اللغتين
             </small>
           </div>
       </div>

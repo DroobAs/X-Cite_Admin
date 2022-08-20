@@ -1,35 +1,32 @@
-
-
 <div class="all">
-    
                 <!-- Display all Categories -->
-    <div class="container category-show"  style="margin-top: 30px;">
-        <div>
-            <div class="row justify-content-between">
-            <div class="card text-center col-4 mb-5" style="width:20rem;" *ngFor="let category of categories; let i = index"  >
-                <div class="card-body" style="text-align: left;">
-                    <p class="card-text">Id:  <span style="font-weight: bold;">{{ category.id }}</span> </p>
-                    <p class="card-text cPointer" (click)="toOwnProducts(category.id, category.subcollections)">Name:  
-                        <span style="font-weight: bold;">{{ category.name }}</span> 
-                    </p>
-                    <p class="card-text cPointer" (click)="toOwnProducts(category.id, category.subcollections)">NameAR:  
-                        <span style="font-weight: bold;">{{ category.nameAR }}</span> 
-                    </p>
-                    <p class="card-text">Discount:  <span style="font-weight: bold;">{{ category.discount }}%</span> </p>
-                    <p class="card-text" *ngFor="let cat of category.subcollections">
-                        <span style="font-weight: bold;"> EN: {{cat.EN}} | </span> 
-                        <span style="font-weight: bold;"> AR: {{cat.AR}} | </span> 
-                    </p>
-                    <hr>
-                    <img style="width:250px ;height: 150px;box-shadow: 0px 0px 10px #000; 
-                    border-radius: 10px;" src={{category.img}} class="cPointer" (click)="toOwnProducts(category.id, category.subcollections)"/>
-                    <!-- <img style="width:250px ;height: 150px;box-shadow: 0px 0px 10px #000; 
-                    border-radius: 10px;" src={{category.imgUrl}}/> -->
-                        <div style="text-align: center;margin-top: 10%;">
-                            <button href="#" class="btn btn-primary" (click)="deleteTutorial(category.id)">Delete</button>
-                            <button href="#" class="btn btn-primary" (click)="sendId(category.id,category.name,category.nameAR, category.discount, category.subcollections)">Update</button>
-                            <button href="#" class="btn btn-primary"  style="margin-top:10% ;margin-left:10%;" (click)="sendIdImage(category.id)">Update Image</button>
-                        </div>
+<div class="container category-show"  style="margin-top: 30px;">
+    <div>
+        <div class="row justify-content-between">
+          <div class="card text-center col-4 mb-5" style="width:20rem;" *ngFor="let category of categories; let i = index"  >
+            <div class="card-body" style="text-align: left;">
+                <!-- <p class="card-text">Id:  <span style="font-weight: bold;">{{ category.id }}</span> </p> -->
+                <p class="card-text cPointer" (click)="toOwnProducts(category.id, category.subcollections)">Name:  
+                    <span style="font-weight: bold;">{{ category.name }}</span> 
+                </p>
+                <p class="card-text cPointer" (click)="toOwnProducts(category.id, category.subcollections)">NameAr:  
+                    <span style="font-weight: bold;">{{ category.nameAR }}</span> 
+                </p>
+                <p class="card-text">Discount:  <span style="font-weight: bold;">{{ category.discount }}%</span> </p>
+                <p class="card-text" *ngFor="let cat of category.subcollections">
+                    <span style="font-weight: bold;"> EN: {{cat.EN}} | </span> 
+                    <span style="font-weight: bold;"> AR: {{cat.AR}} | </span> 
+                </p>
+                <hr>
+                <img style="width:250px ;height: 150px;box-shadow: 0px 0px 10px #000; 
+                border-radius: 10px;" src={{category.img}} class="cPointer" (click)="toOwnProducts(category.id, category.subcollections)"/>
+                <!-- <img style="width:250px ;height: 150px;box-shadow: 0px 0px 10px #000; 
+                border-radius: 10px;" src={{category.imgUrl}}/> -->
+                    <div style="text-align: center;margin-top: 10%;">
+                        <button href="#" class="btn btn-primary" (click)="deleteTutorial(category.id)">Delete</button>
+                        <button href="#" class="btn btn-primary" (click)="sendId(category.id,category.name,category.nameAR, category.discount, category.subcollections)">Update</button>
+                        <button href="#" class="btn btn-primary"  style="margin-top:10% ;margin-left:10%;" (click)="sendIdImage(category.id)">Update Image</button>
+
                     </div>
                 </div>
             </div>            

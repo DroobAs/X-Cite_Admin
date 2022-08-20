@@ -1,27 +1,70 @@
-<div class=" bg-main sColor text-center my-3">
-    <h1>** Product Details **</h1>
-</div>
 <div class="container-fluid mt-3 mb-5">
-    <div class="d-flex w-100 mb-4">
-        <span class="col-5">
-            <!-- <img src={{targetProduct.Logo}} class="w-100"> -->
+    <div class="d-flex flex-wrap w-100 mb-4">
+        <span class="col-lg-5 order-lg-1 order-2 text-center">
+            <img src={{targetProduct.images[0]}} class="w-100" style="max-height: 250px;">
+            <ng-container *ngFor="let img of targetProduct.images; let i= index;" >
+                <img *ngIf="i && i<5" src={{img}} class="col-2 mx-2 my-2 shadow" style="max-height: 150px;">
+            </ng-container>
         </span>
-        <span class="col-6 text-end">
+        <span class="col-lg-5 order-lg-2 order-3 text-start p-3">
+            <h1><b>{{targetProduct.name}}</b></h1>
+
+            <p><b>Brand Name: </b>{{targetProduct.brandName}}</p>
+            <p><b>Category: </b>{{targetProduct.categoryName}}</p>
+            <p><b>SKU: </b>{{targetProduct.sku}}</p>
+            <p><b>Quantity: </b>{{targetProduct.quantity}}</p>
+            <p><b>Price: </b>{{targetProduct.price}}$</p>
+            <p><b>Discount: </b>{{targetProduct.discount?targetProduct.discount+"%":'-'}}</p>
+            <p><b>Added By: </b>{{targetProduct.AddedBy}}</p>
+            
+        </span>
+        <span class="col-lg-2 order-lg-3 order-1 text-end ps-lg-3 ps-0">
             <i class="fa-solid fa-pen-to-square fs-3 m-3 cPointer mColor shadow" (click)="goToEditProduct(targetProductID)" title="Edit"></i>
             <i class="fa-solid fa-trash-can fs-3 m-3 cPointer mColor shadow" (click)="goToDeleteProduct(targetProductID)" title="Delete"></i>
         </span>
     </div>
+    
+    <div class="px-3 w-50">
+        <p><b>Description: </b>{{targetProduct.description}}</p>
+    </div>
+    
+    <div class=" bg-main sColor text-center mb-3 mt-4">
+        <h1 class="py-1">** Product Specification **</h1>
+    </div>
+
+    <div class="container col-12">
+        <table class="table table-bordered">
+            <tbody>
+            <tr *ngFor="let attribute of attributes; let i = index">
+                <th class="col-lg-2 col-3">{{attribute}}</th>
+                <td class="col-lg-10 col-9">{{targetProduct[attribute]}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+  
+  </div>
 
 
-    <div class=" bg-main sColor my-5 w-50" >
+    <!-- <div class="d-flex w-100 mb-4">
+        <span class="col-5"> -->
+            <!-- <img src={{targetProduct.Logo}} class="w-100"> -->
+        <!-- </span>
+        <span class="col-6 text-end">
+            <i class="fa-solid fa-pen-to-square fs-3 m-3 cPointer mColor shadow" (click)="goToEditProduct(targetProductID)" title="Edit"></i>
+            <i class="fa-solid fa-trash-can fs-3 m-3 cPointer mColor shadow" (click)="goToDeleteProduct(targetProductID)" title="Delete"></i>
+        </span>
+    </div> -->
+
+
+    <!-- <div class=" bg-main sColor my-5 w-50" >
         <img src={{targetProduct.images[0]}} class="card-img-top" alt={{targetProduct.name}} style="height: 200px; width:200px ">
         <h1>Name: {{targetProduct.name}}</h1>
         <h1>Price: {{targetProduct.price}}</h1>
         <h1>Quantity: {{targetProduct.quantity}}</h1>
         <h1>OverView: <span style="font-size:17px ;">{{targetProduct.description}}</span></h1>
-    </div>
+    </div> -->
   
-    
-  </div>
+  
 
 

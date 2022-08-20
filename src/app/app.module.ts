@@ -54,6 +54,8 @@ import { SearchPipe } from './pipes/search.pipe';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from "@ng-select/ng-select";
 import { AddCatComponent } from './Components/Categories/AddCategories/add-cat/add-cat.component';
+import { AdminAuthGuard } from './admin-auth.guard';
+import { AdminsComponent } from './Components/profile/admins/admins.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { AddCatComponent } from './Components/Categories/AddCategories/add-cat/a
     ProfileComponent,
     UsersComponent,
     CategoriesComponent,
+    AddCatComponent,
+    AdminsComponent,
     // injected========================
     HeaderComponent,
     SellersComponent,
@@ -82,8 +86,7 @@ import { AddCatComponent } from './Components/Categories/AddCategories/add-cat/a
     OrdersComponent,
     PiachartComponent,
     CharttwoComponent,
-    SearchPipe,
-    AddCatComponent
+    SearchPipe
   ],
   imports: [
     BrowserModule,
@@ -108,6 +111,7 @@ import { AddCatComponent } from './Components/Categories/AddCategories/add-cat/a
     AngularFirestoreModule,
     RouterModule,
     NgSelectModule
+    
     // NgSelectModule
     // Injectable
   ],

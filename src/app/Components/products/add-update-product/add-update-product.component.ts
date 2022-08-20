@@ -8,6 +8,9 @@ import { ProductService } from 'app/Services/product.service';
 import { CategoriesService } from 'app/Services/category.service';
 import { Brand } from 'app/Models/brand';
 import { BrandService } from 'app/Services/brand.service';
+import { Admin } from 'app/Models/admin';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AdminService } from 'app/Services/admin.service';
 
 @Component({
   selector: 'app-add-update-product',
@@ -27,6 +30,7 @@ export class AddUpdateProductComponent implements OnInit {
   childCatList:string[] =[];
   currentSpecificControls:string[]=[];
   currentSpecificControlsAR:string[]=[];
+  currentAdmin:Admin={} as Admin;
 //=== Bindig Form Variables 
   subCat:any;
   // processorBind:any;
@@ -40,7 +44,9 @@ export class AddUpdateProductComponent implements OnInit {
               , private formBuilder : FormBuilder
               , private productService: ProductService
               , private CatService: CategoriesService
-              , private BrandService: BrandService) {
+              , private BrandService: BrandService
+              , private afAuth: AngularFireAuth
+              , private adminService: AdminService) {
 
     this.saveProductForm = formBuilder.group({
       ProName: ['',[Validators.required, Validators.minLength(5)]],
@@ -81,7 +87,14 @@ export class AddUpdateProductComponent implements OnInit {
   }, {validators:[this.BrandLangValidator()]})
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
+    this.afAuth.onAuthStateChanged((res)=>{
+      this.adminService.getCurrentAdmin(res?.uid as string).subscribe((res)=>{
+        this.currentAdmin = {
+          ...res
+        }
+      })
+    })
     this.CatService.getAllCat().snapshotChanges().subscribe((res)=>{
       this.catList = res.map((cat)=>({
         ...cat.payload.doc.data(),
@@ -367,7 +380,7 @@ export class AddUpdateProductComponent implements OnInit {
       categoryNameAR: this.ProCategoryProAR?.value,
       seller:"X-Cite",
       sellerAR:"اكسسايت",
-      AddedBy:''
+      AddedBy:this.Add?this.currentAdmin.name:this.updatedProduct.AddedBy
     }
     this.currentSpecificControls.forEach((ele)=>{
       Object.defineProperty(Prd,ele, {
@@ -385,8 +398,9 @@ export class AddUpdateProductComponent implements OnInit {
         
     if (this.Add)
     {
-      this.productService.addNewPrd(Prd).then(()=>{
-      this.Saved()
+      this.productService.addNewPrd(Prd).then((res)=>{
+        console.log(res);
+        this.Saved(res)
       })
     }
     else
@@ -397,7 +411,7 @@ export class AddUpdateProductComponent implements OnInit {
     }
   }
 
-  Saved()
+  Saved(id?:string)
   {
     console.log('in save')
     this.isload = false;
@@ -409,7 +423,7 @@ export class AddUpdateProductComponent implements OnInit {
     setTimeout(() => {
       if(this.Add)
       {
-        this.route.navigate(['/Products']);
+        this.route.navigate([`/Product/${id}`]);
       }
       else
       {

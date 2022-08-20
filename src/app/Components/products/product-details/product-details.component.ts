@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'app/Models/product';
+import { CategoriesService } from 'app/Services/category.service';
 import { ProductService } from 'app/Services/product.service';
 
 @Component({
@@ -11,11 +12,14 @@ import { ProductService } from 'app/Services/product.service';
 export class ProductDetailsComponent implements OnInit {
   targetProductID:string | null='';
   targetProduct:Product = {} as Product;
-;
-
-  constructor(  @Inject(ActivatedRoute) private activatedRoute:ActivatedRoute,
-                private productService:ProductService,
-                @Inject(Router) private route: Router) { }
+  attributes:(keyof typeof this.targetProduct)[]=[]
+  
+  
+  constructor(  private activatedRoute:ActivatedRoute,
+    private productService:ProductService,
+    private route: Router,
+    private catService:CategoriesService) { 
+    }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((param)=>{
@@ -24,6 +28,9 @@ export class ProductDetailsComponent implements OnInit {
       this.targetProductID?
       this.productService.getByID(this.targetProductID).subscribe((product)=>{
             this.targetProduct = product;
+            this.catService.getSubCategory(product.categoryName).subscribe((res)=>{
+               this.attributes = res.find((ele)=>ele.payload.doc.id=='attributes')?.payload.doc.data().attributes;
+            })
         })
         :'';
 

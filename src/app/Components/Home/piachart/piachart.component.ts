@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartItem, registerables } from 'chart.js';
 
-
-
-
 @Component({
   selector: 'app-piachart',
   templateUrl: './piachart.component.html',
@@ -72,6 +69,7 @@ export class PiachartComponent implements OnInit {
         },
       ],
     };
+    
     const config: any = {
       type: 'bar',
       data: data,

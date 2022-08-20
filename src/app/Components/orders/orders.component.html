@@ -31,9 +31,9 @@
   </tbody>
 </table> -->
 
-<div class="container">
+<div class="container mb-4">
   <p class="fs-1 my-4">ORDERS</p>
-  <div class="d-flex flex-wrap col-12 bordered rounded shadow my-0 pt-2" [ngStyle]="{'background-color':i%2?'#fcc426':'#69c3e8'}"
+  <div class="d-flex flex-wrap col-12 bordered rounded shadow my-0 pt-2" [ngStyle]="{'background-color':i%2?'white':'#e8e8e8'}"
                   *ngFor="let order of orderList; let i = index">
     <div class="col-lg-5 col-12 ps-3 pe-1 borderedEnd">
       <p class="text-muted">{{order.timeCreated}}</p>
@@ -46,7 +46,7 @@
     </div>
     <div class="col-lg-4 col-12 ps-3 pe-1 borderedEnd">
       <p><b>Total Paid:</b> {{order.totalPaid}}$</p>
-      <p><b>User Name:</b> {{order.userName}}</p>
+      <p><b>User Name:</b> {{order.userName}} <span class="text-muted" style="font-size:0.6rem ;">({{order.userId?'Registered':'unRegistered'}})</span></p>
       <p><b>User Email:</b> {{order.userEmail}}</p>
       <p><b>paid with:</b> {{order.paypalMail}}</p>
     </div>
