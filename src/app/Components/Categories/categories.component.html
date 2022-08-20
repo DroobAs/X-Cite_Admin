@@ -206,10 +206,13 @@
     </div>
 
     <div class="col-lg-6">
-        <h2 class="add-cat" >Create Collection Inside Document with Some Data</h2>
+        <h2 class="add-cat" >Create Attributes</h2>
         <div class="submit-form" [formGroup]="Attributes">
+
+            
+
             <div *ngIf="!submitted">
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <div class="text-danger" *ngIf="!Newid?.invalid || !Newid?.untouched">
                         <small *ngIf="Newid?.errors?.['required']" style="background-color: #000;padding: 5px;">
                             ID is required!
@@ -222,7 +225,14 @@
                     id="title"
                     formControlName="Newid"
                     />
-                </div> 
+                </div>  -->
+                <div class="mb-2">
+                    <label for="prodCat">Select Category: </label>
+                    <select name="cat"  class="form-control" formControlName="Newid">   
+                        <option *ngFor="let cat of categories" [value]="cat.id">{{cat.id}}</option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label for="title">Category Name</label>
                     <div class="text-danger" *ngIf="!newCatName?.invalid || !newCatName?.untouched">
