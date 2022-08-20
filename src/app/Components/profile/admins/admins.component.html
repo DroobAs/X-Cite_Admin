@@ -1,0 +1,88 @@
+<h2 class="text-start mb-0" *ngIf="Add else update">
+    <i class='fa-solid fa-pen-to-square fs-3 m-3'></i> Add New Admin:</h2>
+  <ng-template #update>
+  <h2 class="text-start mb-0"><i class='fa-solid fa-pen-to-square fs-3 m-3'></i> Update My Profile:</h2>
+  </ng-template>
+  
+<div class="container w-50" [formGroup]="adminForm">
+  <!--=================== Name ====================-->
+  <div class="mb-3">
+    <label for="name" class="form-label">Name:</label>
+    <input type="text" name="name" id="name" formControlName="name" class="form-control" placeholder="Enter Name"
+    [class.is-valid]="namePro?.valid" [class.is-invalid]="namePro?.invalid && namePro?.touched">
+    
+    <div class="text-danger" *ngIf="!namePro?.invalid || !namePro?.untouched">
+      <small *ngIf="namePro?.errors?.['required']">
+        * Name is required!
+      </small>
+    </div>
+  </div>
+  
+  <!--=================== Email ====================-->
+  <div class="mb-3" *ngIf="Add">
+    <label for="mail" class="form-label">Email:</label>
+    <input type="email" name="mail" id="mail" formControlName="email" class="form-control" placeholder="Enter Email"
+    [class.is-valid]="emailPro?.valid" [class.is-invalid]="emailPro?.invalid && emailPro?.touched">
+    <div class="text-danger" *ngIf="!emailPro?.invalid || !emailPro?.untouched">
+      <small *ngIf="emailPro?.errors?.['required']">
+          * Email is required!
+        </small>
+      </div>
+      <div class="text-danger" *ngIf="!emailPro?.invalid || !emailPro?.untouched">
+        <small *ngIf="emailPro?.errors?.['pattern']">
+          * Email is not match!
+        </small>
+      </div>
+    </div>
+
+    <!--=================== Mobile Phone ====================-->
+    <div class="mb-3">
+      <label for="phone" class="form-label">Mobile Phone:</label>
+      <input type="text" name="phone" id="phone" formControlName="phone" class="form-control" placeholder="Enter phone"
+      [class.is-valid]="phonePro?.valid" [class.is-invalid]="phonePro?.invalid && phonePro?.touched">
+      <div class="text-danger" *ngIf="!phonePro?.invalid || !phonePro?.untouched">
+        <small *ngIf="phonePro?.errors?.['required']">
+          * Phone is required!
+        </small>
+        <small *ngIf="phonePro?.errors?.['pattern']">
+          * Phone is not match!
+        </small>
+      </div>
+    </div>
+    
+    <!--=================== Password ====================-->
+    <div class="mb-3" *ngIf="Add">
+      <label for="password" class="form-label">Password:</label>
+      <input type="password" name="password" id="password" formControlName="password" class="form-control" placeholder="Enter password"
+      [class.is-valid]="passwordPro?.valid" [class.is-invalid]="passwordPro?.invalid && passwordPro?.touched">
+      <div class="text-danger" *ngIf="!passwordPro?.invalid || !passwordPro?.untouched">
+        <small *ngIf="passwordPro?.errors?.['required']">
+          * Password is required!
+        </small>
+        <small *ngIf="passwordPro?.errors?.['minlength']">
+          * Password should contain 7 chars at least!
+        </small>
+      </div>
+    </div>
+    <!-- <div class="text-center">
+        <button type="submit" [disabled]="adminForm.invalid || loading || done" class="btn px-5 mx-auto submitbtn" (click)="SaveAdmin()">Add</button>
+    </div> -->
+
+    <div class="text-center d-flex justify-content-center">
+      <button [disabled]="adminForm.invalid || loading" (click)="SaveAdmin()" class="btn submitbtn px-5" style="height:40px ;">
+        <b *ngIf="Add else upd">Add</b>
+        <ng-template #upd><b>Update</b></ng-template>
+      </button>
+
+      <div *ngIf='loading' class="spinner-border text-warning ms-4" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div *ngIf='done' class="text-dark ms-4">
+        <h2>Admin has <b *ngIf="Add else up">Added</b><ng-template #up><b>Updated</b></ng-template> succeccfully!</h2>
+      </div>
+    </div>
+
+
+
+
+</div>

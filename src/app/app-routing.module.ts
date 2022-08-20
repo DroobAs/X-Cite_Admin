@@ -14,6 +14,7 @@ import { OrdersComponent } from './Components/orders/orders.component';
 import { AddUpdateProductComponent } from './Components/products/add-update-product/add-update-product.component';
 import { ProductDetailsComponent } from './Components/products/product-details/product-details.component';
 import { ProductsComponent } from './Components/products/products.component';
+import { AdminsComponent } from './Components/profile/admins/admins.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { SellersComponent } from './Components/sellers/sellers.component';
 import { UsersComponent } from './Components/users/users.component';
@@ -38,6 +39,8 @@ const routes: Routes = [
     {path: 'Profile', component: ProfileComponent},
     {path: 'WebSite', component: WebConfigComponent},
     {path: 'orders', component: OrdersComponent},
+    {path: 'SaveAdmin/:id', component: AdminsComponent},
+    {path: 'SaveAdmin', component: AdminsComponent},
 
   ]},
   {path: 'Login', component:LoginComponent},

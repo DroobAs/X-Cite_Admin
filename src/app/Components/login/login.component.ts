@@ -10,11 +10,12 @@ import {Database , ref , getDatabase , set  } from "@angular/fire/database"
 })
 export class LoginComponent implements OnInit {
 
-  massage:string = ""
+  massage:string| null = null;
   isAdminLogged: boolean = false
-  constructor(private auth:Auth,
-     private authLog:AdminService,
-     @Inject(Router) private route:Router) { }
+  constructor(  private auth:Auth,
+                private authLog:AdminService,
+                private route:Router
+                ) { }
 
   ngOnInit(): void {
   }
@@ -22,13 +23,15 @@ export class LoginComponent implements OnInit {
 
     signInWithEmailAndPassword(this.auth , value.email, value.password).then((res)=> {
       // console.log(res.user.uid);
+      this.massage=null;
       this.authLog.logIn(value.email, value.password, res.user.uid);
       this.isAdminLogged = this.authLog.getIsAdminLogged
       this.route.navigate(["/Home"])
 
     }).catch((err)=> {
       // console.log(err);
-      this.massage = err
+      // this.massage = err
+      this.massage = "* Wrong Email or Password!"
     })
   }
 }

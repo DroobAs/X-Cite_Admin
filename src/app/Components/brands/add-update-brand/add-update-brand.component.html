@@ -13,20 +13,37 @@
     </div>
 
     <!------------------------ Brand Name ------------------------>
-    <div class="mb-4">
-      <label for="bName" class="form-label fs-7"><b>Brand Name:</b></label>
-      <input type="text" name="brandName" id="bName" formControlName="BrandName" class="form-control input shadow"
-        placeholder="Enter Brand Name .." [class.is-valid]="brandNamePro?.valid"
-        [class.is-invalid]="brandNamePro?.invalid && brandNamePro?.touched">
-
-        <div class="text-danger" *ngIf="!brandNamePro?.invalid || !brandNamePro?.untouched">
-          <small *ngIf="brandNamePro?.errors?.['required']">
-            * Brand Name is required!
-          </small>
-          <small *ngIf="brandNamePro?.errors?.['pattern']">
-            * Brand Name isn't match!
-          </small>
-        </div>
+    <div class="mb-4 d-flex flex-wrap">
+      <div class="col-lg-6 col-12 pe-lg-2 pe-0">
+        <label for="bName" class="form-label fs-7"><b>Brand Name:</b></label>
+        <input type="text" name="brandName" id="bName" formControlName="BrandName" class="form-control input shadow"
+          placeholder="Enter Brand Name .." [class.is-valid]="brandNamePro?.valid"
+          [class.is-invalid]="brandNamePro?.invalid && brandNamePro?.touched">
+  
+          <div class="text-danger" *ngIf="!brandNamePro?.invalid || !brandNamePro?.untouched">
+            <small *ngIf="brandNamePro?.errors?.['required']">
+              * Brand Name is required!
+            </small>
+            <small *ngIf="brandNamePro?.errors?.['pattern']">
+              * Brand Name isn't match!
+            </small>
+          </div>
+      </div>
+      <div class="col-lg-6 col-12 ps-lg-2 ps-0" dir="rtl">
+        <label for="bNameAR" class="form-label fs-7"><b>اسم العلامة التجارية:</b></label>
+        <input type="text" name="brandNameAR" id="bNameAR" formControlName="BrandNameAR" class="form-control input shadow"
+          placeholder="ادخل اسم العلامة التجارية .." [class.is-valid]="brandNameARPro?.valid"
+          [class.is-invalid]="brandNameARPro?.invalid && brandNameARPro?.touched">
+  
+          <div class="text-danger" *ngIf="!brandNameARPro?.invalid || !brandNameARPro?.untouched">
+            <small *ngIf="brandNameARPro?.errors?.['required']">
+              * اسم العلامة التجارية مطلوب!
+            </small>
+            <small *ngIf="brandNameARPro?.errors?.['pattern']">
+              * اسم العلامة التجارية لا يصلح!
+            </small>
+          </div>
+      </div>
     </div>
 
     <!------------------------ Brand Logo ------------------------>
@@ -45,7 +62,7 @@
     </div>
 
     <!------------------------ Brand Categories ------------------------>
-    <div formArrayName="BrandCategories" class="mb-4">
+    <!-- <div formArrayName="BrandCategories" class="mb-4">
         <label for="brandCat" class="form-label fs-7"><b>Categories:</b></label>
       <div class="mb-3" *ngFor="let brandCat of BrandCategoriesPro.controls ; let i = index">
 
@@ -70,7 +87,7 @@
         </div>
 
       </div>
-    </div>
+    </div> -->
 
     <!------------------------ Brand Offers ------------------------>
     <div formArrayName="BrandOffers" class="w-100">

@@ -1,5 +1,7 @@
 import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Product } from 'app/Models/product';
+import { ProductService } from 'app/Services/product.service';
 import { Brand } from '../../../Models/brand';
 import { BrandService } from '../../../Services/brand.service';
 import { CRUDService } from '../../../Services/crud.service';
@@ -13,13 +15,15 @@ export class BrandDetailesComponent implements OnInit, OnDestroy {
 
   targetBrandID:string | null='';
   targitBrand:Brand = {} as Brand;
+  brandProducts:Product[]=[];
 
   @ViewChild('pre') btn !:ElementRef;
   sliderInterval:any ='';
 
   constructor(  private routerActive: ActivatedRoute
               , private brandService: BrandService
-              , private router: Router ) { }
+              , private router: Router 
+              , private productsService: ProductService) { }
 
   ngOnInit(): void {
     this.routerActive.paramMap.subscribe((param)=>{
@@ -28,6 +32,16 @@ export class BrandDetailesComponent implements OnInit, OnDestroy {
       this.targetBrandID?
       this.brandService.getBrandByID(this.targetBrandID).subscribe((brand)=>{
           this.targitBrand = brand;
+          this.productsService.getBrandProducts(brand.name).subscribe((res)=>{
+            console.log(res);
+            this.brandProducts = res.map((pro)=>({
+              ...pro.payload.doc.data(),
+              id: pro.payload.doc.id
+            }))
+            console.log(this.brandProducts);
+            
+            
+          })
       })
       :'';
     })
@@ -57,6 +71,10 @@ export class BrandDetailesComponent implements OnInit, OnDestroy {
           this.router.navigate(['Brands']);
       })
     }
+  }
+  goToProduct(id:string|undefined)
+  {
+    this.router.navigate([`Product/${id}`]);
   }
 
   ngOnDestroy(): void {

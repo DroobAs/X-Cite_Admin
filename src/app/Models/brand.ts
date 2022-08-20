@@ -6,7 +6,7 @@ export interface Brand {
     nameAR?:string,
     logo:File | string,
     // overView:string,
-    categories:string[],
-    products?:string[],
+    // categories:string[],
+    // products?:string[],
     offers: Offer[]
 }

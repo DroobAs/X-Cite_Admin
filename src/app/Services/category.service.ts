@@ -49,11 +49,10 @@ export class CategoriesService {
   }
   addToCategory( cat:string ,docID:string, data:any){
     return this.CRUD.setNewDocWithImg_SpecificID(cat,docID, data, 'Categories', 'img')
-}
+  }
 
-getSubCategory(collectionName:string)
-{
-  return this.CRUD.getCollectionGroub(collectionName)
-}
-
+  getSubCategory(collectionName:string)
+  {
+    return this.CRUD.getCollectionGroub(collectionName)
+  }
 }

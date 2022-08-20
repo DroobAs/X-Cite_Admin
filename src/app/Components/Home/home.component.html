@@ -7,6 +7,7 @@
 <div class="container py-5">
   <div class="col-md-12">
     <div class="row">
+
       <div class="col-xl-4 col-lg-6">
         <div class="card l-bg-blue-dark">
           <div class="card-statistic-3 p-4">
@@ -14,12 +15,14 @@
               <i class="fas fa-users"></i>
             </div>
             <div class="mb-4">
-              <h5 class="card-title mb-0">Customers</h5>
-              <h5>we have a lot of Customers</h5>
+              <h4 class="card-title mb-0">Orders</h4>
+              <h5>we have a lot of Orders</h5>
             </div>
             <div class="row align-items-center mb-2 d-flex">
               <div class="col-8">
-                <h2 class="d-flex align-items-center mb-0">15.07k</h2>
+                <h2 class="d-flex align-items-center mb-0">
+                  {{orderNumber}}
+                </h2>
               </div>
               <div class="col-4 text-right">
                 <span>9.23% <i class="fa fa-arrow-up"></i></span>
@@ -33,12 +36,13 @@
                 aria-valuenow="25"
                 aria-valuemin="0"
                 aria-valuemax="100"
-                style="width: 25%"
+                style="width: 65%"
               ></div>
             </div>
           </div>
         </div>
       </div>
+
       <div class="col-xl-4 col-lg-6">
         <div class="card l-bg-green-dark">
           <div class="card-statistic-3 p-4">
@@ -46,13 +50,13 @@
               <i class="fas fa-ticket-alt"></i>
             </div>
             <div class="mb-4">
-              <h4 class="card-title mb-0">Customers</h4>
-              <h5>we have a lot of Customers</h5>
+              <h4 class="card-title mb-0">Users</h4>
+              <h5>we have a lot of Users</h5>
             </div>
             <div class="row align-items-center mb-2 d-flex">
               <div class="col-8">
                 <h2 class="d-flex align-items-center mb-0">
-                  {{ sellersList?.length }}
+                  {{ usersNumber }}
                 </h2>
               </div>
               <div class="col-4 text-right">
@@ -67,12 +71,13 @@
                 aria-valuenow="25"
                 aria-valuemin="0"
                 aria-valuemax="100"
-                style="width: 25%"
+                style="width: 45%"
               ></div>
             </div>
           </div>
         </div>
       </div>
+
       <div class="col-xl-4 col-lg-6">
         <div class="card l-bg-orange-dark">
           <div class="card-statistic-3 p-4">
@@ -85,7 +90,7 @@
             </div>
             <div class="row align-items-center mb-2 d-flex">
               <div class="col-8">
-                <h2 class="d-flex align-items-center mb-0">$11.61k</h2>
+                <h2 class="d-flex align-items-center mb-0">{{brandNumber}}</h2>
               </div>
               <div class="col-4 text-right">
                 <span>2.5% <i class="fa fa-arrow-up"></i></span>
@@ -105,30 +110,48 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
-<div class="container  mb-4 earn">
-  <div class="row mb-4  d-flex align-items-center  justify-content-center">
-    <div class="col-md-6 text-center text-white">
-      <h2 class="fs-1">total earnings</h2>
-      <!-- <p class="dollor">{{orderList[0]?.price}}</p> -->
-      <p class="dollor">{{orderList?.price}}</p>
-    </div>
-    <div class="col-md-6">
-      <img src="../../../assets/images/sammy-blockchain.png"  alt="image" class="img-fluid money-img">
+
+<div class="container-fluid px-2">
+  <div class="container mb-4 earn">
+    <div class="row p-0 mb-4 d-flex align-items-center justify-content-center mx-0">
+      <div class="col-md-6 text-center text-white">
+        <h2 class="fs-1">Total Earnings</h2>
+        <p class="dollor">{{totalEarned}}$</p>
+      </div>
+      <div class="col-md-6">
+        <img src="../../../assets/images/sammy-blockchain.png"  alt="image" class="img-fluid money-img w-100">
+      </div>
     </div>
   </div>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <h1 class="text-center py-5">Analytics this year</h1>
+
+<div class="container col-12 mb-5">
+  <div class="row mb-5">
+    <div class="col-md-6 py-5">
+      <h1 class="text-center">Analytics this year</h1>
       <app-piachart></app-piachart>
     </div>
-    <div class="col-md-6 py-5">
+    <div class="col-md-6 py-5 mb-5 ps-4 text-center">
       <h1 class="text-center">Most brands sellers</h1>
       <app-charttwo></app-charttwo>
+    </div>
+  </div>
+</div>
+
+<div class="container text-center mt-5">
+  <p class="fs-6 shadow">Made with <i class="fa-solid fa-heart"></i> By</p>
+  <div class="d-flex justify-content-around px-sm-5 ">
+    <div>
+      <p>Asmaa Abd El-Nasser</p>
+      <p>Omnia Ramadan</p>
+    </div>
+    <div>
+      <p>George Atef</p>
+      <p>Ahmed Ibrahim</p>
     </div>
   </div>
 </div>

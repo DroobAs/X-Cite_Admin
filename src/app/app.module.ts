@@ -53,6 +53,7 @@ import {AngularFirestoreModule, SETTINGS} from '@angular/fire/compat/firestore';
 import { SearchPipe } from './pipes/search.pipe';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from "@ng-select/ng-select";
+import { AdminsComponent } from './Components/profile/admins/admins.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { NgSelectModule } from "@ng-select/ng-select";
     OrdersComponent,
     PiachartComponent,
     CharttwoComponent,
-    SearchPipe
+    SearchPipe,
+    AdminsComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +108,7 @@ import { NgSelectModule } from "@ng-select/ng-select";
     AngularFirestoreModule,
     RouterModule,
     NgSelectModule
+    
     // NgSelectModule
     // Injectable
   ],

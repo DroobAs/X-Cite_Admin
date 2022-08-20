@@ -94,7 +94,11 @@ export class BrandService {
       let i = 0;
       while (i < brand.offers.length)
       {
-        await this.crudService.uploadImg(brand.offers[i].imgOffer[0], 'Offers/').then((url)=>{
+        // console.log(brand.offers[i]);
+        console.log(brand.offers[i].imgOffer);
+        // console.log(brand.offers[i].imgOffer[0]);
+        
+        await this.crudService.uploadImg(brand.offers[i].imgOffer, 'Offers/').then((url)=>{
           brand.offers[i].imgOffer = url;  
           i++;
         }).catch((err)=>{console.log(err);})

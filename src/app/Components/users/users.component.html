@@ -28,25 +28,31 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>id</th>
+            <!-- <th>id</th> -->
             <th>Full Name</th>
             <th>Email</th>
             <th>Gander</th>
             <th>Orders</th>
             <th>Mobile</th>
+            <th>Make admin</th>
           </tr>
         </thead>
         <!--Table head-->
         <!--Table body-->
         <tbody>
-          <tr *ngFor="let seller of usersList | search :searchText; let i = index">
+          <tr *ngFor="let user of usersList | search :searchText; let i = index">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ seller.id }}</td>
-            <td>{{ seller.fullName }}</td>
-            <td>{{ seller.email }}</td>
-            <td>{{ seller.gander }}</td>
-            <td>{{ seller?.orders?.length === 0 ? "No Orders" : seller.orders?.length  }}</td>
-            <td>{{ seller.mobile }}</td>
+            <!-- <td>{{ seller.id }}</td> -->
+            <td>{{ user.fullName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.gander }}</td>
+            <td>{{ user?.orders?.length === 0 ? "No Orders" : user.orders?.length  }}</td>
+            <td>{{ user.mobile }}</td>
+            <td>
+              <button class="btn-sm btn-dark" (click)="addUserToAdmins(user.id, user.fullName, user.mobile, user.email, user.password)">
+                Make Admin
+              </button>
+            </td>
           </tr>
         </tbody>
         <!--Table body-->

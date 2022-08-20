@@ -41,13 +41,18 @@ export class ProductService {
   {
     return this.MyCrud.getByQuery(this.collectionName, 'categoryName', 'in', catId);
   }
+  getBrandProducts(brandName:string):Observable<DocumentChangeAction<Product>[]>
+  {
+    return this.MyCrud.getByQuery(this.collectionName, 'brandName','==', brandName)
+  }
 
-  addNewPrd(NewPrd:Product):  Promise<boolean>{
+  addNewPrd(NewPrd:Product):  Promise<string>{
     return new Promise((resolve)=>{
       this.uploadProImgs(NewPrd).then(()=>{
-        this.MyCrud.addNewDoc(`${this.collectionName}`,NewPrd).then(()=>{
+        this.MyCrud.addNewDoc(`${this.collectionName}`,NewPrd).then((res)=>{
+          
         console.log('added successfully');
-        resolve(true);
+        resolve(res.id);
         })
       }).catch((err)=>{console.log(err);})
    })
