@@ -13,6 +13,7 @@ export class UsersComponent implements OnInit {
   searchText: string = '';
   usersList: Seller[] | any;
   orderList: [] | any;
+  adminsIds:string[]=[];
   constructor(  private users: UserService
               , private adminService:AdminService ) {}
 
@@ -25,6 +26,10 @@ export class UsersComponent implements OnInit {
         };
       });
     });
+
+    this.adminService.getAllAdmins().subscribe((res)=>{
+        this.adminsIds = res.map((item)=>item.payload.doc.id)
+    })
   }
 
   addUserToAdmins(_id:string, _name:string, mobile:string, mail:string, pass:string)

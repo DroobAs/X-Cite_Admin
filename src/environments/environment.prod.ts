@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  firebaseConfig : {
+  firebase : {
     apiKey: "AIzaSyDsOgpLuHfdHQPdXOAcVVxmkn5O3r7mits",
     authDomain: "x-cite-db.firebaseapp.com",
     projectId: "x-cite-db",
